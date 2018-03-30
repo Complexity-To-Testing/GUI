@@ -1,0 +1,4 @@
+ TestClaseAlta_exhaustiva.java 509 46 9 12.037 
+ TestClaseBaja_exhaustiva.java 509 60 12 12.717 
+ TestClaseMedia_exhaustiva.java 509 86 17 15.248 
+ TestVagabundo_exhaustiva.java 509 86 17 15.636 
