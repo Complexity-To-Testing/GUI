@@ -1,4 +1,3 @@
- TestClaseAlta_exhaustiva.java 509 46 9 12.037 
- TestClaseBaja_exhaustiva.java 509 60 12 12.717 
- TestClaseMedia_exhaustiva.java 509 86 17 15.248 
- TestVagabundo_exhaustiva.java 509 86 17 15.636 
+ TestEcus.java 140 11 8 15.685 
+ TestVista.java 140 24 17 16.135 
+ Util.java 140 24 17 16.170 

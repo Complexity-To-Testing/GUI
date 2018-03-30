@@ -45,12 +45,15 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.5</version>
                 <configuration>
+                    <failWhenNoMutations>false</failWhenNoMutations>
+                    <outputFormats>
+                        <param>XML</param>
+                        <param>HTML</param>
+                        <param>CSV</param>
+                    </outputFormats>
                     <targetClasses>
-                      
 <param>ClassMath*</param>
-<param>claseNodo*</param>
 </targetClasses><targetTests>
-<param>Test.TestPersonaje_exhaustiva.TestClaseAlta_exhaustiva</param>
-<param>Test.TestPersonaje_exhaustiva.TestClaseBaja_exhaustiva</param>
-<param>Test.TestPersonaje_exhaustiva.TestClaseMedia_exhaustiva</param>
-<param>Test.TestPersonaje_exhaustiva.TestVagabundo_exhaustiva</param></targetTests></configuration></plugin></plugins></build></project>
+<param>Test.TestMath.TestEcus</param>
+<param>Test.TestMath.TestVista</param>
+<param>Test.TestMath.Util</param></targetTests></configuration></plugin></plugins></build></project>

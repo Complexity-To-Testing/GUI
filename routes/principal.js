@@ -41,42 +41,50 @@ router.post("/procesar_file_Tests",upload.single("Tests"), function(req, res) {
 
 router.get("/ejecutar/:nombreProyecto", function(req, res) {
   var nombreProyecto = req.params.nombreProyecto;
-  child = exec("sh ejecutarTests.sh",
-  // Pasamos los parámetros error, stdout la salida
-  // que mostrara el comando
-    function (error, stdout, stderr) {
-      // controlamos el error
-      if (error !== null) {
-        console.log('exec error: ' + error);
-          res.json({exito: false, stderr: stderr});
-      } else {
 
-        daoProyectos.insertProyecto(nombreProyecto, function(err, datos) {
-          // Muestra error si hay un error en la BD
-          if (err) {
-            next(err);
+  preprocesar(function (err) {
+    if (err) {
+      res.json({exito: false, msg:"Error al preprocesar los ficheros."});
+    } else {
+      child = exec("sh ejecutarTests.sh",
+      // Pasamos los parámetros error, stdout la salida
+      // que mostrara el comando
+        function (error, stdout, stderr) {
+          // controlamos el error
+          if (error !== null) {
+            console.log('exec error: ' + error);
+              res.json({exito: false, stderr: stderr});
           } else {
-            console.log(datos);
-            // si no se ha podido insertar
-            if (datos.msg) {
-              res.json({exito: false, msg:datos.msg});
-            }else {
-              // Guardamos los resultados en la  BD
-              saveResultOnDataBase(datos.insertId, function(err) {
-                if (err) {
-                  res.json({exito: false, msg:"Error al guardar los resultados en la BD."});
-                }else {
-                  res.json({exito: true, msg:"Resultados guardados en la BD con éxito."});
-                }
-              });
-            }
-          }
-        });
 
-      }
+            daoProyectos.insertProyecto(nombreProyecto, function(err, datos) {
+              // Muestra error si hay un error en la BD
+              if (err) {
+                next(err);
+              } else {
+                console.log(datos);
+                // si no se ha podido insertar
+                if (datos.msg) {
+                  res.json({exito: false, msg:datos.msg});
+                }else {
+                  // Guardamos los resultados en la  BD
+                  saveResultOnDataBase(datos.insertId, function(err) {
+                    if (err) {
+                      res.json({exito: false, msg:"Error al guardar los resultados en la BD."});
+                    }else {
+                      res.json({exito: true, msg:"Resultados guardados en la BD con éxito."});
+                    }
+                  });
+                }
+              }
+            });
+
+          }
+      });
+    }
   });
+
 });
-router.get("/preprocesar", function(req, res) {
+function preprocesar(callback) {
   child = exec("sh preprocesar.sh",
   // Pasamos los parámetros error, stdout la salida
   // que mostrara el comando
@@ -84,12 +92,12 @@ router.get("/preprocesar", function(req, res) {
       // controlamos el error
       if (error !== null) {
           console.log('exec error: ' + error);
-          res.json({exito: false, stderr: stderr});
+          callback(true);
       } else {
-        res.json({exito: true, stdout: stdout});
+          callback(false);
       }
   });
-});
+};
 
 
 // Procesar resultado.txt
