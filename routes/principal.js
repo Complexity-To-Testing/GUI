@@ -2,7 +2,6 @@
   "use strict";
 var express = require('express');
 var router = express.Router();
-var daoQuerys = require('../integration/daoQuerys');
 var daoProyectos = require('../integration/daoProyectos');
 var moment = require('moment');
 var _ = require('underscore');
@@ -84,6 +83,7 @@ router.get("/ejecutar/:nombreProyecto", function(req, res) {
   });
 
 });
+
 function preprocesar(callback) {
   child = exec("sh preprocesar.sh",
   // Pasamos los parámetros error, stdout la salida
@@ -98,7 +98,6 @@ function preprocesar(callback) {
       }
   });
 };
-
 
 // Procesar resultado.txt
 function saveResultOnDataBase(idProyecto, callback){
@@ -117,7 +116,7 @@ function saveResultOnDataBase(idProyecto, callback){
     datos.percent = Number(array[3]);
     datos.time = Number(array[4]);
 
-    daoQuerys.insertTestProyecto(datos, function (err, result) {
+    daoProyectos.insertTestProyecto(datos, function (err, result) {
       if (err) {
         callback(true);
       } else {

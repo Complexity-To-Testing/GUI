@@ -1,3 +1,7 @@
+var idProyectoSeleccionado;
+var jsonEstaditicas;
+var currentNombreProyecto;
+
 function rellenarProyectos(json) {
   // Limpiamos la tabla de los posibles resultados anteriores.
   $('#tbl-proyecto > tbody').empty();
@@ -32,31 +36,64 @@ function getProyectos() {
 
 function verEstadisticas(idProyecto, nombreProyecto) {
   //listaEstadisticas = [];
-  //idProyectoSeleccionado = idProyecto;
+  idProyectoSeleccionado = idProyecto;
+  currentNombreProyecto = nombreProyecto;
+  $.when(obtenerEstadisticasPorIdProyecto(idProyectoSeleccionado)).done(function(estadisticas) {
 
-  /*$.when(obtenerEstadisticasPorIdProyecto(idProyecto)).done(function(estadisticas) {
-    if (estadisticas != null) {
-      estadisticas.forEach(function(resultadoTest) {
-        listaEstadisticas.push({idCompeticion: resultadoTest.id, nombreCompeticion: resultadoTest.nombre, esLiga: Boolean(resultadoTest.liga), posicionArray: listaEstadisticas.length});
-      });
-    }
-
-    mostrarGraficas(listaEstadisticas);
+    jsonEstaditicas = estadisticas;
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
 
     $('.container > div').addClass('hidden');
     $('#chart').removeClass('hidden');
   });
+}
+
+function drawChart() {
+  // Create our data table out of JSON data loaded from server.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Nombre test');
+  data.addColumn('number', 'killed');
+  data.addColumn('number', 'Time');
+  data.addColumn('number', 'Distingising rate');
+  //data.addColumn('string', 'nombre clase test');
+
+  $.each(jsonEstaditicas, function(i,jsonData)
+  {
+    var value=jsonData.killed;
+    var time=jsonData.time;
+    var percent=jsonData.percent;
+    var name=jsonData.nombreTest;
+
+    //var nameTest=jsonData.nombreTest;
+    data.addRows([ [name, value, time, percent]]);
+  });
+
+  var options = {
+    title: 'Estadisticas del proyecto ' + currentNombreProyecto,
+    //function: 'linear',
+    pointSize: 16
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('chart'));
+  google.visualization.events.addListener(chart, 'ready', function() {  });
+
+  chart.draw(data, options);
+  /*
+  chart=new google.visualization.ColumnChart(document.getElementById('chart_div'));
+  chart=new google.visualization.PieChart(document.getElementById('piechart_div'));
+  chart=new google.visualization.BarChart(document.getElementById('bar_div'));
+  chart=new google.visualization.GeoChart(document.getElementById('regions_div'));
   */
-  $('.container > div').addClass('hidden');
-  $('#chart').removeClass('hidden');
 }
 
 function obtenerEstadisticasPorIdProyecto(idProyecto) {
   return $.ajax({
-    url: SERVER + "proyecto/getEstadisticas/" + idProyecto,
+    url: SERVER + "proyectos/getEstadisticas/" + idProyecto,
     type: "GET",
     dataType: 'json',
     error: function (xhr, status) { alert('Oooops, hubo un error...'); },
     complete: function(xhr, status) {}
   });
+
 }
