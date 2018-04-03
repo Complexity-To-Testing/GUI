@@ -45,6 +45,9 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.5</version>
                 <configuration>
+                  <mutators>
+                    <mutator>CONDITIONALS_BOUNDARY</mutator>
+                </mutators>
                     <failWhenNoMutations>false</failWhenNoMutations>
                     <outputFormats>
                         <param>XML</param>
@@ -52,8 +55,9 @@
                         <param>CSV</param>
                     </outputFormats>
                     <targetClasses>
-<param>ClassMath*</param>
+<param>businessLogic*</param>
 </targetClasses><targetTests>
-<param>Test.TestMath.TestEcus</param>
-<param>Test.TestMath.TestVista</param>
-<param>Test.TestMath.Util</param></targetTests></configuration></plugin></plugins></build></project>
+<param>Tests.BusinessLogicTest1</param>
+<param>Tests.BusinessLogicTest2</param>
+<param>Tests.BusinessLogicTest3</param>
+</targetTests></configuration></plugin></plugins></build></project>
