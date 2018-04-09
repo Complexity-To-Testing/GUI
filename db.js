@@ -6,7 +6,6 @@ module.exports = {
     getPool: function () {
       if (pool) return pool;
       pool = mysql.createPool({
-        connectionLimit : 100,
         host: config.dbHost,
         user: config.dbUser,
         password: config.dbPassword,
