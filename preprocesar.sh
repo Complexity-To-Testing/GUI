@@ -21,6 +21,13 @@ fi
 mkdir $FOLDER_TESTS_POMS
 mkdir $FOLDER_TESTS_POMS_UNIQUE
 
+rmdir $FOLDER_PROYECTOJAVA_SRC
+rmdir $FOLDER_PROYECTOJAVA_TEST
+
+mKdir $FOLDER_PROYECTOJAVA_SRC
+mKdir $FOLDER_PROYECTOJAVA_TEST
+
+
 function recorridoRecursivoTest() {
 for file in "$1"/*
 do

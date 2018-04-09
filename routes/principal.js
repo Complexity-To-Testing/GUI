@@ -45,7 +45,7 @@ router.get("/ejecutar/:nombreProyecto", function(req, res) {
     if (err) {
       res.json({exito: false, msg:"Error al preprocesar los ficheros."});
     } else {
-      child = exec("cat ejecutarTests.sh",
+      child = exec("sh ejecutarTests.sh",
       // Pasamos los parámetros error, stdout la salida
       // que mostrara el comando
         function (error, stdout, stderr) {
