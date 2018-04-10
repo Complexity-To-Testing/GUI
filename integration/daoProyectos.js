@@ -17,7 +17,7 @@ function insertProyecto(nombreProyecto, callback) {
           connection.query(sql, [nombreProyecto], function(err, result) {
             connection.release();
             if (err) {
-              callback(err);
+              callback(null, null);
             } else {
               // Si la consulta dio como resultado cero filas, devolvemos null.
               // En caso contrario, devolvemos el primer elemento del resultado.

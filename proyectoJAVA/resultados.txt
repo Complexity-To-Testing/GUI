@@ -1,3 +1,22 @@
- BusinessLogicTest1.java 7 4 57 3.380 
- BusinessLogicTest2.java 7 6 86 3.464 
- BusinessLogicTest3.java 7 6 86 3.352 
+ Prueba.java  
+ Test2D_con_valor_aleatorio.java  
+ Test2D_exhaustiva.java  
+ Test2D.java  
+ Test3D_con_valor_aleatorio.java  
+ Test3D_exhaustiva.java  
+ Test3D.java  
+ TestClaseAlta_exhaustiva.java  
+ TestClaseAlta.java  
+ TestClaseBaja_exhaustiva.java  
+ TestClaseBaja.java  
+ TestClaseMedia_exhaustiva.java  
+ TestClaseMedia.java  
+ TestCoche_exhaustiva.java  
+ TestCoche.java  
+ TestHouse_exhaustiva.java  
+ TestHouse.java  
+ TestPosicion_exhaustiva.java  
+ TestPosicion.java  
+ TestVagabundo_exhaustiva.java  
+ TestVagabundo.java  
+ Utils1.java  

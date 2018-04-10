@@ -45,9 +45,6 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.5</version>
                 <configuration>
-                  <mutators>
-                    <mutator>CONDITIONALS_BOUNDARY</mutator>
-                </mutators>
                     <failWhenNoMutations>false</failWhenNoMutations>
                     <outputFormats>
                         <param>XML</param>
@@ -55,9 +52,28 @@
                         <param>CSV</param>
                     </outputFormats>
                     <targetClasses>
-<param>businessLogic*</param>
+<param>claseNodo*</param>
 </targetClasses><targetTests>
-<param>Tests.BusinessLogicTest1</param>
-<param>Tests.BusinessLogicTest2</param>
-<param>Tests.BusinessLogicTest3</param>
+<param>TestClaseNodo_otras.Prueba</param>
+<param>TestClaseNodo_otras.TestCoche</param>
+<param>TestClaseNodo_otras.TestHouse</param>
+<param>TestClaseNodo_otras.TestPosicion</param>
+<param>TestClaseNodo_otras_exhaustiva.TestCoche_exhaustiva</param>
+<param>TestClaseNodo_otras_exhaustiva.TestHouse_exhaustiva</param>
+<param>TestClaseNodo_otras_exhaustiva.TestPosicion_exhaustiva</param>
+<param>TestFigura2D.Test2D</param>
+<param>TestFigura2D_exhauxtivo.Test2D_con_valor_aleatorio</param>
+<param>TestFigura2D_exhauxtivo.Test2D_exhaustiva</param>
+<param>TestFigura3D.Test3D</param>
+<param>TestFigura3D_exhauxtivo.Test3D_con_valor_aleatorio</param>
+<param>TestFigura3D_exhauxtivo.Test3D_exhaustiva</param>
+<param>TestPersonaje.TestClaseAlta</param>
+<param>TestPersonaje.TestClaseBaja</param>
+<param>TestPersonaje.TestClaseMedia</param>
+<param>TestPersonaje.TestVagabundo</param>
+<param>TestPersonaje_exhaustiva.TestClaseAlta_exhaustiva</param>
+<param>TestPersonaje_exhaustiva.TestClaseBaja_exhaustiva</param>
+<param>TestPersonaje_exhaustiva.TestClaseMedia_exhaustiva</param>
+<param>TestPersonaje_exhaustiva.TestVagabundo_exhaustiva</param>
+<param>Utils1</param>
 </targetTests></configuration></plugin></plugins></build></project>

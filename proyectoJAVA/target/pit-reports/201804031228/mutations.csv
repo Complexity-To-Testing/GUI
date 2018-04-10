@@ -1,7 +1,0 @@
-BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator,getPrecio,6,SURVIVED,none
-BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.MathMutator,getPrecio,7,KILLED,Tests.BusinessLogicTest2.shouldGetDiscountPricingForOneItem(Tests.BusinessLogicTest2)
-BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.MathMutator,getPrecio,9,KILLED,Tests.BusinessLogicTest1.shouldGetNormalPricingForOneItem(Tests.BusinessLogicTest1)
-BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator,getPrecio,6,KILLED,Tests.BusinessLogicTest3.shouldGetDiscountPricingByAmount(Tests.BusinessLogicTest3)
-BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator,getPrecio,6,KILLED,Tests.BusinessLogicTest2.shouldGetDiscountPricingForOneItem(Tests.BusinessLogicTest2)
-BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator,getPrecio,7,KILLED,Tests.BusinessLogicTest2.shouldGetDiscountPricingForOneItem(Tests.BusinessLogicTest2)
-BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator,getPrecio,9,KILLED,Tests.BusinessLogicTest1.shouldGetNormalPricingForOneItem(Tests.BusinessLogicTest1)
