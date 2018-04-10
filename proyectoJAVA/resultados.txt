@@ -1,22 +1,3 @@
- Prueba.java  
- Test2D_con_valor_aleatorio.java  
- Test2D_exhaustiva.java  
- Test2D.java  
- Test3D_con_valor_aleatorio.java  
- Test3D_exhaustiva.java  
- Test3D.java  
- TestClaseAlta_exhaustiva.java  
- TestClaseAlta.java  
- TestClaseBaja_exhaustiva.java  
- TestClaseBaja.java  
- TestClaseMedia_exhaustiva.java  
- TestClaseMedia.java  
- TestCoche_exhaustiva.java  
- TestCoche.java  
- TestHouse_exhaustiva.java  
- TestHouse.java  
- TestPosicion_exhaustiva.java  
- TestPosicion.java  
- TestVagabundo_exhaustiva.java  
- TestVagabundo.java  
- Utils1.java  
+ Prueba.java 369 0 0 6.272 
+ Test2D.java 369 37 10 13.605 
+ Test2D_con_valor_aleatorio.java 369 37 10 13.833 

@@ -10,6 +10,7 @@ FILE_POM='./proyectoJAVA/pom.xml'
 FILE_POM_TEMP='./proyectoJAVA/tempPom/pom.xml'
 FOLDER_TESTS_POMS='./proyectoJAVA/testsPoms'
 FOLDER_TESTS_POMS_UNIQUE='./proyectoJAVA/testsPomsUnique'
+FOLDER_UPLOADS='./uploads'
 
 if [ -e $FOLDER_TESTS_POMS ] ; then
   rm -r $FOLDER_TESTS_POMS;
@@ -90,4 +91,7 @@ if [ -f $FILE_TESTS ]; then
 else
  echo "File $FILE_TESTS does not exist."
 fi
+
+rm -r $FOLDER_UPLOADS
+mkdir $FOLDER_UPLOADS
 echo "Terminado"

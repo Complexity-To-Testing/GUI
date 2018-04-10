@@ -45,7 +45,7 @@ router.get("/ejecutar/:nombreProyecto", function(req, res) {
     if (err) {
       res.json({exito: false, msg:"Error al preprocesar los ficheros."});
     } else {
-      child = exec("cat ejecutarTests.sh",
+      child = exec("sh ejecutarTests.sh",
       // Pasamos los parámetros error, stdout la salida
       // que mostrara el comando
         function (error, stdout, stderr) {
@@ -60,7 +60,6 @@ router.get("/ejecutar/:nombreProyecto", function(req, res) {
               if (err) {
                 next(err);
               } else {
-                console.log(datos);
                 // si no se ha podido insertar
                 if (datos.msg) {
                   res.json({exito: false, msg:datos.msg});
@@ -68,7 +67,7 @@ router.get("/ejecutar/:nombreProyecto", function(req, res) {
                   // Guardamos los resultados en la  BD
                   saveResultOnDataBase(datos.insertId, function(err) {
                     if (err) {
-                      res.json({exito: false, msg:"Error al guardar los resultados en la BD."});
+                      res.json({exito: false, msg:"No se ha podido guardar los resultados en la BD."});
                     }else {
                       res.json({exito: true, msg:"Resultados guardados en la BD con éxito."});
                     }
