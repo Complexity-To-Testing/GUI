@@ -1,3 +1,6 @@
- Prueba.java 369 0 0 6.272 
- Test2D.java 369 37 10 13.605 
- Test2D_con_valor_aleatorio.java 369 37 10 13.833 
+ TestControl.java 174 23 13 14.712 
+ TestEcus.java 174 25 14 14.342 
+ TestEcus_exhaustivo2.java 174 36 21 16.228 
+ TestVista.java 174 33 19 16.579 
+ test_Control_exhaustivo2.java 174 40 23 17.725 
+ test_vista_exhauxtivo2.java 174 50 29 22.055 
