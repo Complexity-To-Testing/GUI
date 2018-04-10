@@ -11,7 +11,7 @@ dbHost: "localhost",
 dbName: "dbtfg",
 dbUser: "root",
 dbPassword: "root",
-dbHost: "localhost",
+dbHost: "52.53.239.37",
 
  // Puerto en el que escucha nuestra app.
  port: '5555'
