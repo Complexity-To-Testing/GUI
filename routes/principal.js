@@ -114,7 +114,7 @@ function saveResultOnDataBase(idProyecto, callback){
     datos.killed = Number(array[2]);
     datos.percent = Number(array[3]);
     datos.time = Number(array[4]);
-
+    console.log(datos);
     daoProyectos.insertTestProyecto(datos, function (err, result) {
       if (err) {
         callback(true);
