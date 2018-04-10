@@ -59,4 +59,5 @@
 <param>TestMath.TestVista</param>
 <param>TestMath_exhaustivo_determinista.TestEcus_exhaustivo2</param>
 <param>TestMath_exhaustivo_determinista.test_Control_exhaustivo2</param>
-<param>TestMath_exhaustivo_determinista.test_vista_exhauxtivo2</param></targetTests></configuration></plugin></plugins></build></project>
+<param>TestMath_exhaustivo_determinista.test_vista_exhauxtivo2</param>
+</targetTests></configuration></plugin></plugins></build></project>
