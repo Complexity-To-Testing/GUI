@@ -14,6 +14,16 @@ var upload = multer({ dest: "uploads/" });
 var exec = require('child_process').exec, child;
 var lineReader = require('line-reader');
 
+var DIR_PROYECTO_JAVA='./proyectoJAVA'
+var DIR_TESTSPOMS=DIR_PROYECTO_JAVA+'/testsPoms'                // Directorio que contiene todos los ficheros de configuracion por tests (Acumulado)
+var DIR_TESTSPOMS_UNIQUE=DIR_PROYECTO_JAVA+'/testsPomsUnique'   // Directorio que contiene todos los ficheros de configuracion por tests (Unico)
+var FILE_RESULTADOS=DIR_PROYECTO_JAVA+'/resultados.txt'         // Fichero que contiene los resultados de los test
+var DIR_CLASSES=DIR_PROYECTO_JAVA+'/classes'                    // Directorio que contiene los resultados de los test por classes
+var DIR_REPORTS=DIR_PROYECTO_JAVA+'/target/pit-reports'        // Directorio que contiene los resultados de los mutantes
+var FILE_NAME_CLASSES=DIR_CLASSES+'/namesClasses.txt'          // Fichero que contiene todas los nombres de las classes originales
+var FILE_POM=DIR_PROYECTO_JAVA+'/pom.xml '                      // Fichero de configuracion de maven para ejecutar PIT
+var FILE_RESULTADO=DIR_PROYECTO_JAVA+'/resultado.txt'
+
 router.post("/procesar_file_Classes",upload.single("Classes"), function(req, res) {
     var urlFichero;
     if (req.file) {
@@ -38,7 +48,7 @@ router.post("/procesar_file_Tests",upload.single("Tests"), function(req, res) {
     }
 });
 
-router.get("/ejecutar/:nombreProyecto", function(req, res) {
+router.get("/ejecutarOLD/:nombreProyecto", function(req, res, next) {
   var nombreProyecto = req.params.nombreProyecto;
 
   preprocesar(function (err) {
@@ -61,7 +71,7 @@ router.get("/ejecutar/:nombreProyecto", function(req, res) {
                 next(err);
               } else {
                 // si no se ha podido insertar
-                if (datos.msg) {
+                if (!datos.exito) {
                   res.json({exito: false, msg:datos.msg});
                 }else {
                   // Guardamos los resultados en la  BD
@@ -80,7 +90,136 @@ router.get("/ejecutar/:nombreProyecto", function(req, res) {
       });
     }
   });
+});
 
+router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
+    var nombreProyecto = req.params.nombreProyecto;
+
+    if (nombreProyecto === "") {
+      res.json({exito: false, msg: "Parametros vacios."});
+    } else {
+      preprocesar(function (err) {
+        if (err) {
+          res.json({exito: false, msg:"Error al preprocesar los ficheros."});
+        } else {
+          daoProyectos.insertProyecto(nombreProyecto, function(err, resultInsertProyecto) {
+            // Muestra error si hay un error en la BD
+            if (err) {
+              next(err);
+            } else {
+              // si no se ha podido insertar
+              if (!resultInsertProyecto.exito) {
+                res.json({exito: false, msg: resultInsertProyecto.msg});
+              }else {
+
+                // Leemos los ficheros de configuracion
+                ejecutarComandoLinux( "ls " + DIR_TESTSPOMS, function(err, result_ls) {
+                  if (err) {
+                    res.json({exito: false, msg: result_ls});
+                  } else {
+                    var arrayTestFilePom = result_ls.trim().split("\n");
+                    var cont = arrayTestFilePom.length;
+
+                    // Para cada fichero de configuracion lo copiamos el fichero de configuracion en el proyecto java y lo ejecutamos
+                    arrayTestFilePom.forEach(function(testFilePom){
+
+                      var comando = "sh ejecutarTest.sh " + testFilePom;
+                      ejecutarComandoLinux( comando, function(err, result_et) {
+                        if (err) {
+                          res.json({exito: false, msg: result_et});
+                        } else {
+
+                          var comando =  "cat " + FILE_RESULTADO;
+                          ejecutarComandoLinux( comando, function(err, result_cr) {
+                            if (err) {
+                              res.json({exito: false, msg: result_cr});
+                            } else {
+                              var arrayResult = result_cr.trim().split(" ");
+                              var datosTest = {}
+                              datosTest.idProyecto = resultInsertProyecto.insertId;
+                              datosTest.nombreTest = arrayResult[0];
+                              datosTest.numMutants = Number(arrayResult[1]);
+                              datosTest.killed = Number(arrayResult[2]);
+                              datosTest.percent = Number(arrayResult[3]);
+                              datosTest.time = Number(arrayResult[4]);
+
+                              daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
+                                if (err) {
+                                  next(err);
+                                } else {
+
+                                  if (!resultInsertTest.exito) {
+                                    res.json({exito: false, msg: resultInsertProyecto.msg});
+                                  } else {
+
+                                    var comandoLeerMutantes = "ls " + DIR_CLASSES + "/"+testFilePom
+                                    ejecutarComandoLinux( comandoLeerMutantes, function(err, result_lsCLASSES) {
+                                      if (err) {
+                                        res.json({exito: false, msg: result_lsCLASSES});
+                                      } else {
+                                        var arrayClasses = result_lsCLASSES.trim().split("\n");
+                                        var contClasse = arrayClasses.length;
+
+                                        arrayClasses.forEach(function(classe){
+                                          var comando =  "cat " + DIR_CLASSES +"/"+ testFilePom+"/"+ classe;
+
+                                          // Recorremos los mutantes de la clase
+                                          ejecutarComandoLinux( comando, function(err, result_cclass) {
+                                            if (err) {
+                                              res.json({exito: false, msg: result_cclass});
+                                            } else {
+                                              var arrayMutantesClase = result_cclass.trim().split("\n");
+                                              var contMutante = arrayMutantesClase.length;
+
+                                              arrayMutantesClase.forEach(function(mutante){
+                                                var arrayMutante = mutante.split(",");
+                                                var datos = {}
+                                                datos.idProyecto = resultInsertProyecto.insertId;
+                                                datos.idTest = resultInsertTest.insertId;
+                                                datos.clase = arrayMutante[0];
+                                                datos.mutante =  arrayMutante[1];
+                                                datos.killed =  arrayMutante[2];
+
+                                                daoProyectos.insertClasseTestProyecto(datos, function (err, result) {
+                                                  if (err) {
+                                                    next(err);
+                                                  } else {
+                                                    contMutante --;
+
+                                                    if (contMutante == 0) {
+                                                      contClasse--;
+                                                    }
+                                                    if (contClasse == 0) {
+                                                        cont--;
+                                                    }
+                                                    // Si ha terminado de ejecutar
+                                                    if (cont == 0 && contClasse == 0) {
+                                                      res.json({exito: true, msg:result});
+                                                    }
+                                                  }
+                                                });
+                                              });
+                                            }
+                                          });
+                                        });
+                                      }
+                                    });
+                                  }
+                                }
+                              });
+                            }
+                          });
+                        }
+                      });
+                    });
+                  }
+                });
+              }
+            }
+          });
+        }
+      });
+    }
 });
 
 function preprocesar(callback) {
@@ -94,6 +233,19 @@ function preprocesar(callback) {
           callback(true);
       } else {
           callback(false);
+      }
+  });
+};
+
+function ejecutarComandoLinux(comando, callback) {
+  child = exec(comando,
+    function (error, stdout, stderr) {
+      // controlamos el error
+      if (error !== null) {
+          console.log('exec error: ' + error);
+          callback(true,stderr);
+      } else {
+          callback(false, stdout);
       }
   });
 };
@@ -114,7 +266,7 @@ function saveResultOnDataBase(idProyecto, callback){
     datos.killed = Number(array[2]);
     datos.percent = Number(array[3]);
     datos.time = Number(array[4]);
-    console.log(datos);
+
     daoProyectos.insertTestProyecto(datos, function (err, result) {
       if (err) {
         callback(true);

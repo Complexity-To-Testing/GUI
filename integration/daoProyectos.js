@@ -6,32 +6,24 @@ function insertProyecto(nombreProyecto, callback) {
   /* u: datos de un usuario que se va a guardar */
 
   pool.getConnection(function(err, connection) {
-    //var sqlExists = "SELECT * FROM `usuario` WHERE `dni`= ?";
-    //connection.query(sqlExists, [u.dni], function(err, fila) {
 
-      // Si no existe el id del usuario a eliminar
-      //if (fila.length === 0) {
-          var sql = "INSERT INTO `proyectos`( `name`) VALUES (?)";
+    var sql = "INSERT INTO `proyectos`( `name`) VALUES (?)";
 
-          // Ejecutamos la consulta SQL
-          connection.query(sql, [nombreProyecto], function(err, result) {
-            connection.release();
-            if (err) {
-              callback(null, null);
-            } else {
-              // Si la consulta dio como resultado cero filas, devolvemos null.
-              // En caso contrario, devolvemos el primer elemento del resultado.
-              if (result.length === 0) {
-                callback(null, {"msg": "Error"});
-              } else {
-                callback(null, {"insertId": result.insertId } );
-              }
-            }
-          });
-      /*}else{
-        callback(null, {"msg": "yaExiste"});
-      }*/
-    //});
+    // Ejecutamos la consulta SQL
+    connection.query(sql, [nombreProyecto], function(err, result) {
+      connection.release();
+      if (err) {
+        callback(null, null);
+      } else {
+        // Si la consulta dio como resultado cero filas, devolvemos null.
+        // En caso contrario, devolvemos el primer elemento del resultado.
+        if (result.length === 0) {
+          callback(null, {exito: false, "msg": "Error al insertar el proyecto."});
+        } else {
+          callback(null, {exito: true, "insertId": result.insertId } );
+        }
+      }
+    });
   });
 }
 //SELECT SUM(idProyecto) as numTest, SUM(time) as totalTime, numMutants,  AVG(killed) as avg_killed, AVG(percent) as avg_percent FROM `test_proyecto` WHERE  idProyecto = 1
@@ -75,9 +67,33 @@ function insertTestProyecto(datos, callback) {
         // Si la consulta dio como resultado cero filas, devolvemos null.
         // En caso contrario, devolvemos el primer elemento del resultado.
         if (result.length === 0) {
-          callback(null, {"msg": "Error"});
+          callback(null, {exito:false, "msg": "Error al insertar un test del proyecto"});
         } else {
-          callback(null, {"insertId": result.insertId } );
+          callback(null, {exito: true, "insertId": result.insertId } );
+        }
+      }
+    });
+  });
+}
+function insertClasseTestProyecto(datos, callback) {
+  /* u: datos de un usuario que se va a guardar */
+
+  pool.getConnection(function(err, connection) {
+
+    var sql = "INSERT INTO `proyecto_clase_test`( `idProyecto`, `idTest`, `clase`, `mutante`, `killed`) VALUES (?,?,?,?,?)";
+
+    // Ejecutamos la consulta SQL
+    connection.query(sql, [datos.idProyecto, datos.idTest, datos.clase, datos.mutante, datos.killed], function(err, result) {
+      connection.release();
+      if (err) {
+        callback(err);
+      } else {
+        // Si la consulta dio como resultado cero filas, devolvemos null.
+        // En caso contrario, devolvemos el primer elemento del resultado.
+        if (result.length === 0) {
+          callback(null, {exito:false, "msg": "Error al insertar una clase del test de un proyecto."});
+        } else {
+          callback(null, {exito: true, "insertId": result.insertId } );
         }
       }
     });
@@ -111,5 +127,6 @@ module.exports = {
   insertProyecto: insertProyecto,
   getProyectos: getProyectos,
   insertTestProyecto: insertTestProyecto,
-  getEstadisticastPorIdProyecto: getEstadisticastPorIdProyecto
+  getEstadisticastPorIdProyecto: getEstadisticastPorIdProyecto,
+  insertClasseTestProyecto: insertClasseTestProyecto
 };
