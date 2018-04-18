@@ -88,8 +88,8 @@ router.get("/ejecutarOLD/:nombreProyecto", function(req, res, next) {
 
           }
       });
-    }
-  });
+   }
+});
 });
 
 router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
@@ -98,10 +98,10 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
     if (nombreProyecto === "") {
       res.json({exito: false, msg: "Parametros vacios."});
     } else {
-      preprocesar(function (err) {
+    /*  preprocesar(function (err) {
         if (err) {
           res.json({exito: false, msg:"Error al preprocesar los ficheros."});
-        } else {
+        } else {*/
           daoProyectos.insertProyecto(nombreProyecto, function(err, resultInsertProyecto) {
             // Muestra error si hay un error en la BD
             if (err) {
@@ -217,8 +217,8 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
               }
             }
           });
-        }
-      });
+    /*    }
+      });*/
     }
 });
 

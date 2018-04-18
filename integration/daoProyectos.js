@@ -26,7 +26,6 @@ function insertProyecto(nombreProyecto, callback) {
     });
   });
 }
-//SELECT SUM(idProyecto) as numTest, SUM(time) as totalTime, numMutants,  AVG(killed) as avg_killed, AVG(percent) as avg_percent FROM `test_proyecto` WHERE  idProyecto = 1
 
 function getProyectos( callback) {
   pool.getConnection(function(err, connection) {
@@ -75,12 +74,13 @@ function insertTestProyecto(datos, callback) {
     });
   });
 }
+
 function insertClasseTestProyecto(datos, callback) {
   /* u: datos de un usuario que se va a guardar */
 
   pool.getConnection(function(err, connection) {
 
-    var sql = "INSERT INTO `proyecto_clase_test`( `idProyecto`, `idTest`, `clase`, `mutante`, `killed`) VALUES (?,?,?,?,?)";
+    var sql = "INSERT INTO `mutante_test_proyecto`( `idProyecto`, `idTest`, `clase`, `mutante`, `killed`) VALUES (?,?,?,?,?)";
 
     // Ejecutamos la consulta SQL
     connection.query(sql, [datos.idProyecto, datos.idTest, datos.clase, datos.mutante, datos.killed], function(err, result) {

@@ -1,5 +1,2 @@
 
-ControlMath.java
-Ecuaciones.java
-Util.java
-Vista.java
+C1.java
