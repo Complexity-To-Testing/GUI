@@ -32,7 +32,7 @@ if [ -e $DIR_PROYECTOJAVA_TEST ] ; then
 fi
 mkdir $DIR_PROYECTOJAVA_TEST;
 if [ -e $DIR_CLASSES_NAMES ] ; then
-  rm -r $DIR_CLASSES_NAMES; 
+  rm -r $DIR_CLASSES_NAMES;
 fi
 mkdir $DIR_CLASSES_NAMES;
 
@@ -70,6 +70,8 @@ function recorridoRecursivoClasses() {
           nameFile=$(echo "${file}"| rev | cut -d"/" -f1 | rev )
           #cd -
           cd -
+          NEWPARAMS="<param>$pathfile</param>"
+          echo $NEWPARAMS >> $FILE_POM
           echo "${nameFile}" >> $DIR_CLASSES_NAMES/$FILE_NAME_CLASSES
           cd -
       else
@@ -80,24 +82,12 @@ function recorridoRecursivoClasses() {
       fi
   done
 }
+
 cp $FILE_POM_TEMP $FILE_POM
 
 if [ -f $FILE_CLASSES ]; then
    echo "File $FILE_CLASSES exists."
    unzip -o $FILE_CLASSES -d $DIR_PROYECTOJAVA_SRC
-   NEWPARAMS=''
-   OLDPARAMS='PARAM_CLASS'
-
-   for name in $(ls  $DIR_PROYECTOJAVA_SRC)
-   do
-     if [[ $name = "__MACOSX" ]]; then
-       echo "ES __MACOSX"
-     else
-       NEWPARAMS="<param>$name*</param>"
-       echo $NEWPARAMS >> $FILE_POM
-     fi
-   done
-   echo "</targetClasses><targetTests>" >> $FILE_POM
 
    # Guardamos los ficheros java en file_names
    rm $DIR_CLASSES_NAMES/$FILE_NAME_CLASSES
@@ -105,6 +95,7 @@ if [ -f $FILE_CLASSES ]; then
    cd $DIR_PROYECTOJAVA_SRC
    recorridoRecursivoClasses "."
    cd -
+   echo "</targetClasses><targetTests>" >> $FILE_POM
 else
  echo "File $FILE_CLASSES does not exist."
 fi
