@@ -123,10 +123,77 @@ function getEstadisticastPorIdProyecto(idProyecto, callback) {
   });
 }
 
+function getSumMutantesPorIdProyectoKilled(idProyecto, callback) {
+  pool.getConnection(function(err, connection) {
+
+    var sql = "SELECT count(killed) as killed, mutante FROM `mutante_test_proyecto` WHERE idProyecto = ? and killed = 'KILLED' GROUP by mutante "
+
+    // Ejecutamos la consulta SQL
+    connection.query(sql,[idProyecto], function(err, result) {
+      connection.release();
+      if (err) {
+        callback(err);
+      } else {
+        if (result.length === 0) {
+          callback(null, null);
+        } else {
+          callback(null, result);
+        }
+      }
+    });
+  });
+}
+
+function getTestsPorIdProyecto(idProyecto, callback) {
+  pool.getConnection(function(err, connection) {
+
+    var sql = "SELECT * FROM `test_proyecto` WHERE idProyecto = ? "
+
+    // Ejecutamos la consulta SQL
+    connection.query(sql,[idProyecto], function(err, result) {
+      connection.release();
+      if (err) {
+        callback(err);
+      } else {
+        if (result.length === 0) {
+          callback(null, null);
+        } else {
+          callback(null, result);
+        }
+      }
+    });
+  });
+}
+
+function getSumMutantesKilledPorIdTest(idTest, callback) {
+  pool.getConnection(function(err, connection) {
+
+    var sql = "SELECT count(killed) as killed, mutante FROM `mutante_test_proyecto` WHERE idTest = ? and killed = 'KILLED' GROUP by mutante"
+
+    // Ejecutamos la consulta SQL
+    connection.query(sql,[idTest], function(err, result) {
+      connection.release();
+      if (err) {
+        callback(err);
+      } else {
+        if (result.length === 0) {
+          callback(null, null);
+        } else {
+          callback(null, result);
+        }
+      }
+    });
+  });
+}
+
+// SELECT count(killed), mutante as killed FROM `mutante_test_proyecto` WHERE idProyecto = 1 GROUP by mutante
 module.exports = {
   insertProyecto: insertProyecto,
   getProyectos: getProyectos,
   insertTestProyecto: insertTestProyecto,
   getEstadisticastPorIdProyecto: getEstadisticastPorIdProyecto,
-  insertClasseTestProyecto: insertClasseTestProyecto
+  insertClasseTestProyecto: insertClasseTestProyecto,
+  getSumMutantesPorIdProyectoKilled: getSumMutantesPorIdProyectoKilled,
+  getTestsPorIdProyecto: getTestsPorIdProyecto,
+  getSumMutantesKilledPorIdTest: getSumMutantesKilledPorIdTest
 };

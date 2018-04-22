@@ -67,6 +67,32 @@ $(document).ready(function() {
       });
   });
 
+  $('#btn-ejecutar-proyecto').on('click', function() {
+      var nombreProyecto = $('#inputNombreProyecto').val();
+
+      $('.container > div').addClass('hidden');
+      $('#preloader').removeClass('hidden');
+
+      var resultado = $.ajax({
+        url: SERVER + "ejecutar/"+nombreProyecto,
+        type: "GET",
+        dataType: 'json',
+        data: {},
+        success: function(data) {
+          if (data.exito) {
+            $('#preloader').addClass('hidden');
+            $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+            $('#success').removeClass('hidden')
+            $('#success').delay(350).css({'overflow':'visible'});
+          } else {
+            alert("ERROR"+ data.msg);
+          }
+        },
+        error: function (xhr, status) { alert('Oooops, hubo un error...'); },
+        complete: function(xhr, status) {
+        }
+      });
+  });
   $("#btnSubmitClasses").click(function (event) {
         //stop submit the form, we will post it manually.
         event.preventDefault();
