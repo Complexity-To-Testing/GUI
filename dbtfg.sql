@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-04-2018 a las 00:20:13
+-- Tiempo de generación: 23-04-2018 a las 17:20:32
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.0.27
 
@@ -2892,22 +2892,6 @@ INSERT INTO `test_proyecto` (`id`, `idProyecto`, `nombreTest`, `killed`, `numMut
 (23, 9, 'test1.java', 0, 0, 3.655, 100),
 (24, 10, 'test1.java', 57, 268, 19.044, 21);
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `test_proyecto_acum`
---
-
-CREATE TABLE `test_proyecto_acum` (
-  `id` int(11) NOT NULL,
-  `idProyecto` int(11) NOT NULL,
-  `killed` int(11) NOT NULL,
-  `nombreTest` varchar(40) COLLATE utf16_spanish_ci NOT NULL,
-  `numMutants` int(11) NOT NULL,
-  `time` int(11) NOT NULL,
-  `percent` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
-
 --
 -- Índices para tablas volcadas
 --
@@ -2931,12 +2915,6 @@ ALTER TABLE `test_proyecto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `test_proyecto_acum`
---
-ALTER TABLE `test_proyecto_acum`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -2957,12 +2935,6 @@ ALTER TABLE `proyectos`
 --
 ALTER TABLE `test_proyecto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT de la tabla `test_proyecto_acum`
---
-ALTER TABLE `test_proyecto_acum`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
