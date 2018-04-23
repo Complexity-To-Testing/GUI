@@ -1,5 +1,5 @@
 
-  "use strict";
+"use strict";
 var express = require('express');
 var router = express.Router();
 var daoProyectos = require('../integration/daoProyectos');
@@ -88,7 +88,7 @@ router.get("/ejecutarOLD/:nombreProyecto", function(req, res, next) {
           }
       });
    }
-});
+ });
 });
 
 router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
@@ -219,6 +219,18 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
     /*    }
       });*/
     }
+});
+
+router.get("/generarPrograma",function(req, res, next) {
+    var nombreProyecto = req.params.nombreProyecto;
+
+    ejecutarComandoLinux( "sh generadorPrograma.sh", function(err, resultGen) {
+      if (err) {
+        res.json({exito: false, msg: resultGen});
+      } else {
+        res.json(resultGen);
+      }
+    });
 });
 
 function preprocesar(callback) {
