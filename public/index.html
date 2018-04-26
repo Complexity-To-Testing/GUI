@@ -17,7 +17,6 @@
 
   </head>
   <body>
-
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -27,18 +26,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Complexity To Testing</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li id="nav-listado-proyectos" class="user-control"><a href="#">Estadisticas<span class="sr-only">(current)</span></a></li>
+            <li id="nav-home" class="user-control"><a href="#">Home</a></li>
+            <li id="nav-listado-proyectos" class="user-control"><a href="#">Estadísticas<span class="sr-only">(current)</span></a></li>
             <li id="nav-experimeto" class="user-control"><a href="#">Crear proyecto</a></li>
+            <li id="nav-generador" class="user-control"><a href="#">Generar programa</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <!-- LISTADO DE CAMPEONATOS -->
     <div class="container">
       <div id="chart"></div>
       <div id="chart_div"></div>
@@ -62,7 +61,7 @@
       </div>
       <!-- LISTADO PROYECTOS -->
       <div id="listado-proyectos" class="hidden">
-        <h1> Resultados</h1>
+        <h3> Resultados</h3>
         <table id="tbl-proyecto" class="table table-responsive">
           <thead>
             <th>Id</th>
@@ -98,18 +97,20 @@
       <div id="home-experimento" class="hidden">
         <div class="row">
             <div class="form-group col-sm-6 col-lg-6">
-              <label for="inputNombreCompeticion">Nombre del proyecto</label>
+              <label for="inputNombreCompeticion">Nombre del proyecto <font color="red">*</font></label>
               <input type="text" id="inputNombreProyecto"/><br/><br/>
             </div>
         </div>
         <div class="row">
           <form method="POST" class="form"  enctype="multipart/form-data" id="fileUploadFormClasses">
               <div class="form-group col-sm-6 col-lg-6">
-                <label for="">Introduce las clases.</label>
+                <label for="">Selecciona las clases java <font color="red">*</font></label>
                 <input type="file" name="Classes"/><br/><br/>
               </div>
               <span id="resultClasses"></span>
               <div class="form-group col-sm-6 col-lg-6">
+                    <br/>
+                    <br/>
                     <input type="submit" value="Submit" id="btnSubmitClasses"/>
               </div>
           </form>
@@ -117,11 +118,13 @@
         <div class="row">
           <form method="POST" class="form"  enctype="multipart/form-data" id="fileUploadFormTests">
               <div class="form-group col-sm-6 col-lg-6">
-                <label for="">Introduce los tests.</label>
+                <label for="">Selecciona los tests a aplicar <font color="red">*</font></label>
                 <input type="file" name="Tests"/><br/><br/>
               </div>
               <span id="resultTests"></span>
               <div class="form-group col-sm-6 col-lg-6">
+                    <br/>
+                    <br/>
                     <input type="submit" value="Submit" id="btnSubmitTests"/>
               </div>
           </form>
@@ -136,6 +139,111 @@
               </span>
             </div>
           </div>
+        </div>
+      </div>
+      <!-- FORMULARIO PARA EL GENERADOR DE PROGRAMAS -->
+      <div id="home-generador" class="hidden">
+        <h3>Introducir parámetros</h2>
+        <p>Para ser capaces de generar un programa necesitamos establecer algunos parámetros de los cuales dependerá la estructura del programa generado.</p>
+        <br/>
+        <form>
+          <div class="row form-group" id="numeroAnidacionesIf">
+            <div class="col-25">
+              <label for="fname">Número de anidaciones <i>if</i> <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputNumeroAnidacionesIf" name="numeroAnidacionesIf">
+            </div>
+          </div>
+          <div class="row form-group" id="numeroAnidacionesWhile">
+            <div class="col-25">
+              <label for="fname">Número de anidaciones <i>while</i> <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputNumeroAnidacionesWhile" name="numeroAnidacionesWhile">
+            </div>
+          </div>
+          <div class="row form-group" id="numeroIteracionesWhile">
+            <div class="col-25">
+              <label for="fname">Número de iteraciones <i>while</i> <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputNumeroIteracionesWhile" name="numeroIteracionesWhile">
+            </div>
+          </div>
+          <div class="row form-group" id="numeroAnidacionesFor">
+            <div class="col-25">
+              <label for="fname">Número de anidaciones <i>for</i> <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputNumeroAnidacionesFor" name="numeroAnidacionesFor">
+            </div>
+          </div>
+          <div class="row form-group" id="numeroIteracionesFor">
+            <div class="col-25">
+              <label for="fname">Número de iteraciones <i>for</i> <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputNumeroIteracionesFor" name="numeroIteracionesFor">
+            </div>
+          </div>
+          <div class="row form-group" id="numeroCondicionesLogicas">
+            <div class="col-25">
+              <label for="fname">Número de condiciones lógicas <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputNumeroCondicionesLogicas" name="numeroCondicionesLogicas">
+            </div>
+          </div>
+          <div class="row form-group" id="numeroExpresionesLogicas">
+            <div class="col-25">
+              <label for="fname">Número de expresiones lógicas <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputNumeroExpresionesLogicas" name="numeroExpresionesLogicas">
+            </div>
+          </div>
+          <div class="row form-group" id="numeroExpresionesAritmeticas">
+            <div class="col-25">
+              <label for="fname">Número de expresiones aritméticas <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputNumeroExpresionesAritmeticas" name="numeroExpresionesAritmeticas" class="required">
+            </div>
+          </div>
+          <div class="row">
+            <br/>
+            <input type="button" id="btn-nuevo-programa" class="btn btn-primary" value="Submit">
+          </div>
+        </form>
+      </div>
+      <!-- HOME PRINCIPAL -->
+      <div id="home-principal" class="hidden">
+        <div class="row">
+            <div class="form-group col-sm-10 col-lg-12">
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <h3><b>Estudio de las clases de complejidad en <i>testing</i></b></h3>
+              <br/>
+              <br/>
+              <h4>Universidad Complutense de Madrid</h4>
+              <h5>Facultad de Informática</h5>
+              <br/>
+              <br/>
+              <img class="imagen-bienvenida" src="../images/logo.png">
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <h5>Cristhian Rodríguez</h5>
+              <h5>Jonathan Carrero</h5>
+              <h5>Yu Liu</h5>
+              <br/>
+              <br/>
+              <h5><i>Dirigido por</i>: Ismael Rodríguez Laguna</h5>
+            </div>
         </div>
       </div>
     </div>

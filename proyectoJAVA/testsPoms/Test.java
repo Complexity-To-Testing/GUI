@@ -51,4 +51,7 @@
                         <param>HTML</param>
                         <param>CSV</param>
                     </outputFormats>
-                    <targetClasses> <param>test1</param> </targetTests></configuration></plugin></plugins></build></project>
+                    <targetClasses>
+<param>Programa</param>
+</targetClasses><targetTests>
+<param>Test</param></targetTests></configuration></plugin></plugins></build></project>

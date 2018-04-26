@@ -52,6 +52,6 @@
                         <param>CSV</param>
                     </outputFormats>
                     <targetClasses>
-<param>C1</param>
+<param>Programa</param>
 </targetClasses><targetTests>
-<param>test1</param></targetTests></configuration></plugin></plugins></build></project>
+<param>Test</param></targetTests></configuration></plugin></plugins></build></project>

@@ -8,44 +8,89 @@ var idCampeonatoSeleccionado = -1;
 var SERVER = '/'; // MIKE
 
 $(document).ready(function() {
-
   $('nav li').on('click', function() {
     $('nav li').removeClass('active');
     $(this).addClass('active');
 
     switch($(this).attr('id')) {
+      // BOTÓN: ESTADÍSTICAS
       case 'nav-listado-proyectos':
-        $('.container > div').addClass('hidden');
-        $('#listado-proyectos').removeClass('hidden');
-
-        /*$.when(getCampeonatos()).done(function(campeonatos) {
-          rellenarCampeonatos(campeonatos);
-        });*/
-
-        $.when(getProyectos()).done(function(proyectos) {
-          rellenarProyectos(proyectos);
-        });
-        break;
+            // Desaparece suavamente
+            $('.container > div').fadeOut(400);
+            // Se elimina todo lo que hubiese
+            $('.container > div').addClass('hidden');
+            $('#listado-proyectos').removeClass('hidden');
+            // Y se rellena la nueva lista
+            $.when(getProyectos()).done(function(proyectos) {
+              rellenarProyectos(proyectos);
+            });
+            // Aparece suavemente
+            setTimeout(function () {
+              $('.container > div').fadeIn(300);
+            }, 500);
+      break;
+      // BOTÓN: CREAR PROYECTO
       case 'nav-experimeto':
-        $('.container > div').addClass('hidden');
-        $('#home-experimento').removeClass('hidden');
+            $('.container > div').fadeOut(400);
+            $('.container > div').addClass('hidden');
+            $('#home-experimento').removeClass('hidden');
+            setTimeout(function () {
+              $('.container > div').fadeIn(300);
+            }, 500);
+      break;
+      // BOTÓN: GENERAR PROGRAMA
+      case 'nav-generador':
+            $('.container > div').fadeOut(400);
+            $('.container > div').addClass('hidden');
+            $('#home-generador').removeClass('hidden');
+            setTimeout(function () {
+              $('.container > div').fadeIn(300);
+            }, 500);
+      break;
+      // BOTÓN: COMPLEXITY TO TESTING
+      case 'nav-home':
+          $('.container > div').fadeOut(400);
+          $('.container > div').addClass('hidden');
+          $('#home-principal').removeClass('hidden');
+          setTimeout(function () {
+            $('.container > div').fadeIn(300);
+          }, 500);
+      break;
+    }
+  });
+  // GESTION GENERARDOR DE PROGRAMA
+  $('#btn-nuevo-programa').on('click', function() {
+    var datosPrograma = {
+      numeroAnidacionesIf: $('#inputNumeroAnidacionesIf').val(),
+      numeroAnidacionesWhile: $('#inputNumeroAnidacionesWhile').val(),
+      numeroIteracionesWhile: $('#inputNumeroIteracionesWhile').val(),
+      numeroAnidacionesFor: $('#inputNumeroAnidacionesFor').val(),
+      numeroIteracionesFor: $('#inputNumeroIteracionesFor').val(),
+      numeroCondicionesLogicas: $('#inputNumeroCondicionesLogicas').val(),
+      numeroExpresionesLogicas: $('#inputNumeroExpresionesLogicas').val(),
+      numeroExpresionesAritmeticas: $('#inputNumeroExpresionesAritmeticas').val()
+    }
 
-        /*$.when(getEquiposPorIdCreador()).done(function(equipos) {
-          rellenarEquipos(equipos);
-        });*/
-        // rellenarSelectCampeonatosListaEquipos(); //###CambiosCR
-        break;
-
+    // Si se ha rellenado todos los campos.
+    if (validarFormularioGeneradorPrograma()) {
+      $.ajax({
+        type: "POST",
+        url: SERVER + 'generarPrograma',
+        contentType: 'application/json',
+        data: JSON.stringify(datosPrograma),
+        error: function(xhr, status) { alert('Oooops, hubo un error...'); },
+        success: function(xhr, status) { location.reload(); }
+      });
+    } else {
+      alert("Debes completar los campos en rojo.")
     }
   });
 
   // GESION DE PROYECTOS
   $('#btn-ejecutar-proyecto').on('click', function() {
       var nombreProyecto = $('#inputNombreProyecto').val();
-
       $('.container > div').addClass('hidden');
       $('#preloader').removeClass('hidden');
-
       var resultado = $.ajax({
         url: SERVER + "ejecutar/"+nombreProyecto,
         type: "GET",
@@ -93,6 +138,7 @@ $(document).ready(function() {
         }
       });
   });
+
   $("#btnSubmitClasses").click(function (event) {
         //stop submit the form, we will post it manually.
         event.preventDefault();
@@ -134,7 +180,8 @@ $(document).ready(function() {
         });
 
     });
-    $("#btnSubmitTests").click(function (event) {
+
+  $("#btnSubmitTests").click(function (event) {
           console.log("<-- On click Submit");
           //stop submit the form, we will post it manually.
           event.preventDefault();
@@ -208,3 +255,58 @@ document.addEventListener('click', function () {
     }
     document.body.classList.add('active');
 });
+
+/* Función para validar campos */
+function validarFormularioGeneradorPrograma(){
+  var valido = true;
+  //  jQuery.validator.messages.number = 'Esta campo debe ser num&eacute;rico.';
+  if ($('#inputNumeroAnidacionesIf').val() == "") {
+    $('#numeroAnidacionesIf').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroAnidacionesIf').removeClass('has-error');
+  }
+  if ($('#inputNumeroAnidacionesWhile').val() == "") {
+    $('#numeroAnidacionesWhile').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroAnidacionesWhile').removeClass('has-error');
+  }
+  if ($('#inputNumeroIteracionesWhile').val() == "") {
+    $('#numeroIteracionesWhile').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroIteracionesWhile').removeClass('has-error');
+  }
+  if ($('#inputNumeroAnidacionesFor').val() == "") {
+    $('#numeroAnidacionesFor').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroAnidacionesFor').removeClass('has-error');
+  }
+  if ($('#inputNumeroIteracionesFor').val() == "") {
+    $('#numeroIteracionesFor').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroIteracionesFor').removeClass('has-error');
+  }
+  if ($('#inputNumeroCondicionesLogicas').val() == "") {
+    $('#numeroCondicionesLogicas').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroCondicionesLogicas').removeClass('has-error');
+  }
+  if ($('#inputNumeroExpresionesLogicas').val() == "") {
+    $('#numeroExpresionesLogicas').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroExpresionesLogicas').removeClass('has-error');
+  }
+  if ($('#inputNumeroExpresionesAritmeticas').val() == "") {
+    $('#numeroExpresionesAritmeticas').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroExpresionesAritmeticas').removeClass('has-error');
+  }
+  return valido;
+}

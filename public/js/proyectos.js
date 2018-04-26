@@ -24,9 +24,9 @@ function rellenarProyectos(json) {
         '<td>' + proyecto.numMutants +'</td>' +
         '<td>' + proyecto.avg_killed +'</td>' +
         '<td>' + proyecto.avg_percent +'</td>' +
-        '<td align="right"> <form name="verTestsProyecto" action="javascript:verTestsProyecto(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verTestsProyecto"  class="btn btn-primary btn-success" type="submit" value="Ver tests" /> </form> </td>' +
-        '<td align="right"> <form name="verMutantesKilledProyecto" action="javascript:verMutantesKilledProyecto(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verMutantesKilledProyecto"  class="btn btn-primary btn-success" type="submit" value="Ver Mutantes killed" /> </form> </td>' +
-        '<td align="right"> <form name="verEstadisticas" action="javascript:verEstadisticas(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verEstadisticas"  class="btn btn-primary btn-success" type="submit" value="Ver estadisticas" /> </form> </td>' +
+        '<td align="right"> <form name="verTestsProyecto" action="javascript:verTestsProyecto(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verTestsProyecto"  class="btn btn-primary btn-success" type="submit" value="Tests" /> </form> </td>' +
+        '<td align="right"> <form name="verMutantesKilledProyecto" action="javascript:verMutantesKilledProyecto(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verMutantesKilledProyecto"  class="btn btn-primary btn-success" type="submit" value="Killed mutants" /> </form> </td>' +
+        '<td align="right"> <form name="verEstadisticas" action="javascript:verEstadisticas(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verEstadisticas"  class="btn btn-primary btn-success" type="submit" value="Estadísticas" /> </form> </td>' +
       '</tr>'
     );
   });
@@ -46,7 +46,7 @@ function rellenarTests(json) {
         '<td>' + test.killed +'</td>' +
         '<td>' + test.time +'</td>' +
         '<td>' + test.percent +'</td>' +
-        '<td align="right"> <form name="verMutantesKilledTest" action="javascript:verMutantesKilledTest(' + test.id + ', ' + nombreTest + ');" > <input id="verMutantesKilledTest"  class="btn btn-primary btn-success" type="submit" value="Ver mutantes killed" /> </form> </td>' +
+        '<td align="right"> <form name="verMutantesKilledTest" action="javascript:verMutantesKilledTest(' + test.id + ', ' + nombreTest + ');" > <input id="verMutantesKilledTest"  class="btn btn-primary btn-success" type="submit" value="Killed mutants" /> </form> </td>' +
       '</tr>'
     );
   });
@@ -228,6 +228,7 @@ function getProyectos() {
     complete: function(xhr, status) {}
   });
 }
+
 function getTestProyecto(idProyecto) {
   return $.ajax({
     url: SERVER + "proyectos/getTests/" + idProyecto,
@@ -257,6 +258,7 @@ function obtenerSumMutantesKilledPorIdProyecto(idProyecto) {
     complete: function(xhr, status) {}
   });
 }
+
 function obtenerSumMutantesKilledPorIdTest(idTest) {
   return $.ajax({
     url: SERVER + "proyectos/getSumMutantesKilledPorTest/" + idTest,
