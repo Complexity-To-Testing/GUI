@@ -127,4 +127,33 @@ router.get("/getSumMutantesKilledPorTest/:idTest", function(req, res, next) {
       res.json( {error: true, msg: "ERROR: hay un parametro incorrecto, asegurese de que sea un numero entero"});
   }
 });
+
+
+// GET /proyectos/getResultadosPrueba/:nombrePrueba Devuelve los resultados de una prueba
+router.get("/getResultadosPrueba/:nombrePrueba", function(req, res, next) {
+  var nombrePrueba =  req.params.nombrePrueba;
+  console.log("--");
+  console.log(nombrePrueba);
+  if (nombrePrueba !== "") {
+    // Obtiene las getEstadisticas
+    daoProyectos.getResultadoProyectosPorPrueba(nombrePrueba, function(err, tests) {
+
+      // Muestra error si hay un error en la BD
+      if (err) {
+        next(err);
+      } else {
+
+        // Si no hay tests
+        if (tests == null) {
+          res.json([]);
+        }else {
+          res.json(tests);
+        }
+      }
+    });
+  } else {
+      res.json( {error: true, msg: "ERROR: hay un parametro incorrecto, asegurese de que no sea vacio"});
+  }
+});
+
 module.exports = router;

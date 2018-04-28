@@ -1,6 +1,7 @@
 var idProyectoSeleccionado;
 var idTestSeleccionado;
 var jsonEstaditicas;
+var jsonEstaditicasPrueba;
 var jsonMutantes;
 var currentNombreProyecto;
 var currentNombreTest;
@@ -103,6 +104,19 @@ function verEstadisticas(idProyecto, nombreProyecto) {
     jsonEstaditicas = estadisticas;
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
+
+    $('.container > div').addClass('hidden');
+    $('#chart').removeClass('hidden');
+  });
+}
+function verEstadisticasPorPrueba(nombrePrueba) {
+  console.log("<---- verEstadisticasPorPrueba");
+  //listaEstadisticas = [];
+  $.when(obtenerEstadisticasPorPrueba(nombrePrueba)).done(function(estadisticas) {
+    console.log(estadisticas);
+    jsonEstaditicasPrueba = estadisticas;
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChartPrueba);
 
     $('.container > div').addClass('hidden');
     $('#chart').removeClass('hidden');
@@ -216,9 +230,88 @@ function drawChartTest() {
   */
 }
 
+function drawChartPrueba() {
+  // Create our data table out of JSON data loaded from server.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'mutante');
+  data.addColumn('number', 'killed');
+  data.addColumn('number', 'mutante');
+  data.addColumn('number', 'time');
+  //data.addColumn('string', 'nombre clase test');
+  $.each(jsonEstaditicasPrueba, function(i,jsonData)
+  {
+    var time=jsonData.time;
+    var mutante=jsonData.numMutants;
+    var value=jsonData.killed;
+    var name=jsonData.name;
+
+    //var nameTest=jsonData.nombreTest;
+    data.addRows([ [name, value, mutante, time]]);
+  });
+
+  var options = {
+    title: 'Mutantes killed del test ' + currentNombreTest,
+    //function: 'linear',
+    pointSize: 16
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('chart'));
+  //var chart=new google.visualization.BarChart(document.getElementById('chart'));
+  google.visualization.events.addListener(chart, 'ready', function() {  });
+
+  chart.draw(data, options);
+  /*
+  chart=new google.visualization.ColumnChart(document.getElementById('chart'));
+  chart=new google.visualization.PieChart(document.getElementById('chart'));
+  chart=new google.visualization.BarChart(document.getElementById('chart'));
+  chart=new google.visualization.GeoChart(document.getElementById('chart'));
+  */
+}
+/*
+  FUNCIONES AUXILIARES
+*/
+var i = 1;
+function programaTestNumAnidacionesIf() {
+  if (i === 10) {
+        return;
+  }
+
+  console.log("<- PruebaNumeroExpresionesLogicas");
+  console.log(i);
+  var nombreProyecto = "PruebaNumeroExpresionesLogicas" + i;
+  var datosPrograma = {
+    numeroAnidacionesIf: 1,
+    numeroAnidacionesWhile: 1,
+    numeroIteracionesWhile: 1,
+    numeroAnidacionesFor: 1,
+    numeroIteracionesFor: 1,
+    numeroCondicionesLogicas: 1,
+    numeroExpresionesLogicas: i,
+    numeroExpresionesAritmeticas: 1
+  }
+
+  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+    i++;
+    programaTestNumAnidacionesIf();
+  });
+}
+
 /*
   OBTENER DATOS
 */
+
+function generarPrograma(datosPrograma, nombreProyecto) {
+  console.log(datosPrograma);
+  return   $.ajax({
+      type: "POST",
+      url: SERVER + 'generarPrograma/'+nombreProyecto,
+      contentType: 'application/json',
+      data: JSON.stringify(datosPrograma),
+      error: function(xhr, status) { alert('Oooops, hubo un error...'); },
+      success: function(xhr, status) { console.log("<--- terminado")}
+    });
+}
+
 function getProyectos() {
   return $.ajax({
     url: SERVER + 'proyectos/',
@@ -242,6 +335,16 @@ function getTestProyecto(idProyecto) {
 function obtenerEstadisticasPorIdProyecto(idProyecto) {
   return $.ajax({
     url: SERVER + "proyectos/getEstadisticas/" + idProyecto,
+    type: "GET",
+    dataType: 'json',
+    error: function (xhr, status) { alert('Oooops, hubo un error...'); },
+    complete: function(xhr, status) {}
+  });
+}
+
+function obtenerEstadisticasPorPrueba(nombrePrueba) {
+  return $.ajax({
+    url: SERVER + "proyectos/getResultadosPrueba/" + nombrePrueba,
     type: "GET",
     dataType: 'json',
     error: function (xhr, status) { alert('Oooops, hubo un error...'); },

@@ -186,6 +186,30 @@ function getSumMutantesKilledPorIdTest(idTest, callback) {
   });
 }
 
+function getResultadoProyectosPorPrueba(nombrePrueba, callback) {
+  pool.getConnection(function(err, connection) {
+
+    var sql = "SELECT * FROM `test_proyecto` JOIN proyectos ON (proyectos.id = test_proyecto.idProyecto ) WHERE proyectos.name  LIKE  ?  "
+
+    // Ejecutamos la consulta SQL
+    connection.query(sql,['%'+nombrePrueba +'%'], function(err, result) {
+      connection.release();
+      if (err) {
+        callback(err);
+      } else {
+        console.log(nombrePrueba);
+        console.log(result);
+        if (result.length === 0) {
+          callback(null, null);
+        } else {
+          console.log(nombrePrueba);
+          console.log(result);
+          callback(null, result);
+        }
+      }
+    });
+  });
+}
 // SELECT count(killed), mutante as killed FROM `mutante_test_proyecto` WHERE idProyecto = 1 GROUP by mutante
 module.exports = {
   insertProyecto: insertProyecto,
@@ -195,5 +219,6 @@ module.exports = {
   insertClasseTestProyecto: insertClasseTestProyecto,
   getSumMutantesPorIdProyectoKilled: getSumMutantesPorIdProyectoKilled,
   getTestsPorIdProyecto: getTestsPorIdProyecto,
-  getSumMutantesKilledPorIdTest: getSumMutantesKilledPorIdTest
+  getSumMutantesKilledPorIdTest: getSumMutantesKilledPorIdTest,
+  getResultadoProyectosPorPrueba: getResultadoProyectosPorPrueba
 };

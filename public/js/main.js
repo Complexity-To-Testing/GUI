@@ -56,10 +56,21 @@ $(document).ready(function() {
             $('.container > div').fadeIn(300);
           }, 500);
       break;
+      // BOTÓN: COMPLEXITY TO TESTING
+      case 'nav-grafica-prueba':
+          $('.container > div').fadeOut(400);
+          $('.container > div').addClass('hidden');
+          $('#home-graficas-prueba').removeClass('hidden');
+          setTimeout(function () {
+            $('.container > div').fadeIn(300);
+          }, 500);
+      break;
     }
   });
   // GESTION GENERARDOR DE PROGRAMA
   $('#btn-nuevo-programa').on('click', function() {
+    programaTestNumAnidacionesIf();
+    /*
     var datosPrograma = {
       numeroAnidacionesIf: $('#inputNumeroAnidacionesIf').val(),
       numeroAnidacionesWhile: $('#inputNumeroAnidacionesWhile').val(),
@@ -73,17 +84,10 @@ $(document).ready(function() {
 
     // Si se ha rellenado todos los campos.
     if (validarFormularioGeneradorPrograma()) {
-      $.ajax({
-        type: "POST",
-        url: SERVER + 'generarPrograma',
-        contentType: 'application/json',
-        data: JSON.stringify(datosPrograma),
-        error: function(xhr, status) { alert('Oooops, hubo un error...'); },
-        success: function(xhr, status) { location.reload(); }
-      });
+      generarPrograma(datosPrograma);
     } else {
       alert("Debes completar los campos en rojo.")
-    }
+    }*/
   });
 
   // GESION DE PROYECTOS
@@ -112,31 +116,11 @@ $(document).ready(function() {
       });
   });
 
-  $('#btn-ejecutar-proyecto').on('click', function() {
-      var nombreProyecto = $('#inputNombreProyecto').val();
-
-      $('.container > div').addClass('hidden');
-      $('#preloader').removeClass('hidden');
-
-      var resultado = $.ajax({
-        url: SERVER + "ejecutar/"+nombreProyecto,
-        type: "GET",
-        dataType: 'json',
-        data: {},
-        success: function(data) {
-          if (data.exito) {
-            $('#preloader').addClass('hidden');
-            $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-            $('#success').removeClass('hidden')
-            $('#success').delay(350).css({'overflow':'visible'});
-          } else {
-            alert("ERROR"+ data.msg);
-          }
-        },
-        error: function (xhr, status) { alert('Oooops, hubo un error...'); },
-        complete: function(xhr, status) {
-        }
-      });
+  $('#btn-mostrar-grafica-prueba').on('click', function() {
+      var nombrePrueba = $('#inputNombrePrueba').val();
+      console.log("<-- on clink mostrar grafica ");
+      console.log(nombrePrueba);
+      verEstadisticasPorPrueba(nombrePrueba);
   });
 
   $("#btnSubmitClasses").click(function (event) {
