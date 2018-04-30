@@ -8,6 +8,8 @@ var idCampeonatoSeleccionado = -1;
 var SERVER = '/'; // MIKE
 
 $(document).ready(function() {
+  $('nav-home').click();
+
   $('nav li').on('click', function() {
     $('nav li').removeClass('active');
     $(this).addClass('active');
@@ -17,51 +19,52 @@ $(document).ready(function() {
       case 'nav-listado-proyectos':
             // Desaparece suavamente
             $('.container > div').fadeOut(400);
-            // Se elimina todo lo que hubiese
-            $('.container > div').addClass('hidden');
-            $('#listado-proyectos').removeClass('hidden');
+
             // Y se rellena la nueva lista
             $.when(getProyectos()).done(function(proyectos) {
               rellenarProyectos(proyectos);
             });
             // Aparece suavemente
             setTimeout(function () {
+              // Se elimina todo lo que hubiese
+              $('.container > div').addClass('hidden');
+              $('#listado-proyectos').removeClass('hidden');
               $('.container > div').fadeIn(300);
             }, 500);
       break;
       // BOTÓN: CREAR PROYECTO
       case 'nav-experimeto':
             $('.container > div').fadeOut(400);
-            $('.container > div').addClass('hidden');
-            $('#home-experimento').removeClass('hidden');
             setTimeout(function () {
+              $('.container > div').addClass('hidden');
+              $('#home-experimento').removeClass('hidden');
               $('.container > div').fadeIn(300);
             }, 500);
       break;
       // BOTÓN: GENERAR PROGRAMA
       case 'nav-generador':
             $('.container > div').fadeOut(400);
-            $('.container > div').addClass('hidden');
-            $('#home-generador').removeClass('hidden');
             setTimeout(function () {
+              $('.container > div').addClass('hidden');
+              $('#home-generador').removeClass('hidden');
               $('.container > div').fadeIn(300);
             }, 500);
       break;
       // BOTÓN: COMPLEXITY TO TESTING
       case 'nav-home':
           $('.container > div').fadeOut(400);
-          $('.container > div').addClass('hidden');
-          $('#home-principal').removeClass('hidden');
           setTimeout(function () {
+            $('.container > div').addClass('hidden');
+            $('#home-principal').removeClass('hidden');
             $('.container > div').fadeIn(300);
           }, 500);
       break;
       // BOTÓN: COMPLEXITY TO TESTING
       case 'nav-grafica-prueba':
           $('.container > div').fadeOut(400);
-          $('.container > div').addClass('hidden');
-          $('#home-graficas-prueba').removeClass('hidden');
           setTimeout(function () {
+            $('.container > div').addClass('hidden');
+            $('#home-graficas-prueba').removeClass('hidden');
             $('.container > div').fadeIn(300);
           }, 500);
       break;
@@ -69,9 +72,11 @@ $(document).ready(function() {
   });
   // GESTION GENERARDOR DE PROGRAMA
   $('#btn-nuevo-programa').on('click', function() {
-    programaTestNumAnidacionesIf();
-    /*
+    //programaTestNumAnidacionesIf();
+    var nombreProyecto = $('#inputNombreProyectoGenerado').val();
+
     var datosPrograma = {
+      listaInputsComprobacion: $('#inputsInputDeComprobacion').val(),
       numeroAnidacionesIf: $('#inputNumeroAnidacionesIf').val(),
       numeroAnidacionesWhile: $('#inputNumeroAnidacionesWhile').val(),
       numeroIteracionesWhile: $('#inputNumeroIteracionesWhile').val(),
@@ -84,42 +89,56 @@ $(document).ready(function() {
 
     // Si se ha rellenado todos los campos.
     if (validarFormularioGeneradorPrograma()) {
-      generarPrograma(datosPrograma);
+      // Activamos el loader
+      $('#preloader').removeClass('hidden');
+
+      $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+        // Desactivamos el loader
+        $('#preloader').addClass('hidden');
+      });
     } else {
       alert("Debes completar los campos en rojo.")
-    }*/
+    }
   });
 
   // GESION DE PROYECTOS
   $('#btn-ejecutar-proyecto').on('click', function() {
       var nombreProyecto = $('#inputNombreProyecto').val();
       $('.container > div').addClass('hidden');
-      $('#preloader').removeClass('hidden');
-      var resultado = $.ajax({
-        url: SERVER + "ejecutar/"+nombreProyecto,
-        type: "GET",
-        dataType: 'json',
-        data: {},
-        success: function(data) {
-          if (data.exito) {
+
+      if (nombreProyecto !== "") {
+        // Activamos el loader
+        $('#preloader').removeClass('hidden');
+
+        var resultado = $.ajax({
+          url: SERVER + "ejecutar/"+nombreProyecto,
+          type: "GET",
+          dataType: 'json',
+          data: {},
+          success: function(data) {
+            if (data.exito) {
+              $('#preloader').addClass('hidden');
+              $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+              $('#success').removeClass('hidden')
+              $('#success').delay(350).css({'overflow':'visible'});
+            } else {
+              alert("ERROR"+ data.msg);
+            }
+          },
+          error: function (xhr, status) { alert('Oooops, hubo un error...'); },
+          complete: function(xhr, status) {
             $('#preloader').addClass('hidden');
-            $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-            $('#success').removeClass('hidden')
-            $('#success').delay(350).css({'overflow':'visible'});
-          } else {
-            alert("ERROR"+ data.msg);
+              $("#resultClasses").text("");
+              $("#resultTests").text("");
           }
-        },
-        error: function (xhr, status) { alert('Oooops, hubo un error...'); },
-        complete: function(xhr, status) {
-        }
-      });
+        });
+      } else {
+        alert("Los campos con * son obligatorios.")
+      }
   });
 
   $('#btn-mostrar-grafica-prueba').on('click', function() {
       var nombrePrueba = $('#inputNombrePrueba').val();
-      console.log("<-- on clink mostrar grafica ");
-      console.log(nombrePrueba);
       verEstadisticasPorPrueba(nombrePrueba);
   });
 
@@ -160,6 +179,9 @@ $(document).ready(function() {
             error: function (e) {
                 $("#resultClasses").text("ERROR : "+e.responseText.msg);
                 $("#btnSubmitClasses").prop("disabled", false);
+            },
+            complete: function(xhr, status) {
+
             }
         });
 
@@ -203,6 +225,8 @@ $(document).ready(function() {
               error: function (e) {
                   $("#resultTests").text("ERROR : "+e.responseText.msg);
                   $("#btnSubmitTests").prop("disabled", false);
+              },
+              complete: function(xhr, status) {
               }
           });
 
@@ -242,8 +266,30 @@ document.addEventListener('click', function () {
 
 /* Función para validar campos */
 function validarFormularioGeneradorPrograma(){
+  var listaInputs = $('#inputsInputDeComprobacion').val();
+  var listaEnteros = listaInputs.split(",")
+  var ultimoChar = listaInputs.slice(-1);
+  var esEntero = true;
+
+  for (var i = 0; i < listaEnteros.length; i++) {
+    if (isNaN(listaEnteros[i])) {
+      esEntero = false;
+    }
+  }
+
   var valido = true;
   //  jQuery.validator.messages.number = 'Esta campo debe ser num&eacute;rico.';
+  if (esEntero === false) {
+    valido = false;
+    alert("Hay un input que no es entero en la lista de inputs, (Ejemplo: 1,2,3,4,5,)")
+  }
+  if (ultimoChar !== ",") {
+    valido = false;
+    alert("El último caracter de la lista de inputs tiene que ser una , (Ejemplo: 1,2,3,4,5,)")
+  }
+  if ($('#inputNombreProyectoGenerado').val() == "") {
+    valido = false;
+  }
   if ($('#inputNumeroAnidacionesIf').val() == "") {
     $('#numeroAnidacionesIf').addClass('has-error');
     valido = false;

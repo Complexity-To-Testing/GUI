@@ -14,7 +14,7 @@ var upload = multer({ dest: "uploads/" });
 var exec = require('child_process').exec, child;
 var lineReader = require('line-reader');
 
-var DIR_PROYECTO_JAVA='./proyectoJAVA'
+var DIR_PROYECTO_JAVA='./generadorMutantesJAVA'
 var DIR_TESTSPOMS=DIR_PROYECTO_JAVA+'/testsPoms'                // Directorio que contiene todos los ficheros de configuracion por tests (Acumulado)
 var DIR_TESTSPOMS_UNIQUE=DIR_PROYECTO_JAVA+'/testsPomsUnique'   // Directorio que contiene todos los ficheros de configuracion por tests (Unico)
 var FILE_RESULTADOS=DIR_PROYECTO_JAVA+'/resultados.txt'         // Fichero que contiene los resultados de los test
@@ -142,6 +142,7 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
                               datosTest.percent = Number(arrayResult[3]);
                               datosTest.time = Number(arrayResult[4]);
 
+                              console.log(datosTest);
                               daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
                                 if (err) {
                                   next(err);
@@ -223,8 +224,9 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
 
 router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
   var nombreProyecto = req.params.nombreProyecto;
-  var inputs = "1,2,3,4,5,6,7,8,9,10,11,12,13,"
-//  var pathPrograma = "./"
+  // var inputs = "1,2,3,4,5,6,7,8,9,10,11,12,13,"
+  var inputs = req.body.listaInputsComprobacion
+  //  var pathPrograma = "./"
 //  var nombrePrograma = "Programa"
 //  var nombreTest = "Test"
   var parametros = "" + req.body.numeroAnidacionesIf + " "
@@ -291,7 +293,6 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                                   datosTest.killed = Number(arrayResult[2]);
                                   datosTest.percent = Number(arrayResult[3]);
                                   datosTest.time = Number(arrayResult[4]);
-
                                   daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
                                     if (err) {
                                       next(err);
@@ -404,7 +405,7 @@ function ejecutarComandoLinux(comando, callback) {
 // Procesar resultado.txt
 function saveResultOnDataBase(idProyecto, callback){
 
-  var listaResultTest = fs.readFileSync('./proyectoJAVA/resultados.txt').toString().trim().split(/\r?\n/);
+  var listaResultTest = fs.readFileSync('./generadorMutantesJAVA/resultados.txt').toString().trim().split(/\r?\n/);
   var cont = listaResultTest.length;
 
   listaResultTest.forEach(function(line){

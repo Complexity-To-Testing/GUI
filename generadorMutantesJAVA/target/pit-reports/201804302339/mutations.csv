@@ -1,0 +1,4 @@
+BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.MathMutator,getPrecio,5,KILLED,Tests.BusinessLogicTest2.shouldGetNormalPricingForOneItem(Tests.BusinessLogicTest2)
+BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator,getPrecio,5,KILLED,Tests.BusinessLogicTest2.shouldGetNormalPricingForOneItem(Tests.BusinessLogicTest2)
+BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.MathMutator,getPrecio1,8,KILLED,Tests.BusinessLogicTest2.shouldGetNormalPricingForOneItem1(Tests.BusinessLogicTest2)
+BusinessLogic.java,businessLogic.BusinessLogic,org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator,getPrecio1,8,KILLED,Tests.BusinessLogicTest2.shouldGetNormalPricingForOneItem1(Tests.BusinessLogicTest2)

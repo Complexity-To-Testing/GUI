@@ -12,7 +12,6 @@
     <script src="./js/main.js" charset="utf-8"></script>
     <script src="./js/proyectos.js" charset="utf-8"></script>
     <script src="./js/estadisticas.js" charset="utf-8"></script>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
   </head>
@@ -30,10 +29,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li id="nav-home" class="user-control"><a href="#">Home</a></li>
-            <li id="nav-listado-proyectos" class="user-control"><a href="#">Estadísticas<span class="sr-only">(current)</span></a></li>
-            <li id="nav-experimeto" class="user-control"><a href="#">Crear proyecto</a></li>
-            <li id="nav-generador" class="user-control"><a href="#">Generar programa</a></li>
-            <li id="nav-grafica-prueba" class="user-control"><a href="#">Graficas prueba</a></li>
+            <li id="nav-listado-proyectos" class="user-control"><a href="#">Resultados<span class="sr-only">(current)</span></a></li>
+            <li id="nav-experimeto" class="user-control"><a href="#">Crear proyecto con programa real</a></li>
+            <li id="nav-generador" class="user-control"><a href="#">Crear proyecto con programa generado</a></li>
           </ul>
         </div>
       </div>
@@ -63,6 +61,23 @@
       <!-- LISTADO PROYECTOS -->
       <div id="listado-proyectos" class="hidden">
         <h3> Resultados</h3>
+        <div class="row">
+            <div class="form-group col-sm-6 col-lg-6">
+              <label for="inputNombrePrueba">Nombre de la prueba <font color="red">*</font></label>
+              <input type="text" id="inputNombrePrueba"/><br/><br/>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button id="btn-mostrar-grafica-prueba" class="btn btn-primary" type="button">
+                  Mostrar grafica
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
         <table id="tbl-proyecto" class="table table-responsive">
           <thead>
             <th>Id</th>
@@ -105,28 +120,28 @@
         <div class="row">
           <form method="POST" class="form"  enctype="multipart/form-data" id="fileUploadFormClasses">
               <div class="form-group col-sm-6 col-lg-6">
-                <label for="">Selecciona las clases java <font color="red">*</font></label>
+                <label for=""> Selecciona el fichero .zip que contiene las clases del programa.<font color="red">*</font></label>
                 <input type="file" name="Classes"/><br/><br/>
               </div>
               <span id="resultClasses"></span>
               <div class="form-group col-sm-6 col-lg-6">
                     <br/>
                     <br/>
-                    <input type="submit" value="Submit" id="btnSubmitClasses"/>
+                    <input type="submit" value="Subir fichero" id="btnSubmitClasses"/>
               </div>
           </form>
         </div>
         <div class="row">
           <form method="POST" class="form"  enctype="multipart/form-data" id="fileUploadFormTests">
               <div class="form-group col-sm-6 col-lg-6">
-                <label for="">Selecciona los tests a aplicar <font color="red">*</font></label>
+                <label for="">Selecciona el fichero .zip que contiene los test del programa <font color="red">*</font></label>
                 <input type="file" name="Tests"/><br/><br/>
               </div>
               <span id="resultTests"></span>
               <div class="form-group col-sm-6 col-lg-6">
                     <br/>
                     <br/>
-                    <input type="submit" value="Submit" id="btnSubmitTests"/>
+                    <input type="submit" value="Subir fichero" id="btnSubmitTests"/>
               </div>
           </form>
         </div>
@@ -135,7 +150,7 @@
             <div class="input-group">
               <span class="input-group-btn">
                 <button id="btn-ejecutar-proyecto" class="btn btn-primary" type="button">
-                  Ejecutar proyecto
+                  Generar mutantes
                 </button>
               </span>
             </div>
@@ -144,6 +159,12 @@
       </div>
       <!-- FORMULARIO PARA EL GENERADOR DE PROGRAMAS -->
       <div id="home-generador" class="hidden">
+        <div class="row">
+            <div class="form-group col-sm-6 col-lg-6">
+              <label for="inputNombreProyectoGenerado">Nombre del proyecto <font color="red">*</font></label>
+              <input type="text" id="inputNombreProyectoGenerado"/><br/><br/>
+            </div>
+        </div>
         <h3>Introducir parámetros</h2>
         <p>Para ser capaces de generar un programa necesitamos establecer algunos parámetros de los cuales dependerá la estructura del programa generado.</p>
         <br/>
@@ -212,9 +233,17 @@
               <input type="text" id="inputNumeroExpresionesAritmeticas" name="numeroExpresionesAritmeticas" class="required">
             </div>
           </div>
+          <div class="row form-group" id="inputsDeComprobacion">
+            <div class="col-25">
+              <label for="fname">Inputs de comprobación<font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputsInputDeComprobacion" name="inputsInputDeComprobacion" placeholder="(Ejemplo: 1,2,3,4,5,)" class="required">
+            </div>
+          </div>
           <div class="row">
             <br/>
-            <input type="button" id="btn-nuevo-programa" class="btn btn-primary" value="Submit">
+            <input type="button" id="btn-nuevo-programa" class="btn btn-primary" value="Generar programa y mutantes">
           </div>
         </form>
       </div>
@@ -245,26 +274,6 @@
               <br/>
               <h5><i>Dirigido por</i>: Ismael Rodríguez Laguna</h5>
             </div>
-        </div>
-      </div>
-      <!-- HOME PRINCIPAL -->
-      <div id="home-graficas-prueba" class="hidden">
-        <div class="row">
-            <div class="form-group col-sm-6 col-lg-6">
-              <label for="inputNombrePrueba">Nombre de la prueba <font color="red">*</font></label>
-              <input type="text" id="inputNombrePrueba"/><br/><br/>
-            </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <button id="btn-mostrar-grafica-prueba" class="btn btn-primary" type="button">
-                  Mostrar grafica
-                </button>
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </div>

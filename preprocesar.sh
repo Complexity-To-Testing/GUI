@@ -1,6 +1,6 @@
 #!/bin/bash
 DIR_PROYECTOS_NODE='./public/proyectos'         # Directorio que contiene el fichero de las clases y test que el usuario ha subido
-DIR_PROYECTO_JAVA='./proyectoJAVA'              # Directorio que contiene todo el proyecto java
+DIR_PROYECTO_JAVA='./generadorMutantesJAVA'              # Directorio que contiene todo el proyecto java
 NAME_CLASSES='Classes.zip'                      # Nombre del fichero comprimido de las clases originales
 NAME_TESTS='Tests.zip'                          # Nombre del fichero comprimido de los test
 FILE_CLASSES=$DIR_PROYECTOS_NODE/$NAME_CLASSES  # Fichero zip que contiene todas las clases originales

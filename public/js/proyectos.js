@@ -110,10 +110,8 @@ function verEstadisticas(idProyecto, nombreProyecto) {
   });
 }
 function verEstadisticasPorPrueba(nombrePrueba) {
-  console.log("<---- verEstadisticasPorPrueba");
   //listaEstadisticas = [];
   $.when(obtenerEstadisticasPorPrueba(nombrePrueba)).done(function(estadisticas) {
-    console.log(estadisticas);
     jsonEstaditicasPrueba = estadisticas;
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChartPrueba);
@@ -237,7 +235,7 @@ function drawChartPrueba() {
   data.addColumn('number', 'killed');
   data.addColumn('number', 'mutante');
   data.addColumn('number', 'time');
-  //data.addColumn('string', 'nombre clase test');
+
   $.each(jsonEstaditicasPrueba, function(i,jsonData)
   {
     var time=jsonData.time;
@@ -301,7 +299,6 @@ function programaTestNumAnidacionesIf() {
 */
 
 function generarPrograma(datosPrograma, nombreProyecto) {
-  console.log(datosPrograma);
   return   $.ajax({
       type: "POST",
       url: SERVER + 'generarPrograma/'+nombreProyecto,

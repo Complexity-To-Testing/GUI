@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR_PROYECTO_JAVA='./proyectoJAVA'
+DIR_PROYECTO_JAVA='./generadorMutantesJAVA'
 DIR_TESTSPOMS=$DIR_PROYECTO_JAVA/testsPoms                # Directorio que contiene todos los ficheros de configuracion por tests (Acumulado)
 DIR_TESTSPOMS_UNIQUE=$DIR_PROYECTO_JAVA/testsPomsUnique   # Directorio que contiene todos los ficheros de configuracion por tests (Unico)
 FILE_RESULTADOS=$DIR_PROYECTO_JAVA/resultados.txt         # Fichero que contiene los resultados de los test
