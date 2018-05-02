@@ -18,16 +18,17 @@ var DIR_PROYECTO_JAVA='./generadorMutantesJAVA'
 var DIR_TESTSPOMS=DIR_PROYECTO_JAVA+'/testsPoms'                // Directorio que contiene todos los ficheros de configuracion por tests (Acumulado)
 var DIR_TESTSPOMS_UNIQUE=DIR_PROYECTO_JAVA+'/testsPomsUnique'   // Directorio que contiene todos los ficheros de configuracion por tests (Unico)
 var FILE_RESULTADOS=DIR_PROYECTO_JAVA+'/resultados.txt'         // Fichero que contiene los resultados de los test
-var DIR_CLASSES=DIR_PROYECTO_JAVA+'/classes'                    // Directorio que contiene los resultados de los test por classes
-var DIR_REPORTS=DIR_PROYECTO_JAVA+'/target/pit-reports'        // Directorio que contiene los resultados de los mutantes
-var FILE_NAME_CLASSES=DIR_CLASSES+'/namesClasses.txt'          // Fichero que contiene todas los nombres de las classes originales
+var DIR_REPORTS=DIR_PROYECTO_JAVA+'/target/pit-reports'         // Directorio que contiene los resultados de los mutantes
 var FILE_POM=DIR_PROYECTO_JAVA+'/pom.xml '                      // Fichero de configuracion de maven para ejecutar PIT
-var FILE_RESULTADO=DIR_PROYECTO_JAVA+'/resultado.txt'
+var FILE_RESULTADO=DIR_PROYECTO_JAVA+'/resultado.txt'           // Fichero que contiene los resultados de aplicar los mutantes
+var FILE_MUTANTES=DIR_PROYECTO_JAVA+'/mutantes.txt'             // Fichero que contiene los mutantes generados
+var NAME_CLASSES_ZIP='Classes.zip'                              // Nombre del fichero comprimido de las clases originales
+var NAME_TESTS_ZIP='Tests.zip'                                  // Nombre del fichero comprimido de los tests originales
 
 router.post("/procesar_file_Classes",upload.single("Classes"), function(req, res) {
     var urlFichero;
     if (req.file) {
-        urlFichero = path.join("proyectos", "Classes.zip");
+        urlFichero = path.join("proyectos", NAME_CLASSES_ZIP);
         var fichDestino = path.join("public", urlFichero);
         fs.createReadStream(req.file.path).pipe(fs.createWriteStream(fichDestino));
         res.json({exito: true , msg: "Fichero enviado con éxito."});
@@ -39,7 +40,7 @@ router.post("/procesar_file_Classes",upload.single("Classes"), function(req, res
 router.post("/procesar_file_Tests",upload.single("Tests"), function(req, res) {
     var urlFichero;
     if (req.file) {
-        urlFichero = path.join("proyectos", "Tests.zip");
+        urlFichero = path.join("proyectos", NAME_TESTS_ZIP);
         var fichDestino = path.join("public", urlFichero);
         fs.createReadStream(req.file.path).pipe(fs.createWriteStream(fichDestino));
         res.json({exito: true , msg: "Fichero enviado con éxito."});
@@ -121,7 +122,6 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
 
                     // Para cada fichero de configuracion lo copiamos el fichero de configuracion en el proyecto java y lo ejecutamos
                     arrayTestFilePom.forEach(function(testFilePom){
-
                       var comando = "sh ejecutarTest.sh " + testFilePom;
                       ejecutarComandoLinux( comando, function(err, result_et) {
                         if (err) {
@@ -135,6 +135,7 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
                             } else {
                               var arrayResult = result_cr.trim().split(" ");
                               var datosTest = {}
+
                               datosTest.idProyecto = resultInsertProyecto.insertId;
                               datosTest.nombreTest = arrayResult[0];
                               datosTest.numMutants = Number(arrayResult[1]);
@@ -142,7 +143,6 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
                               datosTest.percent = Number(arrayResult[3]);
                               datosTest.time = Number(arrayResult[4]);
 
-                              console.log(datosTest);
                               daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
                                 if (err) {
                                   next(err);
@@ -152,53 +152,38 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
                                     res.json({exito: false, msg: resultInsertProyecto.msg});
                                   } else {
 
-                                    var comandoLeerMutantes = "ls " + DIR_CLASSES + "/"+testFilePom
-                                    ejecutarComandoLinux( comandoLeerMutantes, function(err, result_lsCLASSES) {
+                                    var comando =  "cat " + FILE_MUTANTES ;
+                                    // Recorremos los mutantes de la clase
+                                    ejecutarComandoLinux( comando, function(err, result_cclass) {
                                       if (err) {
-                                        res.json({exito: false, msg: result_lsCLASSES});
+                                        res.json({exito: false, msg: result_cclass});
                                       } else {
-                                        var arrayClasses = result_lsCLASSES.trim().split("\n");
-                                        var contClasse = arrayClasses.length;
+                                        var arrayMutantesClase = result_cclass.trim().split("\n");
+                                        var contMutante = arrayMutantesClase.length;
 
-                                        arrayClasses.forEach(function(classe){
-                                          var comando =  "cat " + DIR_CLASSES +"/"+ testFilePom+"/"+ classe;
+                                        arrayMutantesClase.forEach(function(mutante){
+                                          var arrayMutante = mutante.split(",");
+                                          var datos = {}
+                                          datos.idProyecto = resultInsertProyecto.insertId;
+                                          datos.idTest = resultInsertTest.insertId;
+                                          datos.clase = arrayMutante[0];
+                                          datos.mutante =  arrayMutante[1];
+                                          datos.killed =  arrayMutante[2];
 
-                                          // Recorremos los mutantes de la clase
-                                          ejecutarComandoLinux( comando, function(err, result_cclass) {
+                                          daoProyectos.insertClasseTestProyecto(datos, function (err, result) {
                                             if (err) {
-                                              res.json({exito: false, msg: result_cclass});
+                                              next(err);
                                             } else {
-                                              var arrayMutantesClase = result_cclass.trim().split("\n");
-                                              var contMutante = arrayMutantesClase.length;
+                                              contMutante --;
 
-                                              arrayMutantesClase.forEach(function(mutante){
-                                                var arrayMutante = mutante.split(",");
-                                                var datos = {}
-                                                datos.idProyecto = resultInsertProyecto.insertId;
-                                                datos.idTest = resultInsertTest.insertId;
-                                                datos.clase = arrayMutante[0];
-                                                datos.mutante =  arrayMutante[1];
-                                                datos.killed =  arrayMutante[2];
+                                              if (contMutante == 0) {
+                                                cont--;
+                                              }
 
-                                                daoProyectos.insertClasseTestProyecto(datos, function (err, result) {
-                                                  if (err) {
-                                                    next(err);
-                                                  } else {
-                                                    contMutante --;
-
-                                                    if (contMutante == 0) {
-                                                      contClasse--;
-                                                    }
-                                                    if (contClasse == 0) {
-                                                        cont--;
-                                                    }
-                                                    // Si ha terminado de ejecutar
-                                                    if (cont == 0 && contClasse == 0) {
-                                                      res.json({exito: true, msg:result});
-                                                    }
-                                                  }
-                                                });
-                                              });
+                                              // Si ha terminado de ejecutar
+                                              if (cont == 0 && contMutante == 0) {
+                                                res.json({exito: true, msg:result});
+                                              }
                                             }
                                           });
                                         });
@@ -227,8 +212,8 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
   // var inputs = "1,2,3,4,5,6,7,8,9,10,11,12,13,"
   var inputs = req.body.listaInputsComprobacion
   //  var pathPrograma = "./"
-//  var nombrePrograma = "Programa"
-//  var nombreTest = "Test"
+  //  var nombrePrograma = "Programa"
+  //  var nombreTest = "Test"
   var parametros = "" + req.body.numeroAnidacionesIf + " "
                         +  req.body.numeroAnidacionesWhile + " "
                         +  req.body.numeroIteracionesWhile + " "
@@ -241,7 +226,7 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                   //      +  pathPrograma + " "
                   //      +  nombreTest + " "
                   //      +  nombrePrograma + " "
-    console.log(parametros);
+                  console.log(parametros);
     if (nombreProyecto === "") {
       res.json({exito: false, msg: "Parametros vacios."});
     } else {
@@ -293,70 +278,61 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                                   datosTest.killed = Number(arrayResult[2]);
                                   datosTest.percent = Number(arrayResult[3]);
                                   datosTest.time = Number(arrayResult[4]);
-                                  daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
-                                    if (err) {
-                                      next(err);
-                                    } else {
 
-                                      if (!resultInsertTest.exito) {
-                                        res.json({exito: false, msg: resultInsertProyecto.msg});
+                                  if (!isNaN(datosTest.numMutants) && !isNaN(datosTest.killed) && !isNaN(datosTest.percent)&& !isNaN(datosTest.time)) {
+                                    daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
+                                      if (err) {
+                                        next(err);
                                       } else {
 
-                                        var comandoLeerMutantes = "ls " + DIR_CLASSES + "/"+testFilePom
-                                        ejecutarComandoLinux( comandoLeerMutantes, function(err, result_lsCLASSES) {
-                                          if (err) {
-                                            res.json({exito: false, msg: result_lsCLASSES});
-                                          } else {
-                                            var arrayClasses = result_lsCLASSES.trim().split("\n");
-                                            var contClasse = arrayClasses.length;
+                                        if (!resultInsertTest.exito) {
+                                          res.json({exito: false, msg: resultInsertProyecto.msg});
+                                        } else {
 
-                                            arrayClasses.forEach(function(classe){
-                                              var comando =  "cat " + DIR_CLASSES +"/"+ testFilePom+"/"+ classe;
+                                          var comando =  "cat " + FILE_MUTANTES ;
 
-                                              // Recorremos los mutantes de la clase
-                                              ejecutarComandoLinux( comando, function(err, result_cclass) {
-                                                if (err) {
-                                                  res.json({exito: false, msg: result_cclass});
-                                                } else {
-                                                  var arrayMutantesClase = result_cclass.trim().split("\n");
-                                                  var contMutante = arrayMutantesClase.length;
+                                          // Recorremos los mutantes de la clase
+                                          ejecutarComandoLinux( comando, function(err, result_cclass) {
+                                            if (err) {
+                                              res.json({exito: false, msg: result_cclass});
+                                            } else {
+                                              var arrayMutantesClase = result_cclass.trim().split("\n");
+                                              var contMutante = arrayMutantesClase.length;
 
-                                                  arrayMutantesClase.forEach(function(mutante){
-                                                    var arrayMutante = mutante.split(",");
-                                                    var datos = {}
-                                                    datos.idProyecto = resultInsertProyecto.insertId;
-                                                    datos.idTest = resultInsertTest.insertId;
-                                                    datos.clase = arrayMutante[0];
-                                                    datos.mutante =  arrayMutante[1];
-                                                    datos.killed =  arrayMutante[2];
+                                              arrayMutantesClase.forEach(function(mutante){
+                                                var arrayMutante = mutante.split(",");
+                                                var datos = {}
+                                                datos.idProyecto = resultInsertProyecto.insertId;
+                                                datos.idTest = resultInsertTest.insertId;
+                                                datos.clase = arrayMutante[0];
+                                                datos.mutante =  arrayMutante[1];
+                                                datos.killed =  arrayMutante[2];
 
-                                                    daoProyectos.insertClasseTestProyecto(datos, function (err, result) {
-                                                      if (err) {
-                                                        next(err);
-                                                      } else {
-                                                        contMutante --;
+                                                daoProyectos.insertClasseTestProyecto(datos, function (err, result) {
+                                                  if (err) {
+                                                    next(err);
+                                                  } else {
+                                                    contMutante --;
 
-                                                        if (contMutante == 0) {
-                                                          contClasse--;
-                                                        }
-                                                        if (contClasse == 0) {
-                                                          cont--;
-                                                        }
-                                                        // Si ha terminado de ejecutar
-                                                        if (cont == 0 && contClasse == 0) {
-                                                          res.json({exito: true, msg:result});
-                                                        }
-                                                      }
-                                                    });
-                                                  });
-                                                }
+                                                    if (contMutante == 0) {
+                                                      cont--;
+                                                    }
+
+                                                    // Si ha terminado de ejecutar
+                                                    if (cont == 0) {
+                                                      res.json({exito: true, msg:result});
+                                                    }
+                                                  }
+                                                });
                                               });
-                                            });
-                                          }
-                                        });
+                                            }
+                                          });
+                                        }
                                       }
-                                    }
-                                  });
+                                    });
+                                  } else {
+                                    res.json({exito: false, msg: result_cr});
+                                  }
                                 }
                               });
                             }

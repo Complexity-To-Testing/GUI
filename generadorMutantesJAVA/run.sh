@@ -1,8 +1,4 @@
 #!/bin/sh
-# Si existe el directorio lo borramos
-DIR_PROYECTO_JAVA='./generadorMutantesJAVA/'
-# Ejecutamos el programa y redirigimos la salida a results
-#cd $DIR_PROYECTO_JAVA
 
 salida=$(cd ./generadorMutantesJAVA; mvn clean verify org.pitest:pitest-maven:mutationCoverage; cd -)
 #cd -

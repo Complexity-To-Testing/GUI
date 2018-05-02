@@ -128,7 +128,6 @@ router.get("/getSumMutantesKilledPorTest/:idTest", function(req, res, next) {
   }
 });
 
-
 // GET /proyectos/getResultadosPrueba/:nombrePrueba Devuelve los resultados de una prueba
 router.get("/getResultadosPrueba/:nombrePrueba", function(req, res, next) {
   var nombrePrueba =  req.params.nombrePrueba;

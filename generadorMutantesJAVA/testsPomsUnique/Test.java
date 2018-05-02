@@ -45,10 +45,26 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.5</version>
                 <configuration>
+                  <mutators>
+                      <mutator>CONDITIONALS_BOUNDARY</mutator>
+                      <mutator>INCREMENTS</mutator>
+                      <mutator>INVERT_NEGS</mutator>
+                      <mutator>MATH</mutator>
+                      <mutator>NEGATE_CONDITIONALS</mutator>
+                      <mutator>RETURN_VALS</mutator>
+                      <mutator>VOID_METHOD_CALLS</mutator>
+
+                      <mutator>CONSTRUCTOR_CALLS</mutator>
+                      <mutator>INLINE_CONSTS</mutator>
+                      <mutator>NON_VOID_METHOD_CALLS</mutator>
+                      <mutator>REMOVE_CONDITIONALS</mutator>
+                      <mutator>EXPERIMENTAL_MEMBER_VARIABLE</mutator>
+                      <mutator>EXPERIMENTAL_SWITCH</mutator>
+                  </mutators>
                     <failWhenNoMutations>false</failWhenNoMutations>
                     <outputFormats>
                         <param>XML</param>
                         <param>HTML</param>
                         <param>CSV</param>
                     </outputFormats>
-                    <targetClasses> <param>Tests.BusinessLogicTest1</param> </targetTests></configuration></plugin></plugins></build></project>
+                    <targetClasses> <param>Test</param> </targetTests></configuration></plugin></plugins></build></project>

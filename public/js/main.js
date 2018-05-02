@@ -72,7 +72,7 @@ $(document).ready(function() {
   });
   // GESTION GENERARDOR DE PROGRAMA
   $('#btn-nuevo-programa').on('click', function() {
-    //programaTestNumAnidacionesIf();
+    //generadorDeProgramasAutomatico();
     var nombreProyecto = $('#inputNombreProyectoGenerado').val();
 
     var datosPrograma = {

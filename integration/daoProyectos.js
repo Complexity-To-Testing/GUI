@@ -197,13 +197,9 @@ function getResultadoProyectosPorPrueba(nombrePrueba, callback) {
       if (err) {
         callback(err);
       } else {
-        console.log(nombrePrueba);
-        console.log(result);
         if (result.length === 0) {
           callback(null, null);
         } else {
-          console.log(nombrePrueba);
-          console.log(result);
           callback(null, result);
         }
       }

@@ -6,10 +6,6 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var fs = require('fs');
-var https = require('https');
-var passport = require("passport");
-var passportHTTP = require("passport-http");
-var db = require('./helpers/db');
 var config = require('./config');
 var cors = require('cors');
 
@@ -22,8 +18,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var principal = require('./routes/principal');
-var proyectos = require('./routes/proyectos');
+var principal = require('./controllers/principal');
+var proyectos = require('./controllers/proyectos');
 
 app.use(cors());
 app.options('*', cors());
@@ -41,7 +37,6 @@ app.use(function(err, req, res, next) {
   console.log(err);
   res.status(500).json({ error: true, errorMsg: "Error" });
 });
-
 
 app.listen(process.env.PORT || config.port, function(err) {
   if(!err) {

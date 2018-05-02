@@ -109,6 +109,7 @@ function verEstadisticas(idProyecto, nombreProyecto) {
     $('#chart').removeClass('hidden');
   });
 }
+
 function verEstadisticasPorPrueba(nombrePrueba) {
   //listaEstadisticas = [];
   $.when(obtenerEstadisticasPorPrueba(nombrePrueba)).done(function(estadisticas) {
@@ -269,28 +270,46 @@ function drawChartPrueba() {
   FUNCIONES AUXILIARES
 */
 var i = 1;
-function programaTestNumAnidacionesIf() {
-  if (i === 10) {
-        return;
+var tamPrueba = 20;
+var posParam = 3;
+var parametroCont = [1,1,1,10,1,1,1,1];
+var listaNombrePrueba = [ "Input[1-20]ALLMutants_NumAnidacionesIf",
+                          "Input[1-20]ALLMutants_NumAnidacionesWhile",
+                          "Input[1-20]ALLMutants_NumIteracionesWhile",
+                          "Input[1-20]ALLMutants_NumAnidacionesFor",
+                          "Input[1-20]ALLMutants_NumIteracionesFor",
+                          "Input[1-20]ALLMutants_NumCondicionesLogicas",
+                          "Input[1-20]ALLMutants_NumExpresionesLogicas",
+                          "Input[1-20]ALLMutants_NumExpresionesAritmeticas"];
+
+function generadorDeProgramasAutomatico() {
+  if (parametroCont[posParam] === tamPrueba) {
+    parametroCont[posParam] = 1;
+    posParam++;
+    if (posParam == 8) {
+      return;
+    }
+    parametroCont[posParam] = 0;
   }
 
-  console.log("<- PruebaNumeroExpresionesLogicas");
-  console.log(i);
-  var nombreProyecto = "PruebaNumeroExpresionesLogicas" + i;
+  parametroCont[posParam] = parametroCont[posParam] + 1;
+  var nombreProyecto = listaNombrePrueba[posParam]+ "_"+parametroCont[posParam];
+  console.log(nombreProyecto);
   var datosPrograma = {
-    numeroAnidacionesIf: 1,
-    numeroAnidacionesWhile: 1,
-    numeroIteracionesWhile: 1,
-    numeroAnidacionesFor: 1,
-    numeroIteracionesFor: 1,
-    numeroCondicionesLogicas: 1,
-    numeroExpresionesLogicas: i,
-    numeroExpresionesAritmeticas: 1
+    numeroAnidacionesIf: parametroCont[0],
+    numeroAnidacionesWhile: parametroCont[1],
+    numeroIteracionesWhile: parametroCont[2],
+    numeroAnidacionesFor: parametroCont[3],
+    numeroIteracionesFor: parametroCont[4],
+    numeroCondicionesLogicas: parametroCont[5],
+    numeroExpresionesLogicas: parametroCont[6],
+    numeroExpresionesAritmeticas: parametroCont[7],
+    listaInputsComprobacion: "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,"
   }
 
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
     i++;
-    programaTestNumAnidacionesIf();
+    generadorDeProgramasAutomatico();
   });
 }
 
