@@ -17,7 +17,7 @@ mkdir $DIR_PROYECTOS_NODE;
 
 cd $DIR_PROYECTO_GENERADOR_JAVA
 mvn compile
-mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./ Test Programa ";
+mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./ Test Programa ${10} ";
 cd -
 
 mv  $FILE_CLASS_GENERATED $DIR_PROYECTOS_NODE

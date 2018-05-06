@@ -11,45 +11,45 @@ public class Programa{
 		this.inputs_num=inputs_num;
 	}
 private void exe() {
-boolean k0=  ( 39.32855979091139  >= (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  &&  ( 51.19529640248878  >= (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
+boolean k0=  ( 96.24521050568649  == (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  &&  ( 57.530463633463576  != (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
 result_tmp_bool.add(k0);
-boolean k1=  ( 24.11615569654739  <= (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  &&  ( 23.632873780958946  < (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
+boolean k1=  ( 6.908457705152684  != (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  ||  ( 51.22684342369856  <= (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
 result_tmp_bool.add(k1);
-if( ( 13.794562303880626  <= (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  &&  ( 28.556658673897807  == (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ){
-double k3=   65.87842543576319  / (Math.abs((int)(p_num<inputs_num.length ? inputs_num[p_num++] : 5) )+1) ;
-result_tmp_num.add(k3);
-double k2=   62.39740171529549  - (p_num<inputs_num.length ? inputs_num[p_num++] : 5)  ;
+if( ( 11.9599652085995  >= (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ){
+boolean k3=  ( 90.64096181038605  < (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  ||  ( 90.37752222094889  <= (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
+result_tmp_bool.add(k3);
+double k2=   10.360827168292987  * (p_num<inputs_num.length ? inputs_num[p_num++] : 5)  ;
 result_tmp_num.add(k2);
-double k4=   22.83656447218772  * (p_num<inputs_num.length ? inputs_num[p_num++] : 5)  ;
+double k4=   43.68677140717796  / (Math.abs((int)(p_num<inputs_num.length ? inputs_num[p_num++] : 5) )+1) ;
 result_tmp_num.add(k4);
 }else {
-double k5=   35.09826214143134  / (-Math.abs((int)(p_num<inputs_num.length ? inputs_num[p_num++] : 5) )+1) ;
-result_tmp_num.add(k5);double k6=  ( 69.06058492150409  / (-Math.abs((int)(p_num<inputs_num.length ? inputs_num[p_num++] : 5) )+1)) ;
-result_tmp_num.add(k6);double k7=  ( 11.104101724826815  / (-Math.abs((int)(p_num<inputs_num.length ? inputs_num[p_num++] : 5) )+1)) ;
+double k5=   11.290118503845363  + (p_num<inputs_num.length ? inputs_num[p_num++] : 5)  ;
+result_tmp_num.add(k5);double k6=   26.695905995873872  + (p_num<inputs_num.length ? inputs_num[p_num++] : 5)  ;
+result_tmp_num.add(k6);double k7=   42.75631204969682  + (p_num<inputs_num.length ? inputs_num[p_num++] : 5)  ;
 result_tmp_num.add(k7);
 }
 int i8 = 0;
-while(i8<1 && ( ( 2.2792830826077717  >= (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  ||  ( 63.80656249048769  <= (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) )){
+while(i8<1 && ( ( 62.8820386877274  >= (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  &&  ( 15.59237538996897  > (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) )){
 
-boolean k9=  ( 2.6415773681442087  > (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  &&  ( 14.387676325213182  <= (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
-result_tmp_bool.add(k9);double k10=   37.71273768694642  + (p_num<inputs_num.length ? inputs_num[p_num++] : 5)  ;
-result_tmp_num.add(k10);double k11=  ( 86.75030833709734  * (p_num<inputs_num.length ? inputs_num[p_num++] : 5) ) ;
+boolean k9=  ( 54.99648151130021  >= (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  &&  ( 86.73332585492157  >= (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
+result_tmp_bool.add(k9);boolean k10=  ( 10.99731003576883  < (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  ||  ( 63.58143547971887  > (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
+result_tmp_bool.add(k10);double k11=   61.60515930897106  - (p_num<inputs_num.length ? inputs_num[p_num++] : 5)  ;
 result_tmp_num.add(k11);
 i8++;
 }
 
 for(int i12=1;i12>0;i12 -- ){
-double k13=  ( 3.346620622544779  - (p_num<inputs_num.length ? inputs_num[p_num++] : 5) ) ;
+double k13=  ( 19.606999927209575  / (-Math.abs((int)(p_num<inputs_num.length ? inputs_num[p_num++] : 5) )+1)) ;
 result_tmp_num.add(k13);
-double k14=  ( 30.800590205025966  / (-Math.abs((int)(p_num<inputs_num.length ? inputs_num[p_num++] : 5) )+1)) ;
-result_tmp_num.add(k14);double k15=  ( 57.15148923428521  - (p_num<inputs_num.length ? inputs_num[p_num++] : 5) ) ;
+boolean k14=  ( 1.0455365129870182  != (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  ||  ( 67.51804816644622  == (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
+result_tmp_bool.add(k14);double k15=   76.06655404693119  / (-Math.abs((int)(p_num<inputs_num.length ? inputs_num[p_num++] : 5) )+1) ;
 result_tmp_num.add(k15);
 
 }
-boolean k16=  ( 18.36700821062139  > (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  &&  ( 60.312333466736355  < (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
+boolean k16=  ( 21.82447940004371  == (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  ||  ( 84.49045849232812  == (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
 result_tmp_bool.add(k16);
-double k17=  ( 41.58255064617306  / (-Math.abs((int)(p_num<inputs_num.length ? inputs_num[p_num++] : 5) )+1)) ;
-result_tmp_num.add(k17);
+boolean k17=  ( 47.981343197385314  <= (p_num<inputs_num.length ? inputs_num[p_num++] : 5))  ||  ( 65.2189676706757  != (p_num<inputs_num.length ? inputs_num[p_num++] : 5)) ;
+result_tmp_bool.add(k17);
 }
 public boolean[] get_result_bool() {
 		exe();

@@ -24,6 +24,7 @@ $(document).ready(function() {
             $.when(getProyectos()).done(function(proyectos) {
               rellenarProyectos(proyectos);
             });
+
             // Aparece suavemente
             setTimeout(function () {
               // Se elimina todo lo que hubiese
@@ -50,6 +51,10 @@ $(document).ready(function() {
               $('.container > div').fadeIn(300);
             }, 500);
       break;
+      // BOTÓN: GENERAR PROGRAMA AUTOMATICO
+      case 'nav-generador-automatico':
+          generadorDeProgramasAutomatico();
+      break;
       // BOTÓN: COMPLEXITY TO TESTING
       case 'nav-home':
           $('.container > div').fadeOut(400);
@@ -72,7 +77,7 @@ $(document).ready(function() {
   });
   // GESTION GENERARDOR DE PROGRAMA
   $('#btn-nuevo-programa').on('click', function() {
-    //generadorDeProgramasAutomatico();
+    // generadorDeProgramasAutomatico2();
     var nombreProyecto = $('#inputNombreProyectoGenerado').val();
 
     var datosPrograma = {

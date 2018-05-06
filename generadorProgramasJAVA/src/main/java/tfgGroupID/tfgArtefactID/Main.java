@@ -43,6 +43,7 @@ public class Main {
 		String ruta=getCurrentPath();
 		String nom_test=args[10];
 		String nom_program=args[11];
+		int num_exp_seguida=new Integer(args[12]).intValue();
 
 		System.out.println("<===============");
 		System.out.println("num_ifs");
@@ -62,6 +63,7 @@ public class Main {
 		System.out.println("size_expArit");
 		System.out.println(size_expArit);
 		System.out.println("test_inputs");
+
 		for (int i = 0; i < test_inputs.length; i++) {
 			System.out.println(test_inputs[i]);
 		}
@@ -74,7 +76,7 @@ public class Main {
 		System.out.println(nom_program);
 
 		Generardor g=new Generardor(nom_test,nom_program,test_inputs, num_ifs, num_while, size_while,  num_for,  size_for, size_cond,
-				size_expLogics, size_expArit);
+				size_expLogics, size_expArit, num_exp_seguida);
 
 		GeneraFichero.crear(ruta,g.nom_test+".java",g.programa_test);
 		GeneraFichero.crear(ruta,g.nom_program+".java",g.s);
@@ -90,9 +92,9 @@ public class Main {
 		int size_expLogics=2;
 		int size_expArit=2;
 		double[] test_inputs= {1,2,3,4,5,6,7,8,9,10,11,12,13};
-
+		int num_exp_seguida=5;
 		Generardor g=new Generardor("test","C",test_inputs, num_ifs, num_while, size_while,  num_for,  size_for, size_cond,
-				size_expLogics, size_expArit);
+				size_expLogics, size_expArit,num_exp_seguida);
 
 	/*
 		System.out.println(g.s);

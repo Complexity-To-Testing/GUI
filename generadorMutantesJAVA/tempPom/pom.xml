@@ -53,13 +53,14 @@
                       <mutator>NEGATE_CONDITIONALS</mutator>
                       <mutator>RETURN_VALS</mutator>
                       <mutator>VOID_METHOD_CALLS</mutator>
-
+                      <!--
                       <mutator>CONSTRUCTOR_CALLS</mutator>
                       <mutator>INLINE_CONSTS</mutator>
                       <mutator>NON_VOID_METHOD_CALLS</mutator>
                       <mutator>REMOVE_CONDITIONALS</mutator>
                       <mutator>EXPERIMENTAL_MEMBER_VARIABLE</mutator>
                       <mutator>EXPERIMENTAL_SWITCH</mutator>
+                    -->
                   </mutators>
                     <failWhenNoMutations>false</failWhenNoMutations>
                     <outputFormats>

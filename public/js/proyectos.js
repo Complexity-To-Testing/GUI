@@ -269,32 +269,32 @@ function drawChartPrueba() {
 /*
   FUNCIONES AUXILIARES
 */
-var i = 1;
 var tamPrueba = 20;
-var posParam = 3;
-var parametroCont = [1,1,1,10,1,1,1,1];
-var listaNombrePrueba = [ "Input[1-20]ALLMutants_NumAnidacionesIf",
-                          "Input[1-20]ALLMutants_NumAnidacionesWhile",
-                          "Input[1-20]ALLMutants_NumIteracionesWhile",
-                          "Input[1-20]ALLMutants_NumAnidacionesFor",
-                          "Input[1-20]ALLMutants_NumIteracionesFor",
-                          "Input[1-20]ALLMutants_NumCondicionesLogicas",
-                          "Input[1-20]ALLMutants_NumExpresionesLogicas",
-                          "Input[1-20]ALLMutants_NumExpresionesAritmeticas"];
-
+var posParam = 0;
+var parametroCont = [5,1,1,1,1,1,1,1,1];
+var arryIncremento =  [1,1,10,1,10,1,1,1,1];
+var arrayTam =        [10,10,100,10,100,10,10,10,10];
+var listaNombrePrueba = [ "In[1-20]ExpArit_",
+                          "In[1-20]AnidWhile_",
+                          "In[1-20]IterWhile_",
+                          "In[1-20]AnidFor_",
+                          "In[1-20]IterFor_",
+                          "In[1-20]CondLog_",
+                          "In[1-20]ExprLog_",
+                          "In[1-20]ExprArit_",
+                          "In[1-20]ExprsSeg_"];
 function generadorDeProgramasAutomatico() {
-  if (parametroCont[posParam] === tamPrueba) {
+  if (parametroCont[posParam] === arrayTam[posParam]) {
     parametroCont[posParam] = 1;
     posParam++;
-    if (posParam == 8) {
+    if (posParam == 9) {
       return;
     }
     parametroCont[posParam] = 0;
   }
 
-  parametroCont[posParam] = parametroCont[posParam] + 1;
+  parametroCont[posParam] = parametroCont[posParam] + arryIncremento[posParam];
   var nombreProyecto = listaNombrePrueba[posParam]+ "_"+parametroCont[posParam];
-  console.log(nombreProyecto);
   var datosPrograma = {
     numeroAnidacionesIf: parametroCont[0],
     numeroAnidacionesWhile: parametroCont[1],
@@ -304,15 +304,49 @@ function generadorDeProgramasAutomatico() {
     numeroCondicionesLogicas: parametroCont[5],
     numeroExpresionesLogicas: parametroCont[6],
     numeroExpresionesAritmeticas: parametroCont[7],
+    numeroExpresionesSeguidas: parametroCont[8],
     listaInputsComprobacion: "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,"
   }
-
+  console.log(nombreProyecto);
+  console.log(datosPrograma);
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
-    i++;
     generadorDeProgramasAutomatico();
   });
 }
+/*
+var i = 1;
+var tamPrueba = 15;
+var posParam = 0;
+var parametroCont = [0,1];
+function generadorDeProgramasAutomatico2() {
+  if (parametroCont[posParam] === tamPrueba) {
+    parametroCont[posParam] = 0;
+    posParam++;
+    if (posParam == 8) {
+      return;
+    }
+    parametroCont[posParam] = 0;
+  }
 
+  parametroCont[posParam] = parametroCont[posParam] + 1;
+  var nombreProyecto = listaNombrePrueba[posParam]+ "_"+parametroCont[posParam];
+  var datosPrograma = {
+    numeroAnidacionesIf: 1,
+    numeroAnidacionesWhile: 1,
+    numeroIteracionesWhile: 1 ,//parametroCont[0],
+    numeroAnidacionesFor: 1,
+    numeroIteracionesFor: 1, //parametroCont[1],
+    numeroCondicionesLogicas: 1,
+    numeroExpresionesLogicas: 1,
+    numeroExpresionesAritmeticas: parametroCont[0],
+    listaInputsComprobacion: "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,"
+  }
+  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+    i++;
+    generadorDeProgramasAutomatico2();
+  });
+}
+*/
 /*
   OBTENER DATOS
 */

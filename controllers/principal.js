@@ -127,7 +127,6 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
                         if (err) {
                           res.json({exito: false, msg: result_et});
                         } else {
-
                           var comando =  "cat " + FILE_RESULTADO;
                           ejecutarComandoLinux( comando, function(err, result_cr) {
                             if (err) {
@@ -223,6 +222,7 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                         +  req.body.numeroExpresionesLogicas + " "
                         +  req.body.numeroExpresionesAritmeticas + " "
                         +  inputs + " ";
+                        +  req.body.numeroExpresionesSeguidas + " "
                   //      +  pathPrograma + " "
                   //      +  nombreTest + " "
                   //      +  nombrePrograma + " "
