@@ -221,8 +221,8 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                         +  req.body.numeroCondicionesLogicas + " "
                         +  req.body.numeroExpresionesLogicas + " "
                         +  req.body.numeroExpresionesAritmeticas + " "
-                        +  inputs + " ";
-                        +  req.body.numeroExpresionesSeguidas + " "
+                        +  inputs + " "
+                        +  req.body.numeroExpresionesSeguidas + " ";
                   //      +  pathPrograma + " "
                   //      +  nombreTest + " "
                   //      +  nombrePrograma + " "

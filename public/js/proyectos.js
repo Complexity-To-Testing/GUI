@@ -234,18 +234,19 @@ function drawChartPrueba() {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'mutante');
   data.addColumn('number', 'killed');
-  data.addColumn('number', 'mutante');
-  data.addColumn('number', 'time');
+  //data.addColumn('number', 'mutante');
+  //data.addColumn('number', 'time');
 
   $.each(jsonEstaditicasPrueba, function(i,jsonData)
   {
-    var time=jsonData.time;
-    var mutante=jsonData.numMutants;
+    //var time=jsonData.time;
+    //var mutante=jsonData.numMutants;
     var value=jsonData.killed;
     var name=jsonData.name;
 
     //var nameTest=jsonData.nombreTest;
-    data.addRows([ [name, value, mutante, time]]);
+    //data.addRows([ [name, value, mutante, time]]);
+    data.addRows([ [name, value]]);
   });
 
   var options = {
@@ -269,7 +270,7 @@ function drawChartPrueba() {
 /*
   FUNCIONES AUXILIARES
 */
-var tamPrueba = 20;
+var tamPrueba = 100;
 var posParam = 0;
 var parametroCont = [5,1,1,1,1,1,1,1,1];
 var arryIncremento =  [1,1,10,1,10,1,1,1,1];
@@ -350,7 +351,40 @@ function generadorDeProgramasAutomatico2() {
 /*
   OBTENER DATOS
 */
-
+var tamPrueba = 100;
+var inputString = "";
+var max = 100;
+var min = 1;
+// Inicializar inputs
+for (var i = 1; i < 100; i++) {
+  inputString+=(Math.random() * (max - min) + min)+",";
+}
+var i = 0;
+console.log(inputString);
+function generadorDeProgramasAutomaticoP3_1() {
+  tamPrueba--;
+  if (tamPrueba == 0) {
+    return;
+  }
+  i++;
+  var nombreProyecto = "p3_Ok_2_("+i+","+1+",1,"+1+",1,1,1,1,4)Input[1-100]";
+  console.log(nombreProyecto);
+  var datosPrograma = {
+    numeroAnidacionesIf: i,
+    numeroAnidacionesWhile: 1,
+    numeroIteracionesWhile: 1,
+    numeroAnidacionesFor: 1,
+    numeroIteracionesFor: 1,
+    numeroCondicionesLogicas: 1,
+    numeroExpresionesLogicas: 1,
+    numeroExpresionesAritmeticas: 1,
+    numeroExpresionesSeguidas: 4,
+    listaInputsComprobacion: inputString
+  }
+  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+    generadorDeProgramasAutomaticoP3_1();
+  });
+}
 function generarPrograma(datosPrograma, nombreProyecto) {
   return   $.ajax({
       type: "POST",
@@ -358,7 +392,9 @@ function generarPrograma(datosPrograma, nombreProyecto) {
       contentType: 'application/json',
       data: JSON.stringify(datosPrograma),
       error: function(xhr, status) { alert('Oooops, hubo un error...'); },
-      success: function(xhr, status) { console.log("<--- terminado")}
+      success: function(data) {
+        console.log("Exito: " + data.exito);
+         console.log("<--- terminado")}
     });
 }
 
