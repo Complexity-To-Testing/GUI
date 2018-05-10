@@ -119,6 +119,8 @@ function verEstadisticasPorPrueba(nombrePrueba) {
 
     $('.container > div').addClass('hidden');
     $('#chart').removeClass('hidden');
+    $('#chartMutant').removeClass('hidden');
+    $('#chartDR').removeClass('hidden');
   });
 }
 
@@ -234,32 +236,56 @@ function drawChartPrueba() {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'mutante');
   data.addColumn('number', 'killed');
-  //data.addColumn('number', 'mutante');
-  //data.addColumn('number', 'time');
+  var dataMutant = new google.visualization.DataTable();
+  dataMutant.addColumn('string', 'mutante');
+  dataMutant.addColumn('number', 'mutant');
+  var dataDR = new google.visualization.DataTable();
+  dataDR.addColumn('string', 'mutante');
+  dataDR.addColumn('number', 'DR');
 
   $.each(jsonEstaditicasPrueba, function(i,jsonData)
   {
     //var time=jsonData.time;
-    //var mutante=jsonData.numMutants;
-    var value=jsonData.killed;
+    var mutante=jsonData.numMutants;
+    var killed=jsonData.killed;
     var name=jsonData.name;
+    var dr=killed/mutante;
 
     //var nameTest=jsonData.nombreTest;
     //data.addRows([ [name, value, mutante, time]]);
-    data.addRows([ [name, value]]);
+    // data.addRows([ [name, value,mutante]]);
+    data.addRows([ [name,killed]]);
+    dataMutant.addRows([ [name,mutante]]);
+    dataDR.addRows([ [name,dr]]);
   });
 
   var options = {
-    title: 'Mutantes killed del test ' + currentNombreTest,
-    //function: 'linear',
-    pointSize: 16
+    title: 'Estadisticas killed ',
+    pointSize: 16,
+    is3D: true
+  };
+  var optionsMutant = {
+    title: 'Estadisticas Num Mutants ' ,
+    pointSize: 16,
+    is3D: true
+  };
+  var optionsDR = {
+    title: 'Estadisticas Distingising Rate ',
+    pointSize: 16,
+    is3D: true
   };
 
   var chart = new google.visualization.LineChart(document.getElementById('chart'));
-  //var chart=new google.visualization.BarChart(document.getElementById('chart'));
+  var chartMutant = new google.visualization.LineChart(document.getElementById('chartMutant'));
+  var chartDR = new google.visualization.LineChart(document.getElementById('chartDR'));
+
   google.visualization.events.addListener(chart, 'ready', function() {  });
+  google.visualization.events.addListener(chartMutant, 'ready', function() {  });
+  google.visualization.events.addListener(chartDR, 'ready', function() {  });
 
   chart.draw(data, options);
+  chartMutant.draw(dataMutant, optionsMutant);
+  chartDR.draw(dataDR, optionsDR);
   /*
   chart=new google.visualization.ColumnChart(document.getElementById('chart'));
   chart=new google.visualization.PieChart(document.getElementById('chart'));
@@ -306,7 +332,9 @@ function generadorDeProgramasAutomatico() {
     numeroExpresionesLogicas: parametroCont[6],
     numeroExpresionesAritmeticas: parametroCont[7],
     numeroExpresionesSeguidas: parametroCont[8],
-    listaInputsComprobacion: "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,"
+    listaInputsComprobacion: "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,",
+    numeroFuncion: 2,
+    decicionInputs: "0,1,"
   }
   console.log(nombreProyecto);
   console.log(datosPrograma);
@@ -360,7 +388,7 @@ for (var i = 1; i < 100; i++) {
   inputString+=(Math.random() * (max - min) + min)+",";
 }
 var i = 0;
-console.log(inputString);
+
 function generadorDeProgramasAutomaticoP3_1() {
   tamPrueba--;
   if (tamPrueba == 0) {
@@ -379,12 +407,74 @@ function generadorDeProgramasAutomaticoP3_1() {
     numeroExpresionesLogicas: 1,
     numeroExpresionesAritmeticas: 1,
     numeroExpresionesSeguidas: 4,
-    listaInputsComprobacion: inputString
+    listaInputsComprobacion: inputString,
+    numeroFuncion: 2,
+    decicionInputs: "0,1,"
   }
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
     generadorDeProgramasAutomaticoP3_1();
   });
 }
+
+var tamPrueba = 40;
+var inputString = getListaInputs(1,100, 100);
+var i = 0;
+function generadorDeProgramasAutomaticoP4_1() {
+  tamPrueba--;
+  if (tamPrueba == 0) {
+    return;
+  }
+  i++;
+  var nombreProyecto = "p4_2_("+1+","+1+",1,"+i+",1,1,1,1,4)Input[1-100]";
+  console.log(nombreProyecto);
+  var datosPrograma = {
+    numeroAnidacionesIf: 1,
+    numeroAnidacionesWhile: 1,
+    numeroIteracionesWhile: 1,
+    numeroAnidacionesFor: i,
+    numeroIteracionesFor: 2,
+    numeroCondicionesLogicas: 1,
+    numeroExpresionesLogicas: 1,
+    numeroExpresionesAritmeticas: 1,
+    numeroExpresionesSeguidas: 4,
+    listaInputsComprobacion: inputString,
+    numeroFuncion: 2,
+    decicionInputs: getListaDesicion(2)
+  }
+  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+    generadorDeProgramasAutomaticoP4_1();
+  });
+}
+var tamPrueba = 40;
+var inputString = getListaInputs(1,300, 100);
+var i = 0;
+function generadorDeProgramasAutomaticoP5_1() {
+  tamPrueba -= 10;
+  if (tamPrueba < 0) {
+    return;
+  }
+  i+=10;
+  var nombreProyecto = "p5.2_(1,1,1,"+i+",1,1,1,1,4,"+i+")Input[1-300]";
+  var datosPrograma = {
+    numeroAnidacionesIf: 1,
+    numeroAnidacionesWhile: 1,
+    numeroIteracionesWhile: 1,
+    numeroAnidacionesFor: i,
+    numeroIteracionesFor: 2,
+    numeroCondicionesLogicas: 1,
+    numeroExpresionesLogicas: 1,
+    numeroExpresionesAritmeticas: 1,
+    numeroExpresionesSeguidas: 4,
+    listaInputsComprobacion: inputString,
+    numeroFuncion: 1,
+    decicionInputs: getRandomInput(0, 1)
+  }
+  console.log(nombreProyecto);
+  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+    generadorDeProgramasAutomaticoP5_1();
+  });
+}
+
 function generarPrograma(datosPrograma, nombreProyecto) {
   return   $.ajax({
       type: "POST",

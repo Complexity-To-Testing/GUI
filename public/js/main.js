@@ -53,7 +53,7 @@ $(document).ready(function() {
       break;
       // BOTÓN: GENERAR PROGRAMA AUTOMATICO
       case 'nav-generador-automatico':
-          generadorDeProgramasAutomaticoP3_1();
+          generadorDeProgramasAutomaticoP8_10();
       break;
       // BOTÓN: COMPLEXITY TO TESTING
       case 'nav-home':

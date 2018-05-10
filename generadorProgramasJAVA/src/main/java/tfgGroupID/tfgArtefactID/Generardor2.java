@@ -9,7 +9,7 @@ package tfgGroupID.tfgArtefactID;
   * 4)En el caso de una operacion de division, el denominador siempre es positivo mayor igual que 1
   */
 
-  public class Generardor {
+  public class Generardor2 {
   	private int contVar=0;//para evitar problema de declaracion de varible con los bucles
   	public String s="";
   	public String programa_test="";
@@ -20,15 +20,29 @@ package tfgGroupID.tfgArtefactID;
   	public int size_expArit;
   	public int num_exp_seguida;
   	public int size_cond;
-  	public Generardor(String nom_test,String nom_program,double[] test_inputs,int num_ifs,
+  	public int num_while;
+  	public int num_ifs;
+  	public int num_for;
+  	public int size_while;
+  	public int size_for;
+  	public int num_funcion;
+  	public int[] decision_inputs;
+  	public Generardor2(String nom_test,String nom_program,double[] test_inputs,int[] decision_inputs,int num_ifs,
   			int num_while,int size_while, int num_for, int size_for,int size_cond,
-  			int size_expLogics,int size_expArit,int num_exp_seguida) {
+  			int size_expLogics,int size_expArit,int num_exp_seguida,int num_funcion) {
   		this.nom_program=nom_program;
   		this.nom_test=nom_test;
   		this.size_expArit=size_expArit;
   		this.size_expLogics=size_expLogics;
   		this.num_exp_seguida=num_exp_seguida;
   		this.size_cond=size_cond;
+  		this.num_while=num_while;
+  		this.num_for=num_for;
+  		this.num_ifs=num_ifs;
+  		this.size_for=size_for;
+  		this.size_while=size_while;
+  		this.num_funcion=num_funcion;
+  		this.decision_inputs=decision_inputs;
   		/*
   		 * generar programa testeador
   		 */
@@ -49,9 +63,16 @@ package tfgGroupID.tfgArtefactID;
   		}
   		programa_test+="};\n";
 
+  		programa_test+="int[] decision_inputs={"+decision_inputs[0];
+  		for(int i=1;i<decision_inputs.length;i++) {
+  			programa_test+=","+decision_inputs[i];
+  		}
+  		programa_test+="};\n";
+
+
   		//funcion assert
-  		programa_test+="assertArrayEquals(new "+nom_program+"(inputs).get_result_num(),new "+nom_program+"(inputs).get_result_num(),0);\r\n" +
-  				"		assertArrayEquals(new "+nom_program+"(inputs).get_result_bool(),new "+nom_program+"(inputs).get_result_bool());\r\n";
+  		programa_test+="assertArrayEquals(new "+nom_program+"(inputs,decision_inputs).get_result_num(),new "+nom_program+"(inputs,decision_inputs).get_result_num(),0);\r\n" +
+  				"		assertArrayEquals(new "+nom_program+"(inputs,decision_inputs).get_result_bool(),new "+nom_program+"(inputs,decision_inputs).get_result_bool());\r\n";
   		//fin de funcion test
   		programa_test+="\n}";
   		//fin de clase programa_test
@@ -63,61 +84,110 @@ package tfgGroupID.tfgArtefactID;
   		//declarar
   		s="import java.util.ArrayList;\r\n" +
   				"\r\n" +
-  				"public class "+nom_program +"{\r\n" +
+  				"public class "+nom_program+"{\r\n" +
   				"	private int p_num=0;\r\n" +
   				"	private ArrayList<Double> result_tmp_num=new ArrayList<Double>();\r\n" +
   				"	private double[] result_final_num;\r\n" +
   				"	private ArrayList<Boolean> result_tmp_bool=new ArrayList<Boolean>();\r\n" +
   				"	private boolean[] result_final_bool;\r\n" +
   				"	private double[] inputs_num;\r\n" +
-  				"	public "+nom_program+"(double[] inputs_num) {\r\n" +
+  				"	private int[]decisiones;///////nuevo atributo\r\n" +
+  				"	public "+nom_program+"(double[] inputs_num,int[] decisiones) {\r\n" +
   				"		this.inputs_num=inputs_num;\r\n" +
+  				"		this.decisiones=decisiones;\r\n" +
   				"	}\n";
 
 
-  		s+="private void exe() {\n";
-  		//generar codigos no bucles aleatoriamente
-  		int n=num_exp_seguida;
-  		s+=getExpresiones(n);
+  		for(int i=0; i<num_funcion;i++) {
 
-  		//generar codigo ifs
-  		s+=getIfs(num_ifs)+"\n";
+  			s+="private void exe"+i+"() {\n";
+  			//generar codigos no bucles aleatoriamente
+  			int n=num_exp_seguida;
+  			s+=getExpresiones(n);
 
-  		//generar codigo whiles
-  		s+=getWhiles(num_while, size_while)+"\n";
+  			//generar codigo ifs
+  			s+=getIfs(num_ifs)+"\n";
 
-  		//generar codigo fors
-  		s+=getFors(num_for, size_for)+"\n";
+  			//generar codigo whiles
+  			s+=getWhiles(num_while, size_while)+"\n";
 
-  		//generar codigos no bucles aleatoriamente
-  		s+=getExpresiones(n);
+  			//generar codigo fors
+  			s+=getFors(num_for, size_for)+"\n";
 
-  		//fin de funcion exe
-  		s+="}\n";
+  			//generar codigos no bucles aleatoriamente
+  			s+=getExpresiones(n);
+
+  			//fin de funcion exe
+  			s+="}\n";
+
+  		}
+
 
   		//otras funciones necesarios para el testing
+  		//get_result_bool
   		s+="public boolean[] get_result_bool() {\r\n" +
-  				"		exe();\r\n" +
+  				"		for(int i=0;i<decisiones.length;i++) {\r\n" +
+  				"			switch (decisiones[i]) {\r\n" +
+  				"			case 0:\r\n" +
+  				"				exe0();\r\n" +
+  				"				break;\n";
+
+  		if(num_funcion>1) {
+  			for(int i=1;i<num_funcion;i++) {
+  				s+="case "+i+":\r\n" +
+  						"				exe"+i+"();\r\n" +
+  						"				break;\n";
+  			}
+  		}
+
+  		s+="default:\r\n" +
+  				"				exe0();\r\n" +
+  				"				break;\r\n" +
+  				"			}\r\n" +
+  				"		}\r\n" +
+  				"		\r\n" +
   				"		result_final_bool=new boolean[result_tmp_bool.size()];\r\n" +
   				"		for(int i=0;i<result_tmp_bool.size();i++) {\r\n" +
   				"			result_final_bool[i]=result_tmp_bool.get(i);\r\n" +
   				"		}\r\n" +
   				"		return result_final_bool;\r\n" +
-  				"	}\r\n" +
-  				"\r\n" +
-  				"	public double[] get_result_num() {\r\n" +
-  				"		exe();\r\n" +
+  				"	}\n";
+
+
+  		//get_result_num
+  		s+="public double[] get_result_num() {\r\n" +
+  				"		for(int i=0;i<decisiones.length;i++) {\r\n" +
+  				"			switch (decisiones[i]) {\r\n" +
+  				"			case 0:\r\n" +
+  				"				exe0();\r\n" +
+  				"				break;\n";
+
+  		if(num_funcion>1) {
+  			for(int i=1;i<num_funcion;i++) {
+  				s+="case "+i+":\r\n" +
+  						"				exe"+i+"();\r\n" +
+  						"				break;\n";
+  			}
+  		}
+
+  		s+="default:\r\n" +
+  				"				exe0();\r\n" +
+  				"				break;\r\n" +
+  				"			}\r\n" +
+  				"		}\r\n" +
+  				"		\r\n" +
   				"		result_final_num=new double[result_tmp_num.size()];\r\n" +
   				"		for(int i=0;i<result_tmp_num.size();i++) {\r\n" +
   				"			result_final_num[i]=result_tmp_num.get(i);\r\n" +
   				"		}\r\n" +
   				"		return result_final_num;\r\n" +
   				"	}\n";
-  		//fin de clase
-  		s+="}";
+
+
+  		s+="\n}";//cierre de la clase
   	}
 
-  	public Generardor() {
+  	public Generardor2() {
   	}
 
   	/**
@@ -130,7 +200,6 @@ package tfgGroupID.tfgArtefactID;
   		for(int i=0; i<n;i++) {
   			s+=exp_simple()+"\n";
   		}
-
   		return s;
   	}
 
@@ -296,14 +365,23 @@ package tfgGroupID.tfgArtefactID;
   			return  "if"+"("+condIf()+")"
   			+"{\n"+getExpresiones(num_exp_seguida)+"\n"+s+"\n"+getExpresiones(num_exp_seguida)+"\n}"
   			+"else "+"{\n"+getExpresiones(num_exp_seguida)+getIfs(x-1)+getExpresiones(num_exp_seguida)+"\n}";
-  		*/
+  			 */
   			String s="";
+
   			for(int i=0;i<x;i++) {
   				s+="if"+"("+condIf()+"){\n"+getExpresiones(num_exp_seguida)+"\n";
   			}
 
-  			for(int i=0;i<x;i++) {
-  				s+="\n}"+"else{\n"+getExpresiones(num_exp_seguida)+"}\n";
+        for(int i=0;i<x;i++) {
+  				//s+="\n}"+"else{\n"+getExpresiones(num_exp_seguida)+"}\n";
+
+  				s+="\n}"+"else{\n";
+  				for(int j=0;j<i-1;j++) {
+  					s+="if"+"("+condIf()+"){\n"+getExpresiones(num_exp_seguida)+"\n}";
+
+  				}
+
+  				s+="}\n";
   			}
 
   			return s;
@@ -386,4 +464,4 @@ package tfgGroupID.tfgArtefactID;
   	public double getRandomArbitrary(int min, int max) {
   		return  (Math.random() * (max - min) + min);
   	}
- }
+  }

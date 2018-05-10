@@ -222,11 +222,14 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                         +  req.body.numeroExpresionesLogicas + " "
                         +  req.body.numeroExpresionesAritmeticas + " "
                         +  inputs + " "
-                        +  req.body.numeroExpresionesSeguidas + " ";
+                        +  req.body.numeroExpresionesSeguidas + " "
+                        +  req.body.numeroFuncion + " "
+                        +  req.body.decicionInputs + " ";
                   //      +  pathPrograma + " "
                   //      +  nombreTest + " "
                   //      +  nombrePrograma + " "
                   console.log(parametros);
+
     if (nombreProyecto === "") {
       res.json({exito: false, msg: "Parametros vacios."});
     } else {
