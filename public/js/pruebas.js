@@ -327,7 +327,7 @@ function generadorDeProgramasAutomaticoP8_11_2() {
     numeroCondicionesLogicas: 1,
     numeroExpresionesLogicas: 1,
     numeroExpresionesAritmeticas: 1,
-    numeroExpresionesSeguidas: 200,
+    numeroExpresionesSeguidas: 4,
     listaInputsComprobacion: inputString,
     numeroFuncion: 1,
     decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
