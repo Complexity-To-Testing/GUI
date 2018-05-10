@@ -225,17 +225,16 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                         +  req.body.numeroExpresionesSeguidas + " "
                         +  req.body.numeroFuncion + " "
                         +  req.body.decicionInputs + " ";
-                  //      +  pathPrograma + " "
-                  //      +  nombreTest + " "
-                  //      +  nombrePrograma + " "
-                  console.log(parametros);
+                          //      +  pathPrograma + " "
+                          //      +  nombreTest + " "
+                          //      +  nombrePrograma + " "
 
     if (nombreProyecto === "") {
       res.json({exito: false, msg: "Parametros vacios."});
     } else {
       ejecutarComandoLinux( "sh generadorPrograma.sh " + parametros, function(err, resultGen) {
         if (err) {
-          res.json({exito: false, msg: resultGen});
+          res.json({exito: false, msg: "Error al ejecutar script generadorPrograma.sh"});
         } else {
           preprocesar(function (err) {
             if (err) {
@@ -246,6 +245,7 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                 if (err) {
                   next(err);
                 } else {
+
                   // si no se ha podido insertar
                   if (!resultInsertProyecto.exito) {
                     res.json({exito: false, msg: resultInsertProyecto.msg});
@@ -254,7 +254,7 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                     // Leemos los ficheros de configuracion
                     ejecutarComandoLinux( "ls " + DIR_TESTSPOMS, function(err, result_ls) {
                       if (err) {
-                        res.json({exito: false, msg: result_ls});
+                        res.json({exito: false, msg: "Error al ejecutar ls "+ DIR_TESTSPOMS});
                       } else {
                         var arrayTestFilePom = result_ls.trim().split("\n");
                         var cont = arrayTestFilePom.length;
@@ -265,13 +265,13 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                           var comando = "sh ejecutarTest.sh " + testFilePom;
                           ejecutarComandoLinux( comando, function(err, result_et) {
                             if (err) {
-                              res.json({exito: false, msg: result_et});
+                              res.json({exito: false, msg: "Error al ejecutar script ejecutarTest.sh"});
                             } else {
 
                               var comando =  "cat " + FILE_RESULTADO;
                               ejecutarComandoLinux( comando, function(err, result_cr) {
                                 if (err) {
-                                  res.json({exito: false, msg: result_cr});
+                                  res.json({exito: false, msg: "Error al ejecutar cat " + FILE_RESULTADO });
                                 } else {
                                   var arrayResult = result_cr.trim().split(" ");
                                   var datosTest = {}
@@ -293,11 +293,9 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                                         } else {
 
                                           var comando =  "cat " + FILE_MUTANTES ;
-
-                                          // Recorremos los mutantes de la clase
                                           ejecutarComandoLinux( comando, function(err, result_cclass) {
                                             if (err) {
-                                              res.json({exito: false, msg: result_cclass});
+                                              res.json({exito: false, msg: "Error al ejecutar cat " + FILE_MUTANTES});
                                             } else {
                                               var arrayMutantesClase = result_cclass.trim().split("\n");
                                               var contMutante = arrayMutantesClase.length;
@@ -334,7 +332,7 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                                       }
                                     });
                                   } else {
-                                    res.json({exito: false, msg: result_cr});
+                                    res.json({exito: false, msg: "Error el proyecto no ha generado mutantes"});
                                   }
                                 }
                               });

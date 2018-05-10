@@ -342,138 +342,11 @@ function generadorDeProgramasAutomatico() {
     generadorDeProgramasAutomatico();
   });
 }
-/*
-var i = 1;
-var tamPrueba = 15;
-var posParam = 0;
-var parametroCont = [0,1];
-function generadorDeProgramasAutomatico2() {
-  if (parametroCont[posParam] === tamPrueba) {
-    parametroCont[posParam] = 0;
-    posParam++;
-    if (posParam == 8) {
-      return;
-    }
-    parametroCont[posParam] = 0;
-  }
 
-  parametroCont[posParam] = parametroCont[posParam] + 1;
-  var nombreProyecto = listaNombrePrueba[posParam]+ "_"+parametroCont[posParam];
-  var datosPrograma = {
-    numeroAnidacionesIf: 1,
-    numeroAnidacionesWhile: 1,
-    numeroIteracionesWhile: 1 ,//parametroCont[0],
-    numeroAnidacionesFor: 1,
-    numeroIteracionesFor: 1, //parametroCont[1],
-    numeroCondicionesLogicas: 1,
-    numeroExpresionesLogicas: 1,
-    numeroExpresionesAritmeticas: parametroCont[0],
-    listaInputsComprobacion: "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,"
-  }
-  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
-    i++;
-    generadorDeProgramasAutomatico2();
-  });
-}
-*/
 /*
   OBTENER DATOS
 */
-var tamPrueba = 100;
-var inputString = "";
-var max = 100;
-var min = 1;
-// Inicializar inputs
-for (var i = 1; i < 100; i++) {
-  inputString+=(Math.random() * (max - min) + min)+",";
-}
-var i = 0;
 
-function generadorDeProgramasAutomaticoP3_1() {
-  tamPrueba--;
-  if (tamPrueba == 0) {
-    return;
-  }
-  i++;
-  var nombreProyecto = "p3_Ok_2_("+i+","+1+",1,"+1+",1,1,1,1,4)Input[1-100]";
-  console.log(nombreProyecto);
-  var datosPrograma = {
-    numeroAnidacionesIf: i,
-    numeroAnidacionesWhile: 1,
-    numeroIteracionesWhile: 1,
-    numeroAnidacionesFor: 1,
-    numeroIteracionesFor: 1,
-    numeroCondicionesLogicas: 1,
-    numeroExpresionesLogicas: 1,
-    numeroExpresionesAritmeticas: 1,
-    numeroExpresionesSeguidas: 4,
-    listaInputsComprobacion: inputString,
-    numeroFuncion: 2,
-    decicionInputs: "0,1,"
-  }
-  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
-    generadorDeProgramasAutomaticoP3_1();
-  });
-}
-
-var tamPrueba = 40;
-var inputString = getListaInputs(1,100, 100);
-var i = 0;
-function generadorDeProgramasAutomaticoP4_1() {
-  tamPrueba--;
-  if (tamPrueba == 0) {
-    return;
-  }
-  i++;
-  var nombreProyecto = "p4_2_("+1+","+1+",1,"+i+",1,1,1,1,4)Input[1-100]";
-  console.log(nombreProyecto);
-  var datosPrograma = {
-    numeroAnidacionesIf: 1,
-    numeroAnidacionesWhile: 1,
-    numeroIteracionesWhile: 1,
-    numeroAnidacionesFor: i,
-    numeroIteracionesFor: 2,
-    numeroCondicionesLogicas: 1,
-    numeroExpresionesLogicas: 1,
-    numeroExpresionesAritmeticas: 1,
-    numeroExpresionesSeguidas: 4,
-    listaInputsComprobacion: inputString,
-    numeroFuncion: 2,
-    decicionInputs: getListaDesicion(2)
-  }
-  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
-    generadorDeProgramasAutomaticoP4_1();
-  });
-}
-var tamPrueba = 40;
-var inputString = getListaInputs(1,300, 100);
-var i = 0;
-function generadorDeProgramasAutomaticoP5_1() {
-  tamPrueba -= 10;
-  if (tamPrueba < 0) {
-    return;
-  }
-  i+=10;
-  var nombreProyecto = "p5.2_(1,1,1,"+i+",1,1,1,1,4,"+i+")Input[1-300]";
-  var datosPrograma = {
-    numeroAnidacionesIf: 1,
-    numeroAnidacionesWhile: 1,
-    numeroIteracionesWhile: 1,
-    numeroAnidacionesFor: i,
-    numeroIteracionesFor: 2,
-    numeroCondicionesLogicas: 1,
-    numeroExpresionesLogicas: 1,
-    numeroExpresionesAritmeticas: 1,
-    numeroExpresionesSeguidas: 4,
-    listaInputsComprobacion: inputString,
-    numeroFuncion: 1,
-    decicionInputs: getRandomInput(0, 1)
-  }
-  console.log(nombreProyecto);
-  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
-    generadorDeProgramasAutomaticoP5_1();
-  });
-}
 
 function generarPrograma(datosPrograma, nombreProyecto) {
   return   $.ajax({
@@ -483,7 +356,7 @@ function generarPrograma(datosPrograma, nombreProyecto) {
       data: JSON.stringify(datosPrograma),
       error: function(xhr, status) { alert('Oooops, hubo un error...'); },
       success: function(data) {
-        console.log("Exito: " + data.exito);
+        console.log("Exito: "+data.exito + " msg:" +  data.msg );
          console.log("<--- terminado")}
     });
 }

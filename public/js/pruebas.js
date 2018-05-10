@@ -247,3 +247,93 @@ function generadorDeProgramasAutomaticoP8_10() {
     generadorDeProgramasAutomaticoP8_10();
   });
 }
+var tamPrueba = 30;
+var inputString = getListaInputsInc(-3000, 3000);
+var i = 0;
+function generadorDeProgramasAutomaticoP8_11() {
+  tamPrueba -= 1;
+  if (tamPrueba < 0) {
+    return;
+  }
+  i+=1;
+  console.log("<--- Iteracion " + i);
+  var nombreProyecto = "P8.11_(1,1,1,1,1,1,1,1,4,1)Input[-3000,3000]";
+  var datosPrograma = {
+    numeroAnidacionesIf: 0,
+    numeroAnidacionesWhile: 0,
+    numeroIteracionesWhile: 1,
+    numeroAnidacionesFor: 0,
+    numeroIteracionesFor: 1,
+    numeroCondicionesLogicas: 1,
+    numeroExpresionesLogicas: 1,
+    numeroExpresionesAritmeticas: 1,
+    numeroExpresionesSeguidas: 200,
+    listaInputsComprobacion: inputString,
+    numeroFuncion: 1,
+    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+  }
+  console.log(nombreProyecto);
+  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+    generadorDeProgramasAutomaticoP8_11();
+  });
+}
+var tamPrueba = 30;
+var inputString = getListaInputsInc(-3000, 3000);
+var i = 0;
+function generadorDeProgramasAutomaticoP8_12() {
+  tamPrueba -= 1;
+  if (tamPrueba < 0) {
+    return;
+  }
+  i+=1;
+  console.log("<--- Iteracion " + i);
+  var nombreProyecto = "P8.12_(1,1,1,1,1,1,1,1,1,200)Input[-3000,3000]";
+  var datosPrograma = {
+    numeroAnidacionesIf: 0,
+    numeroAnidacionesWhile: 0,
+    numeroIteracionesWhile: 1,
+    numeroAnidacionesFor: 1,
+    numeroIteracionesFor: 1,
+    numeroCondicionesLogicas: 1,
+    numeroExpresionesLogicas: 1,
+    numeroExpresionesAritmeticas: 1,
+    numeroExpresionesSeguidas: 50,
+    listaInputsComprobacion: inputString,
+    numeroFuncion: 1,
+    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+  }
+  console.log(nombreProyecto);
+  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+    generadorDeProgramasAutomaticoP8_12();
+  });
+}
+var tamPrueba = 10  ;
+var inputString = getListaInputsInc(-3000, 3000);
+var i = 0;
+function generadorDeProgramasAutomaticoP8_11_2() {
+  tamPrueba -= 1;
+  if (tamPrueba < 0) {
+    return;
+  }
+  i+=1;
+  console.log("<--- Iteracion " + i);
+  var nombreProyecto = "P8.11_2(0,0,1,0,1,1,1,1,4,1)Input[-3000,3000]";
+  var datosPrograma = {
+    numeroAnidacionesIf: 0,
+    numeroAnidacionesWhile: 0,
+    numeroIteracionesWhile: 1,
+    numeroAnidacionesFor: 0,
+    numeroIteracionesFor: 1,
+    numeroCondicionesLogicas: 1,
+    numeroExpresionesLogicas: 1,
+    numeroExpresionesAritmeticas: 1,
+    numeroExpresionesSeguidas: 200,
+    listaInputsComprobacion: inputString,
+    numeroFuncion: 1,
+    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+  }
+  console.log(nombreProyecto);
+  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+    generadorDeProgramasAutomaticoP8_11_2();
+  });
+}

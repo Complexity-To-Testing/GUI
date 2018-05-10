@@ -27,6 +27,7 @@ package tfgGroupID.tfgArtefactID;
   	public int size_for;
   	public int num_funcion;
   	public int[] decision_inputs;
+
   	public Generardor2(String nom_test,String nom_program,double[] test_inputs,int[] decision_inputs,int num_ifs,
   			int num_while,int size_while, int num_for, int size_for,int size_cond,
   			int size_expLogics,int size_expArit,int num_exp_seguida,int num_funcion) {
@@ -85,7 +86,7 @@ package tfgGroupID.tfgArtefactID;
   		s="import java.util.ArrayList;\r\n" +
   				"\r\n" +
   				"public class "+nom_program+"{\r\n" +
-  				"	private int p_num=0;\r\n" +
+  				"	private int p_num=1;\r\n" +
   				"	private ArrayList<Double> result_tmp_num=new ArrayList<Double>();\r\n" +
   				"	private double[] result_final_num;\r\n" +
   				"	private ArrayList<Boolean> result_tmp_bool=new ArrayList<Boolean>();\r\n" +
@@ -269,8 +270,8 @@ package tfgGroupID.tfgArtefactID;
   		String op2=op_art();
   		String s1="";
   		String s2="";
-  		String input="(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+") ";
-
+  	// String input="(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+") ";
+      String input="(inputs_num[inputs_num.length%(p_num++)]) ";
   		if(op1!=" / ") {
   			s1=" "+getNum()+op1+input+" ";
 
@@ -307,8 +308,10 @@ package tfgGroupID.tfgArtefactID;
   	}
 
   	public String exp_logic() {
-  		String s2=" ("+getNum()+op_rel()+"(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+")"+") ";
-  		return s2;
+  		// String s2=" ("+getNum()+op_rel()+"(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+")"+") ";
+      String s2=" ("+getNum()+op_rel()+"(inputs_num[inputs_num.length%(p_num++)])) ";
+
+      return s2;
   	}
 
   	/*
