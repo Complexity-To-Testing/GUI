@@ -129,7 +129,7 @@ function generadorDeProgramasAutomaticoP9_1() {
                             "ProfIni_",   // 10
                             "ProfFin_"    // 11
                           ];
-  function generadorDeProgramasAutomatico9() {
+  function generadorDeProgramasAutomaticoListasPruebas() {
       if (contPrueba === tamPrueba) {
         if (contListaPruebas === listaPruebas.length ){
           return;
@@ -190,6 +190,6 @@ function generadorDeProgramasAutomaticoP9_1() {
     console.log(nombreProyecto);
     $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
 
-      generadorDeProgramasAutomatico9();
+      generadorDeProgramasAutomaticoListasPruebas();
     });
   }
