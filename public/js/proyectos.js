@@ -314,7 +314,7 @@ function generadorDeProgramasAutomatico() {
   if (parametroCont[posParam] === arrayTam[posParam]) {
     parametroCont[posParam] = 1;
     posParam++;
-    if (posParam == 9) {
+    if (posParam == parametroCont.length) {
       return;
     }
     parametroCont[posParam] = 0;

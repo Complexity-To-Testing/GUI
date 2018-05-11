@@ -9,7 +9,7 @@ NAME_CLASSES_ZIP='Classes.zip'                      # Nombre del fichero comprim
 NAME_TESTS_ZIP='Tests.zip'                          # Nombre del fichero comprimido de los test
 FILE_CLASSES_ZIP=$DIR_PROYECTOS_NODE/$NAME_CLASSES_ZIP  # Fichero zip que contiene todas las clases originales
 FILE_TESTS_ZIP=$DIR_PROYECTOS_NODE/$NAME_TESTS_ZIP # Fichero zip que contiene todas las clases originales
-
+NAME_DIR_FICHEROS_CREADOS='ficherosCreados'
 if [ -e $DIR_PROYECTOS_NODE ] ; then
   rm -r $DIR_PROYECTOS_NODE;
 fi
@@ -18,9 +18,9 @@ mkdir $DIR_PROYECTOS_NODE;
 cd $DIR_PROYECTO_GENERADOR_JAVA
 mvn compile
 echo "PARAMETROS"
-echo " $1 $2 $3 $4 $5 $6 $7 $8 $9  ${10}  ${11} ${12}"
+echo " $1 $2 $3 $4 $5 $6 $7 $8 $9  ${10}  ${11} ${12} ${13} ${14}"
 echo "EMPIEZA EJECUCION"
-mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./ Test Programa ${10} ${11} ${12}";
+mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13} ${14}";
 cd -
 
 mv  $FILE_CLASS_GENERATED $DIR_PROYECTOS_NODE

@@ -1,5 +1,5 @@
-function getListaDesicion(numFuncion) {
-  var lista = "";
+function getListaDecision(numFuncion) {
+  var lista = "0,";
   for (var i = 0; i < numFuncion; i++) {
     lista += "0,"
   }

@@ -150,7 +150,7 @@ function generadorDeProgramasAutomaticoP8_6() {
     numeroExpresionesSeguidas: 4,
     listaInputsComprobacion: inputString,
     numeroFuncion: 1,
-    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+    decicionInputs: getListaDecision(i)//getRandomInput(0, 1)
   }
   console.log(nombreProyecto);
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
@@ -180,7 +180,7 @@ function generadorDeProgramasAutomaticoP8_7() {
     numeroExpresionesSeguidas: 4,
     listaInputsComprobacion: inputString,
     numeroFuncion: 1,
-    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+    decicionInputs: getListaDecision(i)//getRandomInput(0, 1)
   }
   console.log(nombreProyecto);
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
@@ -210,7 +210,7 @@ function generadorDeProgramasAutomaticoP8_8() {
     numeroExpresionesSeguidas: 4,
     listaInputsComprobacion: inputString,
     numeroFuncion: 1,
-    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+    decicionInputs: getListaDecision(i)//getRandomInput(0, 1)
   }
   console.log(nombreProyecto);
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
@@ -240,7 +240,7 @@ function generadorDeProgramasAutomaticoP8_10() {
     numeroExpresionesSeguidas: 4,
     listaInputsComprobacion: inputString,
     numeroFuncion: 1,
-    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+    decicionInputs: getListaDecision(i)//getRandomInput(0, 1)
   }
   console.log(nombreProyecto);
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
@@ -270,7 +270,7 @@ function generadorDeProgramasAutomaticoP8_11() {
     numeroExpresionesSeguidas: 200,
     listaInputsComprobacion: inputString,
     numeroFuncion: 1,
-    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+    decicionInputs: getListaDecision(i)//getRandomInput(0, 1)
   }
   console.log(nombreProyecto);
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
@@ -300,7 +300,7 @@ function generadorDeProgramasAutomaticoP8_12() {
     numeroExpresionesSeguidas: 50,
     listaInputsComprobacion: inputString,
     numeroFuncion: 1,
-    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+    decicionInputs: getListaDecision(i)//getRandomInput(0, 1)
   }
   console.log(nombreProyecto);
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
@@ -330,10 +330,41 @@ function generadorDeProgramasAutomaticoP8_11_2() {
     numeroExpresionesSeguidas: 4,
     listaInputsComprobacion: inputString,
     numeroFuncion: 1,
-    decicionInputs: getListaDesicion(i)//getRandomInput(0, 1)
+    decicionInputs: getListaDecision(i)//getRandomInput(0, 1)
   }
   console.log(nombreProyecto);
   $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
     generadorDeProgramasAutomaticoP8_11_2();
+  });
+}
+
+var tamPrueba = 10  ;
+var inputString = getListaInputsInc(-3000, 3000);
+var i = 0;
+function generadorDeProgramasAutomaticoP9_1() {
+  tamPrueba -= 1;
+  if (tamPrueba < 0) {
+    return;
+  }
+  i+=1;
+  console.log("<--- Iteracion " + i);
+  var nombreProyecto = "P9.1(0,0,1,0,1,1,1,1,4,1)Input[-3000,3000]";
+  var datosPrograma = {
+    numeroAnidacionesIf: 0,
+    numeroAnidacionesWhile: 0,
+    numeroIteracionesWhile: 1,
+    numeroAnidacionesFor: 0,
+    numeroIteracionesFor: 1,
+    numeroCondicionesLogicas: 1,
+    numeroExpresionesLogicas: 1,
+    numeroExpresionesAritmeticas: 1,
+    numeroExpresionesSeguidas: 4,
+    listaInputsComprobacion: inputString,
+    numeroFuncion: 1,
+    decicionInputs: getListaDecision(i)//getRandomInput(0, 1)
+  }
+  console.log(nombreProyecto);
+  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+    generadorDeProgramasAutomaticoP9_1();
   });
 }
