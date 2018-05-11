@@ -1,5 +1,4 @@
 package tfgGroupID.tfgArtefactID;
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -26,10 +25,10 @@ public class Generardor {
 	public int fin;//el fin del nivel de profundidad de probacion
 	public int num_participacion_bool=0;
 	public int num_participacion_int=0;
-
+	
 	public Generardor(String nom_test,String nom_program,double[] test_inputs,int[] decision_inputs,int num_ifs,
 			int num_while,int size_while, int num_for, int size_for,int size_cond,
-			int size_expLogics,int size_expArit,int num_exp_seguida,int num_funcion, int ini, int fin){
+			int size_expLogics,int size_expArit,int num_exp_seguida,int num_funcion,int ini, int fin) throws Exception {
 		this.nom_program=nom_program;
 		this.nom_test=nom_test;
 		this.size_expArit=size_expArit;
@@ -53,8 +52,8 @@ public class Generardor {
 		//declarar
 		s="import java.util.ArrayList;\r\n" +
 				"\r\n" +
-				"public class " +nom_program+ "{\r\n" +
-				"	private int p_num=0;\r\n" +
+				"public class "+nom_program+"{\r\n" +
+				"	private int p_num=1;\r\n" +
 				"	private ArrayList<Double> result_tmp_num=new ArrayList<Double>();\r\n" +
 				"	private double[] result_final_num;\r\n" +
 				"	private ArrayList<Boolean> result_tmp_bool=new ArrayList<Boolean>();\r\n" +
@@ -203,8 +202,7 @@ public class Generardor {
 			//////////////////////////////////////////
 
 		}else {
-			System.out.println("Error de los valores de ini y fin de comprobacion");
-			//throw new Exception("error de los valores de ini y fin de comprobacion");
+			throw new Exception("error de los valores de ini y fin de comprobacion");
 		}
 
 		System.out.println(num_participacion_bool+", "+num_participacion_int);
@@ -292,7 +290,8 @@ public class Generardor {
 		String op2=op_art();
 		String s1="";
 		String s2="";
-		String input="(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+") ";
+		//String input="(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+") ";
+		String input="(inputs_num[(inputs_num.length-1)%(p_num++)]) ";
 		if(op1!=" / ") {
 			s1=" "+getNum()+op1+input+" ";
 
@@ -329,7 +328,10 @@ public class Generardor {
 	}
 
 	public String exp_logic() {
-		String s2=" ("+getNum()+op_rel()+"(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+")"+") ";
+		//String s2=" ("+getNum()+op_rel()+"(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+")"+") ";
+		String s2=" ("+getNum()+op_rel()+"(inputs_num[(inputs_num.length-1)%(p_num++)])) ";
+
+
 		return s2;
 	}
 
@@ -397,7 +399,7 @@ public class Generardor {
 				//s+="\n}"+"else{\n"+getExpresiones(num_exp_seguida)+"}\n";
 
 				s+="\n}"+"else{\n";
-				for(int j=0;j<i-1;j++) {
+				for(int j=0;j<x;j++) {
 					s+="if"+"("+condIf()+"){\n"+getExpresiones(num_exp_seguida)+"\n}";
 
 				}
