@@ -271,7 +271,7 @@ package tfgGroupID.tfgArtefactID;
   		String s1="";
   		String s2="";
   	// String input="(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+") ";
-      String input="(inputs_num[inputs_num.length%(p_num++)]) ";
+      String input="(inputs_num[inputs_num.length-1%(p_num++)]) ";
   		if(op1!=" / ") {
   			s1=" "+getNum()+op1+input+" ";
 
@@ -309,7 +309,7 @@ package tfgGroupID.tfgArtefactID;
 
   	public String exp_logic() {
   		// String s2=" ("+getNum()+op_rel()+"(p_num<inputs_num.length ? inputs_num[p_num++] : "+getNum()+")"+") ";
-      String s2=" ("+getNum()+op_rel()+"(inputs_num[inputs_num.length%(p_num++)])) ";
+      String s2=" ("+getNum()+op_rel()+"(inputs_num[inputs_num.length-1%(p_num++)])) ";
 
       return s2;
   	}

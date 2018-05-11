@@ -107,13 +107,13 @@ function generadorDeProgramasAutomaticoP9_1() {
     }
   }
 
-  var prefijo = "V7.5_"
+  var prefijo = "V9_"
   var tamPrueba = 10
   var contPrueba = 0;
   var parametroCont =   [1,1,1,1,1,1,1,1,1,1,1,1];
   var parametroIncremento =  [1,1,1,1,1,1,1,1,1,1,1,1];
   var parametroTam =        [5,5,5,5,5,5,5,5,5,5,5,5];
-  var listaPruebas = [[11,3],[11,1],[11,0]]; // Aqui meter los casos
+  var listaPruebas = [[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]]; // Aqui meter los casos
   var contListaPruebas = 0
   var pruebaAEjecutar = listaPruebas[contListaPruebas];
   var listaNombrePrueba = [ "AnidIf_",    // 0
@@ -168,7 +168,7 @@ function generadorDeProgramasAutomaticoP9_1() {
       numeroExpresionesSeguidas: parametroCont[8],
       listaInputsComprobacion: getListaInputsInc(contPrueba*(-1), contPrueba),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
       numeroFuncion: parametroCont[9],
-      decicionInputs: getListaDecision(contPrueba), //  Para (3) -> Devuelve 0,0,0,
+      decicionInputs: getListaDecision(10), //  Para (3) -> Devuelve 0,0,0,
       profundidadInicial: parametroCont[10],
       profundidadFinal: parametroCont[11]
     }
