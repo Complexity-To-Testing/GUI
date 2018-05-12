@@ -5,7 +5,23 @@
   // A7 Increment iter For mutant MATH
   // A8 Increment iter For mutant INCREMENTS
   // A9 Increment iter For mutant INCREMENTS profFin 10
+/*
+  "INCREMENTS"                    # 0
+  "MATH"                          # 1
+  "CONDITIONALS_BOUNDARY"         # 2
+  "NEGATE_CONDITIONALS"           # 3
+  "INVERT_NEGS"                   # 4
+  "RETURN_VALS"                   # 5
+  "VOID_METHOD_CALLS"             # 6
+  "CONSTRUCTOR_CALLS"             # 7
+  "INLINE_CONSTS"                 # 8
+  "NON_VOID_METHOD_CALLS"         # 9
+  "REMOVE_CONDITIONALS"           # 10
+  "EXPERIMENTAL_MEMBER_VARIABLE"  # 11
+  "EXPERIMENTAL_SWITCH")          # 12
+  */
   var prefijo = "A9_"
+  var listaMutantes = "0 1 5"
   var tamPrueba = 8
   var contPrueba = 0;
   var parametroCont =   [1,1,1,1,1,1,1,1,1,1,1,1];
@@ -68,7 +84,8 @@
       numeroFuncion: parametroCont[9],
       decicionInputs: getListaDecision(10), //  Para (3) -> Devuelve 0,0,0,
       profundidadInicial: parametroCont[10],
-      profundidadFinal: parametroCont[11]
+      profundidadFinal: parametroCont[11],
+      listaMutantes: listaMutantes
     }
 
     nombreProyecto = prefijo + nombreProyecto + "("

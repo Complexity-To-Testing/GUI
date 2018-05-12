@@ -14,6 +14,22 @@ NAME_TESTS_ZIP='Tests.zip'                                  # Nombre del fichero
 FILE_CLASSES_ZIP=$DIR_PROYECTOS_NODE/$NAME_CLASSES_ZIP      # Fichero zip que contiene todas las clases originales
 FILE_TESTS_ZIP=$DIR_PROYECTOS_NODE/$NAME_TESTS_ZIP          # Fichero zip que contiene todas los tests
 DIR_UPLOADS_NODE='./uploads'                                # Directorio que contiene los ficheros que el usuario a subido a la aplicación node
+declare -a LISTA_MUTANTES=(
+  "INCREMENTS"                    # 0
+  "MATH"                          # 1
+  "CONDITIONALS_BOUNDARY"         # 2
+  "NEGATE_CONDITIONALS"           # 3
+  "INVERT_NEGS"                   # 4
+  "RETURN_VALS"                   # 5
+  "VOID_METHOD_CALLS"             # 6
+  "CONSTRUCTOR_CALLS"             # 7
+  "INLINE_CONSTS"                 # 8
+  "NON_VOID_METHOD_CALLS"         # 9
+  "REMOVE_CONDITIONALS"           # 10
+  "EXPERIMENTAL_MEMBER_VARIABLE"  # 11
+  "EXPERIMENTAL_SWITCH")          # 12
+
+MUTANTES_GENERAR=$1;
 
 #######################################
 #                                     #
@@ -35,6 +51,13 @@ if [ -e $DIR_PROYECTOJAVA_TEST ] ; then
   rm -r $DIR_PROYECTOJAVA_TEST;
 fi
 mkdir $DIR_PROYECTOJAVA_TEST;
+
+#################################################
+#                                               #
+# 1.1 Añadir los mutantes que se van a generar  #
+#                                               #
+#################################################
+
 
 function procAddFilesTestToFilePomRec() {
   for file in "$1"/*
@@ -80,12 +103,31 @@ function procAddFilesClasesToFilePomRec() {
   done
 }
 
+
+
+
 # Creamos un fichero de configuración nuevo,
 # a partir del fichero de configuración base que se encuentra
 # en en el directorio 'tempPom'
 
 cp $FILE_POM_TEMP $FILE_POM
 
+for idMutante in $MUTANTES_GENERAR
+do
+   echo $idMutante
+   echo "${LISTA_MUTANTES[${idMutante}]}"
+   echo "<mutator>${LISTA_MUTANTES[${idMutante}]}</mutator>" >> $FILE_POM
+done
+ echo "</mutators>
+   <failWhenNoMutations>false</failWhenNoMutations>
+   <outputFormats>
+       <param>XML</param>
+       <param>HTML</param>
+       <param>CSV</param>
+   </outputFormats>
+   <targetClasses>" >> $FILE_POM
+
+echo "<-----------"
 #########################################################################
 #                                                                       #
 # 2. Preparamos el fichero de configuración con las clases del programa #

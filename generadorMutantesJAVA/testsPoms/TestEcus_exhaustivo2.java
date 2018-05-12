@@ -46,30 +46,18 @@
                 <version>1.1.5</version>
                 <configuration>
                   <mutators>
-                      <mutator>INCREMENTS</mutator>
-                     <!--
-                     <mutator>MATH</mutator>
-                     <mutator>CONDITIONALS_BOUNDARY</mutator>
-                      <mutator>INVERT_NEGS</mutator>
-                      <mutator>NEGATE_CONDITIONALS</mutator>
-                        <mutator> RETURN_VALS</mutator>
-                      <mutator>VOID_METHOD_CALLS</mutator>
-
-                      <mutator>CONSTRUCTOR_CALLS</mutator>
-                      <mutator>INLINE_CONSTS</mutator>
-                      <mutator>NON_VOID_METHOD_CALLS</mutator>
-                      <mutator>REMOVE_CONDITIONALS</mutator>
-                      <mutator>EXPERIMENTAL_MEMBER_VARIABLE</mutator>
-                      <mutator>EXPERIMENTAL_SWITCH</mutator>
-                    -->
-                  </mutators>
-                    <failWhenNoMutations>false</failWhenNoMutations>
-                    <outputFormats>
-                        <param>XML</param>
-                        <param>HTML</param>
-                        <param>CSV</param>
-                    </outputFormats>
-                    <targetClasses>
+<mutator>INCREMENTS</mutator>
+<mutator>MATH</mutator>
+<mutator>CONDITIONALS_BOUNDARY</mutator>
+<mutator>NEGATE_CONDITIONALS</mutator>
+</mutators>
+   <failWhenNoMutations>false</failWhenNoMutations>
+   <outputFormats>
+       <param>XML</param>
+       <param>HTML</param>
+       <param>CSV</param>
+   </outputFormats>
+   <targetClasses>
 <param>ClassMath.ControlMath</param>
 <param>ClassMath.Ecuaciones</param>
 <param>ClassMath.Util</param>

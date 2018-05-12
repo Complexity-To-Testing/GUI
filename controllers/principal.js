@@ -73,10 +73,11 @@ router.post("/procesar_file_Tests",upload.single("Tests"), function(req, res) {
     }
 });
 
-router.get("/ejecutarOLD/:nombreProyecto", function(req, res, next) {
+router.get("/ejecutarOLD/:nombreProyecto/:listaMutantes", function(req, res, next) {
   var nombreProyecto = req.params.nombreProyecto;
+  var listaMutantes = req.params.listaMutantes;
 
-  preprocesar(function (err) {
+  preprocesar(listaMutantes, function (err) {
     if (err) {
       res.json({exito: false, msg:"Error al preprocesar los ficheros."});
     } else {
@@ -118,11 +119,12 @@ router.get("/ejecutarOLD/:nombreProyecto", function(req, res, next) {
 
 router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
     var nombreProyecto = req.params.nombreProyecto;
+    var listaMutantes = "0 1 2 3";
 
     if (nombreProyecto === "") {
       res.json({exito: false, msg: "Parametros vacios."});
     } else {
-      preprocesar(function (err) {
+      preprocesar(listaMutantes, function (err) {
         if (err) {
           res.json({exito: false, msg:"Error al preprocesar los ficheros."});
         } else {
@@ -234,7 +236,7 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
                       },
                       true
                   );
-    
+
                   }
                 });
               }
@@ -247,6 +249,9 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
 
 router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
   var nombreProyecto = req.params.nombreProyecto;
+  var listaMutantes = req.body.listaMutantes;
+  console.log("<--");
+  console.log(listaMutantes);
   // var inputs = "1,2,3,4,5,6,7,8,9,10,11,12,13,"
   var inputs = req.body.listaInputsComprobacion
   //  var pathPrograma = "./"
@@ -279,7 +284,7 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
         if (err) {
           res.json({exito: false, msg: "Error al ejecutar script generadorPrograma.sh"});
         } else {
-          preprocesar(function (err) {
+          preprocesar(listaMutantes, function (err) {
             if (err) {
               res.json({exito: false, msg:"Error al preprocesar los ficheros."});
             } else {
@@ -394,8 +399,11 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
     }
 });
 
-function preprocesar(callback) {
-  child = exec("sh preprocesar.sh",
+/*
+  listaMutantes: ejemplo.  "0 1 2 3 4"
+*/
+function preprocesar(listaMutantes, callback) {
+  child = exec("sh preprocesar.sh '" + listaMutantes+"'",
   // Pasamos los parámetros error, stdout la salida
   // que mostrara el comando
     function (error, stdout, stderr) {
