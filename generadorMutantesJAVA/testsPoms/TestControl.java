@@ -70,3 +70,9 @@
                         <param>CSV</param>
                     </outputFormats>
                     <targetClasses>
+<param>ClassMath.ControlMath</param>
+<param>ClassMath.Ecuaciones</param>
+<param>ClassMath.Util</param>
+<param>ClassMath.Vista</param>
+</targetClasses><targetTests>
+<param>TestMath.TestControl</param></targetTests></configuration></plugin></plugins></build></project>

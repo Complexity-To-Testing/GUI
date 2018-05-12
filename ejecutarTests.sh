@@ -9,6 +9,7 @@ FILE_RUN=$DIR_PROYECTO_JAVA/run.sh                        # Fichero que ejecuta 
 FILE_MUTANTES=$DIR_PROYECTO_JAVA/mutantes.txt
 
 cd $DIR_PROYECTO_JAVA
+echo "" >$FILE_RESULTADOS;
 
 # 1. Recorremos todos los ficheros de configuracion de los tests
 for testFilePom in $(ls  $DIR_TESTSPOMS)

@@ -1,11 +1,17 @@
 
-  var prefijo = "A1_"
-  var tamPrueba = 10
+  // A2 modificamos lista de inputs con valores aleatorios
+  // A3 pares de pruebas lista de decision_input(1) inputs con valores aleatorios
+  // A5 Increment iter For mutant CONDITIONALS_BOUNDARY
+  // A7 Increment iter For mutant MATH
+  // A8 Increment iter For mutant INCREMENTS
+  // A9 Increment iter For mutant INCREMENTS profFin 10
+  var prefijo = "A9_"
+  var tamPrueba = 8
   var contPrueba = 0;
   var parametroCont =   [1,1,1,1,1,1,1,1,1,1,1,1];
   var parametroIncremento =  [1,1,1,1,1,1,1,1,1,1,1,1];
   var parametroTam =        [5,5,5,5,5,5,5,5,5,5,5,5];
-  var listaPruebas = [[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]]; // Aqui meter los casos
+  var listaPruebas = [[11]]; // Aqui meter los casos
   var contListaPruebas = 0
   var pruebaAEjecutar = listaPruebas[contListaPruebas];
   var listaNombrePrueba = [ "AnidIf_",    // 0
@@ -58,7 +64,7 @@
       numeroExpresionesLogicas: parametroCont[6],
       numeroExpresionesAritmeticas: parametroCont[7],
       numeroExpresionesSeguidas: parametroCont[8],
-      listaInputsComprobacion: getListaInputsInc(contPrueba*(-1), contPrueba),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
+      listaInputsComprobacion: getListaInputs(-100,100, 201),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
       numeroFuncion: parametroCont[9],
       decicionInputs: getListaDecision(10), //  Para (3) -> Devuelve 0,0,0,
       profundidadInicial: parametroCont[10],

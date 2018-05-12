@@ -25,6 +25,30 @@ var FILE_MUTANTES=DIR_PROYECTO_JAVA+'/mutantes.txt'             // Fichero que c
 var NAME_CLASSES_ZIP='Classes.zip'                              // Nombre del fichero comprimido de las clases originales
 var NAME_TESTS_ZIP='Tests.zip'                                  // Nombre del fichero comprimido de los tests originales
 
+function forEachAll(data, each, finish, sync) {
+    var n = -1, result = [];
+    var next = sync ?
+        function () {
+            if (++n < data.length) { each(data[n], result, next); }
+            else if (finish)       { finish(result); }
+        } :
+        (function () {
+            function completed() {
+                if (++n <= data.length && finish) { finish(result); }
+            }
+            for (var i = 0; i < data.length; i++) { each(data[i], result, completed); }
+            return completed;
+        }());
+    next();
+}
+
+function asyncSqrt(value, callback) {
+    console.log('START execution with value =', value);
+    setTimeout(function() {
+        callback(value, value * value);
+    }, 0 | Math.random() * 100);
+}
+
 router.post("/procesar_file_Classes",upload.single("Classes"), function(req, res) {
     var urlFichero;
     if (req.file) {
@@ -121,81 +145,96 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
                     var cont = arrayTestFilePom.length;
 
                     // Para cada fichero de configuracion lo copiamos el fichero de configuracion en el proyecto java y lo ejecutamos
-                    arrayTestFilePom.forEach(function(testFilePom){
-                      var comando = "sh ejecutarTest.sh " + testFilePom;
-                      ejecutarComandoLinux( comando, function(err, result_et) {
-                        if (err) {
-                          res.json({exito: false, msg: result_et});
-                        } else {
-                          var comando =  "cat " + FILE_RESULTADO;
-                          ejecutarComandoLinux( comando, function(err, result_cr) {
-                            if (err) {
-                              res.json({exito: false, msg: result_cr});
-                            } else {
-                              var arrayResult = result_cr.trim().split(" ");
-                              var datosTest = {}
-
-                              datosTest.idProyecto = resultInsertProyecto.insertId;
-                              datosTest.nombreTest = arrayResult[0];
-                              datosTest.numMutants = Number(arrayResult[1]);
-                              datosTest.killed = Number(arrayResult[2]);
-                              datosTest.percent = Number(arrayResult[3]);
-                              datosTest.time = Number(arrayResult[4]);
-
-                              daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
-                                if (err) {
-                                  next(err);
-                                } else {
-
-                                  if (!resultInsertTest.exito) {
-                                    res.json({exito: false, msg: resultInsertProyecto.msg});
+                    forEachAll(arrayTestFilePom,
+                      function(testFilePom, allresult, next) {
+                          asyncSqrt(testFilePom, function(testFilePom, result) {
+                              var comando = "sh ejecutarTest.sh " + testFilePom;
+                              ejecutarComandoLinux( comando, function(err, result_et) {
+                              if (err) {
+                                res.json({exito: false, msg: result_et});
+                              } else {
+                                console.log("(<--Ejecutando test: " + testFilePom);
+                                var comando =  "cat " + FILE_RESULTADO;
+                                ejecutarComandoLinux( comando, function(err, result_cr) {
+                                  if (err) {
+                                    res.json({exito: false, msg: result_cr});
                                   } else {
+                                    var arrayResult = result_cr.trim().split(" ");
+                                    var datosTest = {}
 
-                                    var comando =  "cat " + FILE_MUTANTES ;
-                                    // Recorremos los mutantes de la clase
-                                    ejecutarComandoLinux( comando, function(err, result_cclass) {
+                                    datosTest.idProyecto = resultInsertProyecto.insertId;
+                                    datosTest.nombreTest = arrayResult[0];
+                                    datosTest.numMutants = Number(arrayResult[1]);
+                                    datosTest.killed = Number(arrayResult[2]);
+                                    datosTest.percent = Number(arrayResult[3]);
+                                    datosTest.time = Number(arrayResult[4]);
+
+                                    daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
                                       if (err) {
-                                        res.json({exito: false, msg: result_cclass});
+                                        next(err);
                                       } else {
-                                        var arrayMutantesClase = result_cclass.trim().split("\n");
-                                        var contMutante = arrayMutantesClase.length;
 
-                                        arrayMutantesClase.forEach(function(mutante){
-                                          var arrayMutante = mutante.split(",");
-                                          var datos = {}
-                                          datos.idProyecto = resultInsertProyecto.insertId;
-                                          datos.idTest = resultInsertTest.insertId;
-                                          datos.clase = arrayMutante[0];
-                                          datos.mutante =  arrayMutante[1];
-                                          datos.killed =  arrayMutante[2];
+                                        if (!resultInsertTest.exito) {
+                                          res.json({exito: false, msg: resultInsertProyecto.msg});
+                                        } else {
 
-                                          daoProyectos.insertClasseTestProyecto(datos, function (err, result) {
+                                          var comando =  "cat " + FILE_MUTANTES ;
+                                          // Recorremos los mutantes de la clase
+                                          ejecutarComandoLinux( comando, function(err, result_cclass) {
                                             if (err) {
-                                              next(err);
+                                              res.json({exito: false, msg: result_cclass});
                                             } else {
-                                              contMutante --;
+                                              var arrayMutantesClase = result_cclass.trim().split("\n");
+                                              var contMutante = arrayMutantesClase.length;
 
-                                              if (contMutante == 0) {
-                                                cont--;
-                                              }
+                                              arrayMutantesClase.forEach(function(mutante){
+                                                var arrayMutante = mutante.split(",");
+                                                var datos = {}
+                                                datos.idProyecto = resultInsertProyecto.insertId;
+                                                datos.idTest = resultInsertTest.insertId;
+                                                datos.clase = arrayMutante[0];
+                                                datos.mutante =  arrayMutante[1];
+                                                datos.killed =  arrayMutante[2];
 
-                                              // Si ha terminado de ejecutar
-                                              if (cont == 0 && contMutante == 0) {
-                                                res.json({exito: true, msg:result});
-                                              }
+                                                daoProyectos.insertClasseTestProyecto(datos, function (err, result) {
+                                                  if (err) {
+                                                    next(err);
+                                                  } else {
+                                                    contMutante --;
+
+                                                    if (contMutante == 0) {
+                                                      cont--;
+                                                      allresult.push({value: testFilePom, result: result});
+                                                      next();
+                                                    }
+
+                                                    // Si ha terminado de ejecutar
+                                                    if (cont == 0 && contMutante == 0) {
+                                                      res.json({exito: true, msg:result});
+                                                    }
+                                                  }
+                                                });
+                                              });
                                             }
                                           });
-                                        });
+                                        }
                                       }
                                     });
                                   }
-                                }
-                              });
-                            }
+                                });
+                              }
+                            });
+
                           });
-                        }
-                      });
-                    });
+
+                      },
+                      function(allresult) {
+                          console.log('COMPLETED');
+                          console.log(allresult);
+                      },
+                      true
+                  );
+    
                   }
                 });
               }
@@ -231,7 +270,6 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                           //      +  nombreTest + " "
                           //      +  nombrePrograma + " "
 
-    console.log(parametros);
     //res.json({exito: true, msg: "<--- ."});
     //return;
     if (nombreProyecto === "") {
