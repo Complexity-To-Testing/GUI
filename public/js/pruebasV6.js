@@ -5,6 +5,8 @@
   // A7 Increment iter For mutant MATH
   // A8 Increment iter For mutant INCREMENTS
   // A9 Increment iter For mutant INCREMENTS profFin 10
+  // B1 combinacion de pares con profFin = 500 mutantes 0 1 2 3 -> generadorPrograma no genera Programa
+  // B3 combinacion de pares con profFin = 100 mutantes 0 1 2 3 -> generadorPrograma no genera Programa
 /*
   "INCREMENTS"                    # 0
   "MATH"                          # 1
@@ -20,14 +22,16 @@
   "EXPERIMENTAL_MEMBER_VARIABLE"  # 11
   "EXPERIMENTAL_SWITCH")          # 12
   */
-  var prefijo = "A9_"
-  var listaMutantes = "0 1 5"
+  var prefijo = "F1_0123_"
+  var listaMutantes = "0 1 2 3"
   var tamPrueba = 8
   var contPrueba = 0;
   var parametroCont =   [1,1,1,1,1,1,1,1,1,1,1,1];
   var parametroIncremento =  [1,1,1,1,1,1,1,1,1,1,1,1];
   var parametroTam =        [5,5,5,5,5,5,5,5,5,5,5,5];
-  var listaPruebas = [[11]]; // Aqui meter los casos
+  var listaPruebas = [[0,3]
+
+                      ]; // Aqui meter los casos
   var contListaPruebas = 0
   var pruebaAEjecutar = listaPruebas[contListaPruebas];
   var listaNombrePrueba = [ "AnidIf_",    // 0

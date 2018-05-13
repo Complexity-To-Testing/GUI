@@ -10,6 +10,7 @@ NAME_TESTS_ZIP='Tests.zip'                          # Nombre del fichero comprim
 FILE_CLASSES_ZIP=$DIR_PROYECTOS_NODE/$NAME_CLASSES_ZIP  # Fichero zip que contiene todas las clases originales
 FILE_TESTS_ZIP=$DIR_PROYECTOS_NODE/$NAME_TESTS_ZIP # Fichero zip que contiene todas las clases originales
 NAME_DIR_FICHEROS_CREADOS='ficherosCreados'
+
 if [ -e $DIR_PROYECTOS_NODE ] ; then
   rm -r $DIR_PROYECTOS_NODE;
 fi

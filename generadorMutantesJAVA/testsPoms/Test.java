@@ -47,9 +47,6 @@
                 <configuration>
                   <mutators>
 <mutator>INCREMENTS</mutator>
-<mutator>MATH</mutator>
-<mutator>CONDITIONALS_BOUNDARY</mutator>
-<mutator>NEGATE_CONDITIONALS</mutator>
 </mutators>
    <failWhenNoMutations>false</failWhenNoMutations>
    <outputFormats>
@@ -58,13 +55,6 @@
        <param>CSV</param>
    </outputFormats>
    <targetClasses>
-<param>ClassMath.ControlMath</param>
-<param>ClassMath.Ecuaciones</param>
-<param>ClassMath.Util</param>
-<param>ClassMath.Vista</param>
+<param>Programa</param>
 </targetClasses><targetTests>
-<param>TestMath.TestControl</param>
-<param>TestMath.TestEcus</param>
-<param>TestMath.TestVista</param>
-<param>TestMath_exhaustivo_determinista.TestEcus_exhaustivo2</param>
-<param>TestMath_exhaustivo_determinista.test_Control_exhaustivo2</param></targetTests></configuration></plugin></plugins></build></project>
+<param>Test</param></targetTests></configuration></plugin></plugins></build></project>
