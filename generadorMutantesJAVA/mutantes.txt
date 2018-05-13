@@ -1,0 +1,6 @@
+Programa.java,IncrementsMutator,SURVIVED
+Programa.java,IncrementsMutator,TIMED_OUT
+Programa.java,IncrementsMutator,KILLED
+Programa.java,IncrementsMutator,KILLED
+Programa.java,IncrementsMutator,KILLED
+Programa.java,IncrementsMutator,KILLED

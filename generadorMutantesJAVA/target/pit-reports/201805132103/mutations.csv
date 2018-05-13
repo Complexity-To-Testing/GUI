@@ -1,0 +1,6 @@
+Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,exe0,39,SURVIVED,none
+Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,exe0,41,TIMED_OUT,none
+Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,get_result_bool,55,KILLED,Test1.test(Test1)
+Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,get_result_bool,67,KILLED,Test1.test(Test1)
+Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,get_result_num,73,KILLED,Test1.test(Test1)
+Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,get_result_num,85,KILLED,Test1.test(Test1)

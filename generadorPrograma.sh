@@ -1,7 +1,7 @@
 #!/bin/bash
 DIR_PROYECTO_GENERADOR_JAVA='./generadorProgramasJAVA'
 NAME_CLASS_GENERATED='Programa.java'
-NAME_TEST_GENERATED='Test.java'
+NAME_TEST_GENERATED='Test'
 FILE_CLASS_GENERATED=$DIR_PROYECTO_GENERADOR_JAVA/ficherosCreados/$NAME_CLASS_GENERATED
 FILE_TEST_GENERATED=$DIR_PROYECTO_GENERADOR_JAVA/ficherosCreados/$NAME_TEST_GENERATED
 DIR_PROYECTOS_NODE='./public/proyectos'         # Directorio que contiene el fichero de las clases y test que el usuario ha subido
@@ -21,17 +21,18 @@ mvn compile
 echo "PARAMETROS"
 echo " $1 $2 $3 $4 $5 $6 $7 $8 $9  ${10}  ${11} ${12} ${13} ${14}"
 echo "EMPIEZA EJECUCION"
-mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13} ${14}";
+# mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13} ${14}"; #V7
+ mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13}";
+
 cd -
 
 mv  $FILE_CLASS_GENERATED $DIR_PROYECTOS_NODE
-mv  $FILE_TEST_GENERATED $DIR_PROYECTOS_NODE
+mv  $FILE_TEST_GENERATED* $DIR_PROYECTOS_NODE
 
 cd $DIR_PROYECTOS_NODE
 zip $NAME_CLASSES_ZIP $NAME_CLASS_GENERATED
-zip $NAME_TESTS_ZIP $NAME_TEST_GENERATED
+zip $NAME_TESTS_ZIP $NAME_TEST_GENERATED*
 
-rm $NAME_CLASS_GENERATED
-rm $NAME_TEST_GENERATED
+rm *.java
 
 cd -
