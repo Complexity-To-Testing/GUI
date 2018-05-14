@@ -69,6 +69,4 @@
 <param>Programa</param>
 </targetClasses><targetTests>
 <param>Test0</param>
-<param>Test1</param>
-<param>Test2</param>
-<param>Test3</param></targetTests></configuration></plugin></plugins></build></project>
+<param>Test1</param></targetTests></configuration></plugin></plugins></build></project>

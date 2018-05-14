@@ -114,14 +114,16 @@ $(document).ready(function() {
   // GESION DE PROYECTOS
   $('#btn-ejecutar-proyecto').on('click', function() {
       var nombreProyecto = $('#inputNombreProyecto').val();
+      var listaMutantes = $('#inputListaMutantesReal').val();
+
       $('.container > div').addClass('hidden');
 
-      if (nombreProyecto !== "") {
+      if (nombreProyecto !== "" && listaMutantes !=="") {
         // Activamos el loader
         $('#preloader').removeClass('hidden');
 
         var resultado = $.ajax({
-          url: SERVER + "ejecutar/"+nombreProyecto,
+          url: SERVER + "ejecutar/"+nombreProyecto+"/"+listaMutantes,
           type: "GET",
           dataType: 'json',
           data: {},

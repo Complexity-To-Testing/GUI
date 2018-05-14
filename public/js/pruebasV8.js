@@ -6,9 +6,13 @@
   // A8 Increment iter For mutant INCREMENTS
   // A9 Increment iter For mutant INCREMENTS profFin 10
   // B1 combinacion de pares con profFin = 500 mutantes 0 1 2 3 -> generadorPrograma no genera Programa
-  // B3 combinacion de pares con profFin = 100 mutantes 0 1 2 3 -> generadorPrograma no genera Programa
+  // B2 combinacion de pares con profFin = 200 mutantes 0 1 2 3 -> generadorPrograma no genera Programa
+
   // F1 F1_0123_
-  // m_0
+  // M_0  listaDecision = 1
+  // M_1  listaDecision = 1
+  // M_2  listaDecision = 1
+  // M_3  listaDecision = 1
 /*
   "INCREMENTS"                    # 0
   "MATH"                          # 1
@@ -24,17 +28,17 @@
   "EXPERIMENTAL_MEMBER_VARIABLE"  # 11
   "EXPERIMENTAL_SWITCH")          # 12
   */
-  var prefijo = "M_12_"
-  var listaMutantes = "0"
+  var prefijo = "2Tutoria_"
+  var listaMutantes = "0 1 2"
   var tamPrueba = 10;
   var contPrueba = 0;
-  var parametroCont =   [1,1,1,1,1,1,1,1,1,1,1];
+  var parametroCont =   [3,1,1,1,1,1,1,1,1,1,1];
   var parametroIncremento =  [1,1,1,1,1,1,1,1,1,1,1];
   var parametroTam =        [5,5,5,5,5,5,5,5,5,5,5];
   var listaPruebas = [[0]]; // Aqui meter los casos
   var contListaPruebas = 0
   var pruebaAEjecutar = listaPruebas[contListaPruebas];
-  var listaNombrePrueba = [ "AnidIf_",    // 0
+  var listaNombrePrueba = [ "DesicionInput_",    // 0
                             "AnidWhile_", // 1
                             "IterWhile_", // 2
                             "AnidFor_",   // 3
@@ -74,7 +78,7 @@
 
 
     var datosPrograma = {
-      numeroAnidacionesIf: parametroCont[0],
+      numeroAnidacionesIf: parametroCont[1],
       numeroAnidacionesWhile: parametroCont[1],
       numeroIteracionesWhile: parametroCont[2],
       numeroAnidacionesFor: parametroCont[3],
@@ -85,7 +89,7 @@
       numeroExpresionesSeguidas: parametroCont[8],
       listaInputsComprobacion: getListaInputs(-100,100, 201),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
       numeroFuncion: parametroCont[9],
-      decicionInputs: getListaDecision(1), //  Para (3) -> Devuelve 0,0,0,
+      decicionInputs: getListaDecision(parametroCont[0]), //  Para (3) -> Devuelve 0,0,0,
       size_tests: parametroCont[10],
       listaMutantes: listaMutantes
     }

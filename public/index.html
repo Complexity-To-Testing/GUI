@@ -110,9 +110,32 @@
       <!-- HOME -->
       <div id="home-experimento" class="hidden">
         <div class="row">
-            <div class="form-group col-sm-6 col-lg-6">
+            <div class=" form-group ">
               <label for="inputNombreCompeticion">Nombre del proyecto <font color="red">*</font></label>
               <input type="text" id="inputNombreProyecto"/><br/><br/>
+            </div>
+            <div>
+                <p><h6>  0 = INCREMENTS                     </h6></p>
+                <p><h6>  1 = MATH                          </h6></p>
+                <p><h6>  2 = CONDITIONALS_BOUNDARY         </h6></p>
+                <p><h6>  3 = NEGATE_CONDITIONALS           </h6></p>
+                <p><h6>  4 = INVERT_NEGS                   </h6></p>
+                <p><h6>  5 = RETURN_VALS                   </h6></p>
+                <p><h6>  6 = VOID_METHOD_CALLS             </h6></p>
+                <p><h6>  7 = CONSTRUCTOR_CALLS             </h6></p>
+                <p><h6>  8 = INLINE_CONSTS                 </h6></p>
+                <p><h6>  9 = NON_VOID_METHOD_CALLS         </h6></p>
+                <p><h6> 10 = REMOVE_CONDITIONALS            </h6></p>
+                <p><h6> 11 = EXPERIMENTAL_MEMBER_VARIABLE   </h6></p>
+                <p><h6> 12 = EXPERIMENTAL_SWITCH           </h6></p>
+            </div>
+            <div class=" form-group" id="listaMutantesReal">
+              <div class="col-25">
+                <label for="fname">Lista de mutantes (Ejemplo: 0 1 2) <font color="red">*</font></label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="inputListaMutantesReal" name="listaMutantesReal">
+              </div>
             </div>
         </div>
         <div class="row">

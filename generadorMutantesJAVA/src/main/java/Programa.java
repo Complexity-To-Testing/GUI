@@ -13,219 +13,112 @@ public class Programa{
 		this.decisiones=decisiones;
 	}
 private void exe0() {
-double k0=   95.35996626230086  * (inputs_num[(inputs_num.length-1)%(p_num++)])  ;
-result_tmp_num.add(k0);
-if( ( 20.434469852958266  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 94.72123465643082  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k1=   41.5443839732929  / (-Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1) ;
-result_tmp_num.add(k1);
-
-if( ( 18.369665067958042  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 93.37874681072942  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k2=  ( 64.89748464837874  + (inputs_num[(inputs_num.length-1)%(p_num++)]) ) ;
-result_tmp_num.add(k2);
-
-if( ( 52.066396785949934  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 33.87920697044852  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k3=  ( 54.38439507242256  * (inputs_num[(inputs_num.length-1)%(p_num++)]) ) ;
+boolean k0=  ( 31.85548612616868  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 17.094142418951776  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 53.59065819540702  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k0);
+boolean k1=  ( 13.845374897537328  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 2.0947223146681075  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 95.11631897804162  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k1);
+if( ( 91.85944442439445  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 57.12466042777063  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 97.86225927638927  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
+boolean k2=  ( 7.68382868584947  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 39.7697441609698  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 34.17743755695849  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k2);
+double k3=  ( 18.309163391678663  * (inputs_num[(inputs_num.length-1)%(p_num++)]) )  - 76.55978983011087;
 result_tmp_num.add(k3);
 
-if( ( 96.12155315798034  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 66.39578799576022  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k4=  ( 97.03609129997476  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 29.865235803643113  != (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k4);
-
-if( ( 17.595475589672038  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 81.23329326636281  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k5=  ( 23.42261675915424  * (inputs_num[(inputs_num.length-1)%(p_num++)]) ) ;
-result_tmp_num.add(k5);
-
-if( ( 32.87640331100114  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 30.900672380029796  != (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k6=   36.25572372220423  + (inputs_num[(inputs_num.length-1)%(p_num++)])  ;
-result_tmp_num.add(k6);
+if( ( 38.976509796349575  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 32.50531357732644  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 29.74008836567138  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
+double k4=  ( 65.35961526933153  * (inputs_num[(inputs_num.length-1)%(p_num++)]) )  / 90.28371489106894;
+result_tmp_num.add(k4);
+boolean k5=  ( 48.9906699657349  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 47.684352378716355  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 39.78058094348289  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k5);
 
 
 }else{
-if( ( 86.70412085345794  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 34.43754098298454  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k7=  ( 63.85458235217672  + (inputs_num[(inputs_num.length-1)%(p_num++)]) ) ;
-result_tmp_num.add(k7);
+if( ( 95.57145909811264  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 31.104232938796894  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 26.052678779656464  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
+double k6=  ( 5.880009101865932  * (inputs_num[(inputs_num.length-1)%(p_num++)]) )  * 68.93338247371125;
+result_tmp_num.add(k6);
+boolean k7=  ( 27.44407202311644  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 83.04809518586362  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 6.430357445651301  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k7);
 
-}if( ( 64.59305864373476  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 3.3536465748352358  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k8=   38.07515686418084  / (Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1) ;
+}if( ( 36.317137438164195  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 90.11570065803504  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 8.367001652957955  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
+double k8=  ( 56.060810669141404  + (inputs_num[(inputs_num.length-1)%(p_num++)]) )  / 1.5994944489293186;
 result_tmp_num.add(k8);
-
-}if( ( 97.39867442316735  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 85.68893055982855  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k9=   30.82340267546522  / (-Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1) ;
+double k9=  ( 23.634103626227144  - (inputs_num[(inputs_num.length-1)%(p_num++)]) )  / 36.13228629472988;
 result_tmp_num.add(k9);
 
-}if( ( 67.92462720943725  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 70.68518741162063  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k10=  ( 6.171787835622806  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 26.52186117236975  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k10);
+}}
 
-}if( ( 53.46524572135138  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 65.77613207075214  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k11=  ( 7.163019719669997  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 86.77597901210868  != (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+}else{
+if( ( 73.42690883840878  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 88.90352676594941  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 96.41960717924341  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
+double k10=   32.11587679559179  / (Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1)  / 69.45364731655329;
+result_tmp_num.add(k10);
+boolean k11=  ( 95.15963199768301  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 67.31349689736876  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 17.611012532080412  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
 result_tmp_bool.add(k11);
 
-}if( ( 62.75617648370935  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 16.43842609529225  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k12=  ( 97.29830630099553  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 13.333536326339091  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+}if( ( 3.5591884773011353  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 17.650050458008685  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 94.22484973805689  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
+boolean k12=  ( 88.89256915131696  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 54.65073655927645  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 48.45459698561606  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
 result_tmp_bool.add(k12);
-
-}}
-
-}else{
-if( ( 92.1905542545013  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 21.525102638305032  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k13=  ( 66.1290531800261  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 42.08019445097436  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+boolean k13=  ( 6.965167062395951  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 44.05953651900687  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 85.17651774149792  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
 result_tmp_bool.add(k13);
 
-}if( ( 48.760792932711084  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 20.50184635849356  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k14=  ( 71.3241343831223  * (inputs_num[(inputs_num.length-1)%(p_num++)]) ) ;
-result_tmp_num.add(k14);
-
-}if( ( 65.2081876169047  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 10.25140566927502  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k15=  ( 22.200237566475455  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 60.808756340648465  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k15);
-
-}if( ( 47.31291782924791  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 32.719958854261264  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k16=  ( 41.908923636009476  * (inputs_num[(inputs_num.length-1)%(p_num++)]) ) ;
-result_tmp_num.add(k16);
-
-}if( ( 94.22539914118208  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 86.13665944050635  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k17=   47.033324346919585  - (inputs_num[(inputs_num.length-1)%(p_num++)])  ;
-result_tmp_num.add(k17);
-
-}if( ( 95.32722578777005  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 65.83544528072633  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k18=   45.48689258973958  * (inputs_num[(inputs_num.length-1)%(p_num++)])  ;
-result_tmp_num.add(k18);
-
 }}
 
-}else{
-if( ( 89.37549229026524  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 32.254911085711235  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k19=  ( 30.258803269457616  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 5.084477166079665  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k19);
+int i14 = 2;
+while(i14>0 && ( ( 9.755163920980289  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 62.35507637389987  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 18.559479463646937  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) )){
 
-}if( ( 21.973133671382243  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 70.30981176704545  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k20=  ( 44.772669001135036  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 40.99160697519346  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k20);
+boolean k15=  ( 56.30659019591595  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 25.352756949864308  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 34.88073549396308  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k15);
+double k16=   96.85375728713439  - (inputs_num[(inputs_num.length-1)%(p_num++)])   - 40.06295454963976;
+result_tmp_num.add(k16);
+int i17 = 0;
+while(i17<2 && ( ( 28.267415211566497  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 4.152611268428675  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 79.40888150385274  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) )){
 
-}if( ( 80.84238776898525  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 57.85681609655638  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k21=   35.902175967658586  / (-Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1) ;
-result_tmp_num.add(k21);
-
-}if( ( 25.548760776944086  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 21.51711893302844  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k22=  ( 50.630864194296294  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 42.50548516785667  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+boolean k18=  ( 69.60741089129115  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 15.457683058612217  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 1.6151616962519142  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k18);
+double k19=  ( 46.94891614654017  * (inputs_num[(inputs_num.length-1)%(p_num++)]) )  + 35.070133598839725;
+result_tmp_num.add(k19);
+boolean k20=  ( 70.89801801337366  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 15.311116019077947  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 23.26493625979778  != (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k20);boolean k21=  ( 77.17447715547377  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 74.08704192412287  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 78.76402115637062  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k21);
+boolean k22=  ( 99.62537190536072  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 92.75377734126118  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 36.16588505434539  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
 result_tmp_bool.add(k22);
 
-}if( ( 31.53937077749676  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 92.21275198212979  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k23=  ( 57.171023591532474  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 10.91304530564161  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+i17++;
+}
+boolean k23=  ( 76.26402997401443  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 6.555161451110276  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 39.15594912145799  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
 result_tmp_bool.add(k23);
-
-}if( ( 22.62045362553519  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 42.8379625778419  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k24=  ( 3.4876963558539167  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 69.33115075073067  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+boolean k24=  ( 98.2976549040215  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 16.1799735675869  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 93.65116690205427  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
 result_tmp_bool.add(k24);
 
-}}
-
-}else{
-if( ( 66.33324136260894  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 41.81681925846249  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k25=  ( 72.00106613861537  + (inputs_num[(inputs_num.length-1)%(p_num++)]) ) ;
-result_tmp_num.add(k25);
-
-}if( ( 97.25578561339854  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 13.425244982463157  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k26=   64.06650646788799  * (inputs_num[(inputs_num.length-1)%(p_num++)])  ;
+i14--;
+}
+for(int i25=2;i25>0;i25 -- ){
+double k26=   17.5486848499335  + (inputs_num[(inputs_num.length-1)%(p_num++)])   / 99.14743118878692;
 result_tmp_num.add(k26);
+boolean k27=  ( 97.5576207438357  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 98.73745067977107  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 64.53625387563312  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k27);
 
-}if( ( 56.97607694981146  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 28.538796014866833  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k27=   95.2903641302411  / (-Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1) ;
-result_tmp_num.add(k27);
-
-}if( ( 59.54188794334212  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 53.71654215694977  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k28=  ( 26.130042907992312  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 48.17541468296265  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k28);
-
-}if( ( 80.63293237063813  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 97.14205387253645  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k29=  ( 18.835219259183653  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 72.04246380379183  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k29);
-
-}if( ( 82.8379264225287  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 96.02487491395587  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k30=  ( 72.53824217030053  / (-Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1)) ;
+for(int i28=2;i28>0;i28 -- ){
+double k29=   40.60193298962433  / (-Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1)  - 78.69196324483238;
+result_tmp_num.add(k29);
+double k30=  ( 95.89262397376659  * (inputs_num[(inputs_num.length-1)%(p_num++)]) )  * 11.573622472848438;
 result_tmp_num.add(k30);
 
-}}
+boolean k31=  ( 42.7888500254399  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 9.46650069020647  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 79.15477098160066  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k31);double k32=  ( 71.04769503728645  + (inputs_num[(inputs_num.length-1)%(p_num++)]) )  - 4.623267295838811;
+result_tmp_num.add(k32);
+boolean k33=  ( 75.78766572864302  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 27.15202148186147  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 66.43799557138944  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+result_tmp_bool.add(k33);
 
-}else{
-if( ( 60.17012820006244  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 18.23583661185864  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k31=  ( 76.24637428090705  + (inputs_num[(inputs_num.length-1)%(p_num++)]) ) ;
-result_tmp_num.add(k31);
 
-}if( ( 78.93775041989497  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 46.76231352781733  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k32=  ( 2.167197085797932  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 40.56502101186584  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k32);
-
-}if( ( 95.23430203965839  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 56.634329324370114  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k33=   29.07817434400834  - (inputs_num[(inputs_num.length-1)%(p_num++)])  ;
-result_tmp_num.add(k33);
-
-}if( ( 2.8246900970591042  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 48.1771440855636  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k34=  ( 54.60440897257662  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 42.68354294120609  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k34);
-
-}if( ( 37.17847039184276  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 95.0900433696065  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k35=  ( 94.46133717286534  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 40.49854318052028  != (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
+}double k34=  ( 50.72024450745366  / (Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1))  / 29.239430103536325;
+result_tmp_num.add(k34);
+boolean k35=  ( 37.37284271191625  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 9.712906402720158  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 46.57754100006435  <= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
 result_tmp_bool.add(k35);
 
-}if( ( 30.217154712366327  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 56.11239429790739  > (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k36=  ( 67.46950663113168  == (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 28.815194890291625  != (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k36);
 
-}}
-
-}else{
-if( ( 31.244960483131965  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 3.654222767438014  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k37=  ( 88.48390234292424  / (Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1)) ;
+}
+double k36=  ( 33.83794358191727  - (inputs_num[(inputs_num.length-1)%(p_num++)]) )  + 84.89035404895908;
+result_tmp_num.add(k36);
+double k37=  ( 3.712398919935175  * (inputs_num[(inputs_num.length-1)%(p_num++)]) )  + 44.07657225616457;
 result_tmp_num.add(k37);
-
-}if( ( 99.18333239274753  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 1.673812618866954  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k38=  ( 91.04341697108786  / (Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1)) ;
-result_tmp_num.add(k38);
-
-}if( ( 51.270713290369386  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 61.060756630416776  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k39=  ( 89.59947248005507  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 83.28084570547509  != (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k39);
-
-}if( ( 72.15243242544211  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 34.19357499280525  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k40=  ( 14.796339121827849  * (inputs_num[(inputs_num.length-1)%(p_num++)]) ) ;
-result_tmp_num.add(k40);
-
-}if( ( 80.51200965164145  < (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 9.232517902420392  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-double k41=   94.67687759391166  - (inputs_num[(inputs_num.length-1)%(p_num++)])  ;
-result_tmp_num.add(k41);
-
-}if( ( 90.58101772977714  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 47.63682772615117  != (inputs_num[(inputs_num.length-1)%(p_num++)])) ){
-boolean k42=  ( 66.61012877233749  >= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 89.3282904817034  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k42);
-
-}}
-
-int i43 = 0;
-while(i43<1 && ( ( 82.52835928526208  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 37.62060366860891  < (inputs_num[(inputs_num.length-1)%(p_num++)])) )){
-
-boolean k44=  ( 35.23013488032752  > (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 11.09605762940489  < (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k44);
-double k45=   54.42505009462189  * (inputs_num[(inputs_num.length-1)%(p_num++)])  ;
-result_tmp_num.add(k45);double k46=  ( 32.76973289554418  / (-Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1)) ;
-result_tmp_num.add(k46);
-
-i43++;
-}
-
-for(int i47=1;i47>0;i47 -- ){
-double k48=  ( 26.289701210521837  / (-Math.abs((int)(inputs_num[(inputs_num.length-1)%(p_num++)]) )+1)) ;
-result_tmp_num.add(k48);
-
-boolean k49=  ( 85.56826479880621  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  ||  ( 24.053256044219  == (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k49);boolean k50=  ( 5.626454127637129  <= (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 95.80261982426174  >= (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k50);
-
-
-}
-boolean k51=  ( 41.234368280829415  != (inputs_num[(inputs_num.length-1)%(p_num++)]))  &&  ( 68.58479367622557  != (inputs_num[(inputs_num.length-1)%(p_num++)])) ;
-result_tmp_bool.add(k51);
 }
 public boolean[] get_result_bool(int hasta_x) {
 		for(int i=0;i<decisiones.length;i++) {

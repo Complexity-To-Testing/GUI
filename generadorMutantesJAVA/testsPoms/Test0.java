@@ -27,6 +27,14 @@
             <version>1.4</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -47,6 +55,9 @@
                 <configuration>
                   <mutators>
 <mutator>INCREMENTS</mutator>
+<mutator>MATH</mutator>
+<mutator>CONDITIONALS_BOUNDARY</mutator>
+<mutator>NEGATE_CONDITIONALS</mutator>
 </mutators>
    <failWhenNoMutations>false</failWhenNoMutations>
    <outputFormats>
