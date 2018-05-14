@@ -8,6 +8,7 @@
   // B1 combinacion de pares con profFin = 500 mutantes 0 1 2 3 -> generadorPrograma no genera Programa
   // B3 combinacion de pares con profFin = 100 mutantes 0 1 2 3 -> generadorPrograma no genera Programa
   // F1 F1_0123_
+  // m_0
 /*
   "INCREMENTS"                    # 0
   "MATH"                          # 1
@@ -23,14 +24,14 @@
   "EXPERIMENTAL_MEMBER_VARIABLE"  # 11
   "EXPERIMENTAL_SWITCH")          # 12
   */
-  var prefijo = "F3_0_"
+  var prefijo = "M_12_"
   var listaMutantes = "0"
-  var tamPrueba = 1;
+  var tamPrueba = 10;
   var contPrueba = 0;
-  var parametroCont =   [1,1,1,1,1,1,1,1,1,1,8];
+  var parametroCont =   [1,1,1,1,1,1,1,1,1,1,1];
   var parametroIncremento =  [1,1,1,1,1,1,1,1,1,1,1];
   var parametroTam =        [5,5,5,5,5,5,5,5,5,5,5];
-  var listaPruebas = [[10]]; // Aqui meter los casos
+  var listaPruebas = [[0]]; // Aqui meter los casos
   var contListaPruebas = 0
   var pruebaAEjecutar = listaPruebas[contListaPruebas];
   var listaNombrePrueba = [ "AnidIf_",    // 0
@@ -84,7 +85,7 @@
       numeroExpresionesSeguidas: parametroCont[8],
       listaInputsComprobacion: getListaInputs(-100,100, 201),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
       numeroFuncion: parametroCont[9],
-      decicionInputs: getListaDecision(10), //  Para (3) -> Devuelve 0,0,0,
+      decicionInputs: getListaDecision(1), //  Para (3) -> Devuelve 0,0,0,
       size_tests: parametroCont[10],
       listaMutantes: listaMutantes
     }
@@ -100,8 +101,7 @@
     +datosPrograma.numeroExpresionesAritmeticas + ", "
     +datosPrograma.numeroExpresionesSeguidas + ", "
     +datosPrograma.numeroFuncion + ", "
-    +datosPrograma.profundidadInicial + ", "
-    +datosPrograma.profundidadFinal + ""
+    +datosPrograma.size_tests + " "
     +")";
     console.log(nombreProyecto);
     $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {

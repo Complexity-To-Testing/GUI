@@ -212,7 +212,7 @@ router.get("/ejecutar/:nombreProyecto",function(req, res, next) {
 
                                                     // Si ha terminado de ejecutar
                                                     if (cont == 0 && contMutante == 0) {
-                                                      res.json({exito: true, msg:result});
+                                                      res.json({exito: true, msg:result,idProyecto: esultInsertProyecto.insertId});
                                                     }
                                                   }
                                                 });
@@ -403,6 +403,7 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
   var nombreProyecto = req.params.nombreProyecto;
   var listaMutantes = req.body.listaMutantes;
 
+  console.log(req.body);
   // var inputs = "1,2,3,4,5,6,7,8,9,10,11,12,13,"
   var inputs = req.body.listaInputsComprobacion;
   //  var pathPrograma = "./"

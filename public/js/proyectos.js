@@ -76,7 +76,7 @@ function verMutantesKilledProyecto(idProyecto, nombreProyecto) {
     google.charts.setOnLoadCallback(drawChartMutante);
 
     $('.container > div').addClass('hidden');
-    $('#chart').removeClass('hidden');
+
   });
 }
 
@@ -107,6 +107,9 @@ function verEstadisticas(idProyecto, nombreProyecto) {
 
     $('.container > div').addClass('hidden');
     $('#chart').removeClass('hidden');
+    $('#chartMutant').removeClass('hidden');
+    $('#chartDR').removeClass('hidden');
+    $('#chartDR2').removeClass('hidden');
   });
 }
 
@@ -125,7 +128,7 @@ function verEstadisticasPorPrueba(nombrePrueba) {
   });
 }
 
-function drawChart() {
+function drawChartOLD() {
   // Create our data table out of JSON data loaded from server.
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Nombre test');
@@ -162,7 +165,91 @@ function drawChart() {
   chart=new google.visualization.GeoChart(document.getElementById('chart'));
   */
 }
+function drawChart() {
+  // Create our data table out of JSON data loaded from server.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'mutante');
+  data.addColumn('number', 'killed');
+  var dataMutant = new google.visualization.DataTable();
+  dataMutant.addColumn('string', 'mutante');
+  dataMutant.addColumn('number', 'mutant');
+  var dataDR = new google.visualization.DataTable();
+  dataDR.addColumn('string', 'mutante');
+  dataDR.addColumn('number', 'DR');
+  var dataDR2 = new google.visualization.DataTable();
+  dataDR2.addColumn('number', 'DR_Invert');
+  dataDR2.addColumn('number', 'Time');
 
+  $.each(jsonEstaditicas, function(i,jsonData)
+  {
+    console.log(jsonData);
+    var time=jsonData.time;
+    var mutante=jsonData.numMutants;
+    var killed=jsonData.killed;
+    var name=jsonData.nombreTest;
+    var dr=killed/mutante;
+    var dr2=(1/(1-dr));
+    //var nameTest=jsonData.nombreTest;
+    //data.addRows([ [name, value, mutante, time]]);
+    // data.addRows([ [name, value,mutante]]);
+    data.addRows([ [name,killed]]);
+    dataMutant.addRows([ [name,mutante]]);
+    dataDR.addRows([ [name,dr]]);
+    dataDR2.addRows([ [dr2,time]]);
+  });
+
+  //dataDR.sort([{column: 1}]);
+  dataDR2.sort([{column: 0}]);
+  var options = {
+    title: 'Estadisticas killed ',
+    pointSize: 16,
+    is3D: true
+  };
+  var optionsMutant = {
+    title: 'Estadisticas Num Mutants ' ,
+    pointSize: 16,
+    is3D: true
+  };
+  var optionsDR = {
+    title: 'Estadisticas Distingising Rate ',
+    pointSize: 16,
+    is3D: true
+  };
+  var optionsDR2 = {
+    hAxis: {
+      title: 'Inversa del DR (1/(1-DR))'
+    },
+    vAxis: {
+      title: 'Coste (Tiempo)'
+    },
+    colors: ['#AB0D06', '#007329']/*,
+    trendlines: {
+      0: {type: 'exponential', color: '#333', opacity: 1},
+      1: {type: 'linear', color: '#111', opacity: .3}
+    }*/
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('chart'));
+  var chartMutant = new google.visualization.LineChart(document.getElementById('chartMutant'));
+  var chartDR = new google.visualization.LineChart(document.getElementById('chartDR'));
+  var chartDR2 = new google.visualization.LineChart(document.getElementById('chartDR2'));
+
+  google.visualization.events.addListener(chart, 'ready', function() {  });
+  google.visualization.events.addListener(chartMutant, 'ready', function() {  });
+  google.visualization.events.addListener(chartDR, 'ready', function() {  });
+  google.visualization.events.addListener(chartDR2, 'ready', function() {  });
+
+  chart.draw(data, options);
+  chartMutant.draw(dataMutant, optionsMutant);
+  chartDR.draw(dataDR, optionsDR);
+  chartDR2.draw(dataDR2, optionsDR2);
+  /*
+  chart=new google.visualization.ColumnChart(document.getElementById('chart'));
+  chart=new google.visualization.PieChart(document.getElementById('chart'));
+  chart=new google.visualization.BarChart(document.getElementById('chart'));
+  chart=new google.visualization.GeoChart(document.getElementById('chart'));
+  */
+}
 function drawChartMutante() {
   // Create our data table out of JSON data loaded from server.
   var data = new google.visualization.DataTable();
@@ -316,55 +403,6 @@ function drawChartPrueba() {
   chart=new google.visualization.GeoChart(document.getElementById('chart'));
   */
 }
-/*
-  FUNCIONES AUXILIARES
-*/
-var tamPrueba = 100;
-var posParam = 0;
-var parametroCont = [5,1,1,1,1,1,1,1,1];
-var arryIncremento =  [1,1,10,1,10,1,1,1,1];
-var arrayTam =        [10,10,100,10,100,10,10,10,10];
-var listaNombrePrueba = [ "In[1-20]ExpArit_",
-                          "In[1-20]AnidWhile_",
-                          "In[1-20]IterWhile_",
-                          "In[1-20]AnidFor_",
-                          "In[1-20]IterFor_",
-                          "In[1-20]CondLog_",
-                          "In[1-20]ExprLog_",
-                          "In[1-20]ExprArit_",
-                          "In[1-20]ExprsSeg_"];
-function generadorDeProgramasAutomatico() {
-  if (parametroCont[posParam] === arrayTam[posParam]) {
-    parametroCont[posParam] = 1;
-    posParam++;
-    if (posParam == parametroCont.length) {
-      return;
-    }
-    parametroCont[posParam] = 0;
-  }
-
-  parametroCont[posParam] = parametroCont[posParam] + arryIncremento[posParam];
-  var nombreProyecto = listaNombrePrueba[posParam]+ "_"+parametroCont[posParam];
-  var datosPrograma = {
-    numeroAnidacionesIf: parametroCont[0],
-    numeroAnidacionesWhile: parametroCont[1],
-    numeroIteracionesWhile: parametroCont[2],
-    numeroAnidacionesFor: parametroCont[3],
-    numeroIteracionesFor: parametroCont[4],
-    numeroCondicionesLogicas: parametroCont[5],
-    numeroExpresionesLogicas: parametroCont[6],
-    numeroExpresionesAritmeticas: parametroCont[7],
-    numeroExpresionesSeguidas: parametroCont[8],
-    listaInputsComprobacion: "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,",
-    numeroFuncion: 2,
-    decicionInputs: "0,1,"
-  }
-  console.log(nombreProyecto);
-  console.log(datosPrograma);
-  $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
-    generadorDeProgramasAutomatico();
-  });
-}
 
 /*
   OBTENER DATOS
@@ -380,6 +418,7 @@ function generarPrograma(datosPrograma, nombreProyecto) {
       error: function(xhr, status) { alert('Oooops, hubo un error...'); },
       success: function(data) {
         console.log("Exito: "+data.exito + " msg:" +  data.msg );
+        verEstadisticasPorPrueba(nombreProyecto);
          console.log("<--- terminado")}
     });
 }

@@ -81,7 +81,6 @@ $(document).ready(function() {
     var nombreProyecto = $('#inputNombreProyectoGenerado').val();
 
     var datosPrograma = {
-      listaInputsComprobacion: $('#inputsInputDeComprobacion').val(),
       numeroAnidacionesIf: $('#inputNumeroAnidacionesIf').val(),
       numeroAnidacionesWhile: $('#inputNumeroAnidacionesWhile').val(),
       numeroIteracionesWhile: $('#inputNumeroIteracionesWhile').val(),
@@ -89,7 +88,13 @@ $(document).ready(function() {
       numeroIteracionesFor: $('#inputNumeroIteracionesFor').val(),
       numeroCondicionesLogicas: $('#inputNumeroCondicionesLogicas').val(),
       numeroExpresionesLogicas: $('#inputNumeroExpresionesLogicas').val(),
-      numeroExpresionesAritmeticas: $('#inputNumeroExpresionesAritmeticas').val()
+      numeroExpresionesAritmeticas: $('#inputNumeroExpresionesAritmeticas').val(),
+      numeroExpresionesSeguidas: $('#inputNumeroExpresionesSeguidas').val(),
+      listaInputsComprobacion: $('#inputsInputDeComprobacion').val(),
+      numeroFuncion:  $('#inputNumeroFuncion').val(),
+      decicionInputs:  $('#inputDecisionInputs').val(),
+      size_tests: $('#inputsSize_tests').val(),
+      listaMutantes:  $('#inputListaMutantes').val()
     }
 
     // Si se ha rellenado todos los campos.
@@ -122,10 +127,7 @@ $(document).ready(function() {
           data: {},
           success: function(data) {
             if (data.exito) {
-              $('#preloader').addClass('hidden');
-              $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-              $('#success').removeClass('hidden')
-              $('#success').delay(350).css({'overflow':'visible'});
+              verEstadisticas(data.idProyecto, nombreProyecto);
             } else {
               alert("ERROR"+ data.msg);
             }
@@ -342,6 +344,36 @@ function validarFormularioGeneradorPrograma(){
     valido = false;
   }else{
     $('#numeroExpresionesAritmeticas').removeClass('has-error');
+  }
+  if ($('#inputNumeroExpresionesSeguidas').val() == "") {
+    $('#numeroExpresionesSeguidas').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroExpresionesSeguidas').removeClass('has-error');
+  }
+  if ($('#inputListaMutantes').val() == "") {
+    $('#listaMutantes').addClass('has-error');
+    valido = false;
+  }else{
+    $('#listaMutantes').removeClass('has-error');
+  }
+  if ($('#inputNumeroFuncion').val() == "") {
+    $('#numeroFuncion').addClass('has-error');
+    valido = false;
+  }else{
+    $('#numeroFuncion').removeClass('has-error');
+  }
+  if ($('#inputDecisionInputs').val() == "") {
+    $('#decicionInputs').addClass('has-error');
+    valido = false;
+  }else{
+    $('#decicionInputs').removeClass('has-error');
+  }
+  if ($('#inputsSize_tests').val() == "") {
+    $('#size_tests').addClass('has-error');
+    valido = false;
+  }else{
+    $('#size_tests').removeClass('has-error');
   }
   return valido;
 }
