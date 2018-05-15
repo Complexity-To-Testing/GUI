@@ -19,7 +19,7 @@ mkdir $DIR_PROYECTOS_NODE;
 cd $DIR_PROYECTO_GENERADOR_JAVA
 mvn compile
 echo "PARAMETROS"
-echo " $1 $2 $3 $4 $5 $6 $7 $8 $9  ${10}  ${11} ${12} ${13} ${14} ${15} ${16} ${17}"
+echo " $1 $2 $3 $4 $5 $6 $7 $8 $9  ${10}  ${11} ${12} ${13} ${14} ${15} ${16} ${17}" > parametros
 echo "EMPIEZA EJECUCION"
 # mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13} ${14}"; #V7
 # mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13}"; #V8

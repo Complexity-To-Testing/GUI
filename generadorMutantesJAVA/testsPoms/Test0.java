@@ -54,3 +54,15 @@
                 <version>1.1.5</version>
                 <configuration>
                   <mutators>
+<mutator>INCREMENTS</mutator>
+</mutators>
+   <failWhenNoMutations>false</failWhenNoMutations>
+   <outputFormats>
+       <param>XML</param>
+       <param>HTML</param>
+       <param>CSV</param>
+   </outputFormats>
+   <targetClasses>
+<param>Programa</param>
+</targetClasses><targetTests>
+<param>Test0</param></targetTests></configuration></plugin></plugins></build></project>

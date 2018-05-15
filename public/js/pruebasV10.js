@@ -28,17 +28,32 @@
   "EXPERIMENTAL_MEMBER_VARIABLE"  # 11
   "EXPERIMENTAL_SWITCH")          # 12
   */
-  var prefijo = "PV10_"
+  var prefijo = "PFINAL3_"
   var listaMutantes = "0 1 2 3"
   var tamPrueba = 1;
   var contPrueba = 0;
-  var parametroCont =   [2,3,4,5,6,7,8,9,1,5,5,1,true,1,100];
-  var parametroIncremento = [1,1,1,1,1,1,1,1,1,1,1,1,true,1,2];
-  var parametroTam =        [5,5,5,5,5,5,5,5,5,5,5,1,true,1,2];
+  var parametroCont =   [ 1,// AndIf
+                          1,// AnidWhile_
+                          1,// IterWhile_
+                          1,// AnidFor_
+                          1,// IterFor_
+                          1,// CondLog_
+                          1,// ExprLog_
+                          1,// ExprArit_
+                          1,// ExprsSeg_
+                          2,// NumFun_
+                          4,// SizeTests
+                          1,// IfsAniCuerpoBucle
+                          1,// Aleatorio
+                          1,// Ani
+                          4,// Fin
+                        ];
+  var parametroIncremento = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,2];
+  var parametroTam =        [5,5,5,5,5,5,5,5,5,5,5,1,1,1,2];
   var listaPruebas = [[0]]; // Aqui meter los casos
   var contListaPruebas = 0
   var pruebaAEjecutar = listaPruebas[contListaPruebas];
-  var listaNombrePrueba = [ "_",    // 0
+  var listaNombrePrueba = [ "AndIf",    // 0
                             "AnidWhile_", // 1
                             "IterWhile_", // 2
                             "AnidFor_",   // 3
@@ -61,7 +76,7 @@
         } else {
           contListaPruebas++;
           pruebaAEjecutar=listaPruebas[contListaPruebas];
-          parametroCont = [1,1,1,1,1,1,1,1,1,1,3,1,true,1,100];;
+          parametroCont = [1,1,1,1,1,1,1,1,1,1,3,1,0,1,4];;
           contPrueba = 0;
           console.log(pruebaAEjecutar);
           if (pruebaAEjecutar === undefined) {
@@ -91,7 +106,7 @@
       numeroExpresionesLogicas: parametroCont[6],
       numeroExpresionesAritmeticas: parametroCont[7],
       numeroExpresionesSeguidas: parametroCont[8],
-      listaInputsComprobacion: "1,2,3,4,5,6,7,8,9,10,",// getListaInputs(-500,500, 1001),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
+      listaInputsComprobacion: "1,2,3,4,",// getListaInputs(-500,500, 1001),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
       numeroFuncion: parametroCont[9],
       decicionInputs: "1,2,3,",//getListaDecision(parametroCont[9]), //  Para (3) -> Devuelve 0,0,0,
       size_tests: parametroCont[10],

@@ -94,7 +94,10 @@ $(document).ready(function() {
       numeroFuncion:  $('#inputNumeroFuncion').val(),
       decicionInputs:  $('#inputDecisionInputs').val(),
       size_tests: $('#inputsSize_tests').val(),
-      listaMutantes:  $('#inputListaMutantes').val()
+      aleatorio:  getAtrAleatorio(),
+      ini:  $('#inputIni').val(),
+      fin:  $('#inputFin').val(),
+      ifsAniCuerpoBucle:  $('#inputFfsAniCuerpoBucle').val()
     }
 
     // Si se ha rellenado todos los campos.
@@ -376,6 +379,25 @@ function validarFormularioGeneradorPrograma(){
     valido = false;
   }else{
     $('#size_tests').removeClass('has-error');
+  }
+
+  if ($('#inputIni').val() == "") {
+    $('#ini').addClass('has-error');
+    valido = false;
+  }else{
+    $('#ini').removeClass('has-error');
+  }
+  if ($('#inputFin').val() == "") {
+    $('#fin').addClass('has-error');
+    valido = false;
+  }else{
+    $('#fin').removeClass('has-error');
+  }
+  if ($('#inputFfsAniCuerpoBucle').val() == "") {
+    $('#ifsAniCuerpoBucle').addClass('has-error');
+    valido = false;
+  }else{
+    $('#ifsAniCuerpoBucle').removeClass('has-error');
   }
   return valido;
 }

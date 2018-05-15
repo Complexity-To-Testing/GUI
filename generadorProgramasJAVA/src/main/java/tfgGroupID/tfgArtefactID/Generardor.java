@@ -2,7 +2,7 @@ package tfgGroupID.tfgArtefactID;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-
+import java.util.LinkedList;
 
 public class Generardor {
 	private int contVar=0;//para evitar problema de declaracion de varible con los bucles
@@ -88,10 +88,10 @@ public class Generardor {
 			//funcion assert
 			programa_test+="assertArrayEquals(new "+nom_program
 					+"(inputs,decision_inputs).get_result_num("+this.ini+","+(this.ini+inc_nivel)+"),"
-					+ "new C(inputs,decision_inputs).get_result_num("+this.ini+","+(this.ini+inc_nivel)+"),0);\r\n" +
+					+ "new "+nom_program+"(inputs,decision_inputs).get_result_num("+this.ini+","+(this.ini+inc_nivel)+"),0);\r\n" +
 					"		assertArrayEquals(new "+nom_program
 					+"(inputs,decision_inputs).get_result_bool("+this.ini+","+(this.ini+inc_nivel)+"),"
-					+ "new C(inputs,decision_inputs).get_result_bool("+this.ini+","+(this.ini+inc_nivel)+"));\r\n" +
+					+ "new "+nom_program+"(inputs,decision_inputs).get_result_bool("+this.ini+","+(this.ini+inc_nivel)+"));\r\n" +
 					"";
 			//fin de funcion test
 			programa_test+="\n}";

@@ -43,10 +43,10 @@
     </nav>
 
     <div class="container">
+      <div id="chartDR2" class="chart"></div>
       <div id="chart" class="chart"></div>
       <div id="chartMutant" class="chart"></div>
       <div id="chartDR" class="chart"></div>
-      <div id="chartDR2" class="chart"></div>
 
       <div id="chart_div"></div>
       <div id="regions_div" ></div>
@@ -196,7 +196,7 @@
               <label for="fname">Lista de mutantes (Ejemplo: 0 1 2) <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputListaMutantes" name="listaMutantes">
+              <input type="text" id="inputListaMutantes" name="listaMutantes" value="0 1 2">
             </div>
           </div>
           <div class="row form-group" id="numeroAnidacionesIf">
@@ -204,7 +204,7 @@
               <label for="fname">Número de anidaciones <i>if</i> <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroAnidacionesIf" name="numeroAnidacionesIf">
+              <input type="text" id="inputNumeroAnidacionesIf" name="numeroAnidacionesIf" class="required"value="1" type="number">
             </div>
           </div>
           <div class="row form-group" id="numeroAnidacionesWhile">
@@ -212,7 +212,7 @@
               <label for="fname">Número de anidaciones <i>while</i> <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroAnidacionesWhile" name="numeroAnidacionesWhile">
+              <input type="text" id="inputNumeroAnidacionesWhile" name="numeroAnidacionesWhile" class="required"value="1" type="number">
             </div>
           </div>
           <div class="row form-group" id="numeroIteracionesWhile">
@@ -220,7 +220,7 @@
               <label for="fname">Número de iteraciones <i>while</i> <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroIteracionesWhile" name="numeroIteracionesWhile">
+              <input type="text" id="inputNumeroIteracionesWhile" name="numeroIteracionesWhile" class="required"value="1" type="number">
             </div>
           </div>
           <div class="row form-group" id="numeroAnidacionesFor">
@@ -228,7 +228,7 @@
               <label for="fname">Número de anidaciones <i>for</i> <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroAnidacionesFor" name="numeroAnidacionesFor">
+              <input type="text" id="inputNumeroAnidacionesFor" name="numeroAnidacionesFor" class="required"value="1" type="number">
             </div>
           </div>
           <div class="row form-group" id="numeroIteracionesFor">
@@ -236,7 +236,7 @@
               <label for="fname">Número de iteraciones <i>for</i> <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroIteracionesFor" name="numeroIteracionesFor">
+              <input type="text" id="inputNumeroIteracionesFor" name="numeroIteracionesFor" class="required"value="1" type="number">
             </div>
           </div>
           <div class="row form-group" id="numeroCondicionesLogicas">
@@ -244,23 +244,23 @@
               <label for="fname">Número de condiciones lógicas <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroCondicionesLogicas" name="numeroCondicionesLogicas">
+              <input type="text" id="inputNumeroCondicionesLogicas" name="numeroCondicionesLogicas" class="required"value="1" type="number">
             </div>
           </div>
-          <div class="row form-group" id="numeroExpresionesLogicas">
+          <div class="row form-group" id="numeroExpresionesLogicas" value="1">
             <div class="col-25">
               <label for="fname">Número de expresiones lógicas <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroExpresionesLogicas" name="numeroExpresionesLogicas">
+              <input type="text" id="inputNumeroExpresionesLogicas" name="numeroExpresionesLogicas" class="required"value="1" type="number">
             </div>
           </div>
-          <div class="row form-group" id="numeroExpresionesAritmeticas">
+          <div class="row form-group" id="numeroExpresionesAritmeticas" value="1">
             <div class="col-25">
               <label for="fname">Número de expresiones aritméticas <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroExpresionesAritmeticas" name="numeroExpresionesAritmeticas" class="required">
+              <input type="text" id="inputNumeroExpresionesAritmeticas" name="numeroExpresionesAritmeticas" class="required" value="1" type="number">
             </div>
           </div>
           <div class="row form-group" id="numeroExpresionesSeguidas">
@@ -268,15 +268,15 @@
               <label for="fname">Número de expresiones seguidas <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroExpresionesSeguidas" name="numeroExpresionesSeguidas" class="required">
+              <input type="text" id="inputNumeroExpresionesSeguidas" name="numeroExpresionesSeguidas" class="required" value="1" type="number">
             </div>
           </div>
           <div class="row form-group" id="inputsDeComprobacion">
             <div class="col-25">
-              <label for="fname">Inputs de comprobación<font color="red">*</font></label>
+              <label for="fname">Inputs de comprobación (Ejemplo: 1,2,3,4,5,)<font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputsInputDeComprobacion" name="inputsInputDeComprobacion" placeholder="(Ejemplo: 1,2,3,4,5,)" class="required">
+              <input type="text" id="inputsInputDeComprobacion" name="inputsInputDeComprobacion" placeholder="(Ejemplo: 1,2,3,4,5,)" class="required" value="1,2,3,4,5,">
             </div>
           </div>
           <div class="row form-group" id="numeroFuncion">
@@ -284,7 +284,7 @@
               <label for="fname">Numero de funciones<font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputNumeroFuncion" name="inputNumeroFuncion" placeholder="" class="required">
+              <input type="text" id="inputNumeroFuncion" name="inputNumeroFuncion" placeholder="" class="required" value="3" type="number">
             </div>
           </div>
           <div class="row form-group" id="decicionInputs">
@@ -292,7 +292,7 @@
               <label for="fname">Decición inputs (ejemplo: 0,1,2,) <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputDecisionInputs" name="inputDecisionInputs" placeholder="(Ejemplo: 1,2,3,4,5,)" class="required">
+              <input type="text" id="inputDecisionInputs" name="inputDecisionInputs" placeholder="(Ejemplo: 1,2,3,4,5,)" class="required" value="1,2,3,4,5,">
             </div>
           </div>
           <div class="row form-group" id="size_tests">
@@ -300,7 +300,39 @@
               <label for="fname">Numero de tests <font color="red">*</font></label>
             </div>
             <div class="col-75">
-              <input type="text" id="inputsSize_tests" name="inputsSize_tests" placeholder="" class="required">
+              <input type="text" id="inputsSize_tests" name="inputsSize_tests" placeholder="" class="required" value="2" type="number">
+            </div>
+          </div>
+          <div class="row form-group" id="aleatorio">
+            <div class="col-25">
+              <label for="fname">Atributos aleatorios <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="checkbox" id="checkAtrAleatorio"  onclick="getAtrAleatorio()">
+            </div>
+          </div>
+          <div class="row form-group" id="ini">
+            <div class="col-25">
+              <label for="fname">Ini <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputIni" name="ini" placeholder="" class="required" value="1" type="number">
+            </div>
+          </div>
+          <div class="row form-group" id="fin">
+            <div class="col-25">
+              <label for="fname">Fin <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputFin" name="fin" placeholder="" class="required" value="2" type="number">
+            </div>
+          </div>
+          <div class="row form-group" id="ifsAniCuerpoBucle">
+            <div class="col-25">
+              <label for="fname">Ifs Anidado en Bucle <font color="red">*</font></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="inputFfsAniCuerpoBucle" name="ifsAniCuerpoBucle" placeholder="" class="required" value="1" type="number">
             </div>
           </div>
           <div class="row">

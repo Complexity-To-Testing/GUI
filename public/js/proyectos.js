@@ -117,7 +117,7 @@ function verEstadisticasPorPrueba(nombrePrueba) {
   //listaEstadisticas = [];
   $.when(obtenerEstadisticasPorPrueba(nombrePrueba)).done(function(estadisticas) {
     jsonEstaditicasPrueba = estadisticas;
-    google.charts.load('current', {'packages':['corechart','line']});
+    google.charts.load('current', {'packages':['corechart','bar']});
     google.charts.setOnLoadCallback(drawChartPrueba);
 
     $('.container > div').addClass('hidden');
@@ -165,6 +165,7 @@ function drawChartOLD() {
   chart=new google.visualization.GeoChart(document.getElementById('chart'));
   */
 }
+
 function drawChart() {
   // Create our data table out of JSON data loaded from server.
   var data = new google.visualization.DataTable();
@@ -182,7 +183,6 @@ function drawChart() {
 
   $.each(jsonEstaditicas, function(i,jsonData)
   {
-    console.log(jsonData);
     var time=jsonData.time;
     var mutante=jsonData.numMutants;
     var killed=jsonData.killed;
@@ -250,6 +250,7 @@ function drawChart() {
   chart=new google.visualization.GeoChart(document.getElementById('chart'));
   */
 }
+
 function drawChartMutante() {
   // Create our data table out of JSON data loaded from server.
   var data = new google.visualization.DataTable();
@@ -331,7 +332,7 @@ function drawChartPrueba() {
   dataDR.addColumn('string', 'mutante');
   dataDR.addColumn('number', 'DR');
   var dataDR2 = new google.visualization.DataTable();
-  dataDR2.addColumn('number', 'DR_Invert');
+  dataDR2.addColumn('string', 'mutante');
   dataDR2.addColumn('number', 'Time');
 
   $.each(jsonEstaditicasPrueba, function(i,jsonData)
@@ -348,7 +349,7 @@ function drawChartPrueba() {
     data.addRows([ [name,killed]]);
     dataMutant.addRows([ [name,mutante]]);
     dataDR.addRows([ [name,dr]]);
-    dataDR2.addRows([ [dr2,time]]);
+    dataDR2.addRows([ [name,time]]);
   });
 
   //dataDR.sort([{column: 1}]);
@@ -382,10 +383,10 @@ function drawChartPrueba() {
     }*/
   };
 
-  var chart = new google.visualization.LineChart(document.getElementById('chart'));
-  var chartMutant = new google.visualization.LineChart(document.getElementById('chartMutant'));
-  var chartDR = new google.visualization.LineChart(document.getElementById('chartDR'));
-  var chartDR2 = new google.visualization.LineChart(document.getElementById('chartDR2'));
+  var chart = new google.charts.Bar(document.getElementById('chart'));
+  var chartMutant = new google.charts.Bar(document.getElementById('chartMutant'));
+  var chartDR = new google.charts.Bar(document.getElementById('chartDR'));
+  var chartDR2 = new google.charts.Bar(document.getElementById('chartDR2'));
 
   google.visualization.events.addListener(chart, 'ready', function() {  });
   google.visualization.events.addListener(chartMutant, 'ready', function() {  });
@@ -417,9 +418,8 @@ function generarPrograma(datosPrograma, nombreProyecto) {
       data: JSON.stringify(datosPrograma),
       error: function(xhr, status) { alert('Oooops, hubo un error...'); },
       success: function(data) {
-        console.log("Exito: "+data.exito + " msg:" +  data.msg );
-        verEstadisticasPorPrueba(nombreProyecto);
-         console.log("<--- terminado")}
+        verEstadisticas(data.idProyecto, nombreProyecto);
+      }
     });
 }
 

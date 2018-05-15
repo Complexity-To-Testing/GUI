@@ -23,3 +23,12 @@ function getListaInputsInc(inicioLista, tamLista) {
 function getRandomInput(min, max) {
   return (Math.random() * (max - min) + min)+","
 }
+
+function getAtrAleatorio(){
+  var checkBox = document.getElementById("checkAtrAleatorio");
+    if (checkBox.checked == true){
+      return 1;
+    } else {
+      return 0;
+    }
+}
