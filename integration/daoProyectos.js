@@ -30,7 +30,7 @@ function insertProyecto(nombreProyecto, callback) {
 function getProyectos( callback) {
   pool.getConnection(function(err, connection) {
 
-    var sql = "SELECT test_proyecto.idProyecto, proyectos.name, COUNT(test_proyecto.idProyecto) as numTest, ROUND(SUM(test_proyecto.time),2) as totalTime, test_proyecto.numMutants, ROUND(AVG(test_proyecto.killed),2) as avg_killed, ROUND(AVG(test_proyecto.percent),2) as avg_percent FROM `test_proyecto` join proyectos on (proyectos.id = test_proyecto.idProyecto) GROUP by idProyecto "
+    var sql = "SELECT test_proyecto.idProyecto, proyectos.name, COUNT(test_proyecto.idProyecto) as numTest, ROUND(SUM(test_proyecto.time),2) as totalTime, test_proyecto.numMutants, ROUND(AVG(test_proyecto.killed),2) as avg_killed, ROUND(AVG(test_proyecto.percent),2) as avg_percent FROM `test_proyecto` join proyectos on (proyectos.id = test_proyecto.idProyecto) GROUP by idProyecto  ORDER BY test_proyecto.idProyecto DESC LIMIT 20"
 
     // Ejecutamos la consulta SQL
     connection.query(sql, function(err, result) {

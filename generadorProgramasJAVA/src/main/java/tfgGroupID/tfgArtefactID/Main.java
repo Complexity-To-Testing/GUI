@@ -1,7 +1,6 @@
 package tfgGroupID.tfgArtefactID;
 import java.util.ArrayList;
 import java.io.IOException;
-
 public class Main {
 	public static double[] parse(String args) {
 		String tmp_inputs=args;
@@ -72,51 +71,64 @@ public class Main {
 		int num_funcion=new Integer(args[13]).intValue();
 		int[] decision_inputs=parse2(args[14]);//actualizdo
 		int size_tests=new Integer(args[15]).intValue();
+		int ifsAniCuerpoBucle=new Integer(args[16]).intValue();
+		int aleatorio=new Integer(args[17]).intValue();
+		int ini=new Integer(args[18]).intValue();
+		int fin=new Integer(args[19]).intValue();
 
-		System.out.println("<===============");
-		System.out.println("num_ifs");
-		System.out.println(num_ifs);
-		System.out.println("num_while");
-		System.out.println(num_while);
-		System.out.println("size_while");
-		System.out.println(size_while);
-		System.out.println("num_for");
-		System.out.println(num_for);
-		System.out.println("size_for");
-		System.out.println(size_for);
-		System.out.println("size_cond");
-		System.out.println(size_cond);
-		System.out.println("size_expLogics");
-		System.out.println(size_expLogics);
-		System.out.println("size_expArit");
-		System.out.println(size_expArit);
-		System.out.println("test_inputs");
 
-		for (int i = 0; i < test_inputs.length; i++) {
-			System.out.println(test_inputs[i]);
-		}
+				System.out.println("<===============");
+				System.out.println("num_ifs");
+				System.out.println(num_ifs);
+				System.out.println("num_while");
+				System.out.println(num_while);
+				System.out.println("size_while");
+				System.out.println(size_while);
+				System.out.println("num_for");
+				System.out.println(num_for);
+				System.out.println("size_for");
+				System.out.println(size_for);
+				System.out.println("size_cond");
+				System.out.println(size_cond);
+				System.out.println("size_expLogics");
+				System.out.println(size_expLogics);
+				System.out.println("size_expArit");
+				System.out.println(size_expArit);
+				System.out.println("test_inputs");
 
-		System.out.println("ruta");
-		System.out.println(ruta);
-		System.out.println("nom_test");
-		System.out.println(nom_test);
-		System.out.println("nom_program");
-		System.out.println(nom_program);
-		System.out.println("num_exp_seguida");
-		System.out.println(num_exp_seguida);
-		System.out.println("num_funcion");
-		System.out.println(num_funcion);
-		System.out.println("decision_inputs");
+				for (int i = 0; i < test_inputs.length; i++) {
+					System.out.println(test_inputs[i]);
+				}
 
-		for (int i = 0; i < decision_inputs.length; i++) {
-			System.out.println(decision_inputs[i]);
-		}
+				System.out.println("ruta");
+				System.out.println(ruta);
+				System.out.println("nom_test");
+				System.out.println(nom_test);
+				System.out.println("nom_program");
+				System.out.println(nom_program);
+				System.out.println("num_exp_seguida");
+				System.out.println(num_exp_seguida);
+				System.out.println("num_funcion");
+				System.out.println(num_funcion);
+				System.out.println("decision_inputs");
 
-		System.out.println("size_tests");
-		System.out.println(size_tests);
+				for (int i = 0; i < decision_inputs.length; i++) {
+					System.out.println(decision_inputs[i]);
+				}
+
+				System.out.println("size_tests");
+				System.out.println(size_tests);
+				System.out.println("ifsAniCuerpoBucle");
+				System.out.println(ifsAniCuerpoBucle);
+				System.out.println("aleatorio");
+				System.out.println(aleatorio);
+				System.out.println("ini");
+				System.out.println(ini);
+				System.out.println("fin");
+				System.out.println(fin);
 
 		Generardor g=new Generardor(nom_test,nom_program,test_inputs,decision_inputs, num_ifs, num_while, size_while,  num_for,  size_for, size_cond,
-				size_expLogics, size_expArit,num_exp_seguida,num_funcion,size_tests,0);
+				size_expLogics, size_expArit,num_exp_seguida,num_funcion,size_tests,ifsAniCuerpoBucle,ini,fin,aleatorio);
 
 		for(int i=0; i<g.nom_tests.length;i++) {
 			GeneraFichero.crear(ruta,g.nom_tests[i]+".java",g.tests[i]);
@@ -126,30 +138,35 @@ public class Main {
 	}
 
 	public static void debug() {
-		int num_ifs=1; //numero de iteracion
-		int num_while=1;//numero de anidacion
-		int size_while=1;//numero de iteracion
-		int num_for=1;//numero de anidacion
-		int size_for=1;//numero de iteracion
-		int size_cond=1;
-		int size_expLogics=1;
-		int size_expArit=1;
-		int size_inputs=1;
+		int num_ifs=3; //numero de iteracion
+		int num_while=3;//numero de anidacion
+		int size_while=3;//numero de iteracion
+		int num_for=3;//numero de anidacion
+		int size_for=3;//numero de iteracion
+		int size_cond=3;
+		int size_expLogics=3;
+		int size_expArit=3;
+		int size_inputs=100;
 		double[] test_inputs=new double[size_inputs];
-		for (int i = 0; i < test_inputs.length; i++) {
+		for (int i = 0; i < size_inputs; i++) {
 			test_inputs[i]=i;
 		}
 		int num_exp_seguida=1;
-		int num_funcion=1;//{0,1,2,3..n-1}
-		int size_dec_inputs=num_funcion;
+		int num_funcion=10;//{0,1,2,3..n-1}
+		int size_dec_inputs=20;
 		int[] decision_inputs= new int[size_dec_inputs];
 		for (int i = 0; i < decision_inputs.length; i++) {
 			decision_inputs[i]=i;
+			System.out.println(decision_inputs[i]+":");
 		}
+		System.out.println("fin");
 		int size_tests=10;
-
+		int ifsAniCuerpoBucle=1;
+		int aleatorio=1;//1: aleatorio, 0: no aleatorio
+		int ini=1;
+		int fin=1000;
 		Generardor g=new Generardor("test","C",test_inputs,decision_inputs, num_ifs, num_while, size_while,  num_for,  size_for, size_cond,
-				size_expLogics, size_expArit,num_exp_seguida,num_funcion,size_tests,0);
+				size_expLogics, size_expArit,num_exp_seguida,num_funcion,size_tests,ifsAniCuerpoBucle,ini,fin,aleatorio);
 
 		/*
 		System.out.println(g.s);
@@ -184,8 +201,7 @@ public class Main {
 
 	}
 	public static void main(String[] args) {
-		//debug();
+		// debug();
 		exe(args);
 	};
-
 };

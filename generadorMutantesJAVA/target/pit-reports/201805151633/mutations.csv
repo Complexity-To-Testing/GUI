@@ -1,0 +1,15 @@
+Ecuaciones.java,ClassMath.Ecuaciones,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,ecu3,41,TIMED_OUT,none
+Ecuaciones.java,ClassMath.Ecuaciones,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,ecu3,46,TIMED_OUT,none
+Ecuaciones.java,ClassMath.Ecuaciones,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,ecu4,22,KILLED,TestMath.TestEcus.test(TestMath.TestEcus)
+Ecuaciones.java,ClassMath.Ecuaciones,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,ecu5,87,KILLED,TestMath.TestEcus.test(TestMath.TestEcus)
+Ecuaciones.java,ClassMath.Ecuaciones,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,ecu6,96,KILLED,TestMath.TestEcus.test(TestMath.TestEcus)
+Vista.java,ClassMath.Vista,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,add,74,KILLED,TestMath_exhaustivo_determinista.test_vista_exhauxtivo2.test(TestMath_exhaustivo_determinista.test_vista_exhauxtivo2)
+Vista.java,ClassMath.Vista,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,check,123,KILLED,TestMath.TestVista.test(TestMath.TestVista)
+Vista.java,ClassMath.Vista,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,check,130,SURVIVED,none
+Vista.java,ClassMath.Vista,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,clearResult,51,KILLED,TestMath.TestVista.test(TestMath.TestVista)
+Vista.java,ClassMath.Vista,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,mostrarResult,113,KILLED,TestMath.TestVista.test(TestMath.TestVista)
+Util.java,ClassMath.Util,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,generaEntrada,12,KILLED,TestMath.TestEcus.test(TestMath.TestEcus)
+Util.java,ClassMath.Util,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,generaEntrada,19,KILLED,TestMath.TestEcus.test(TestMath.TestEcus)
+Util.java,ClassMath.Util,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,generaEntrada_determinista,33,KILLED,TestMath_exhaustivo_determinista.test_Control_exhaustivo2.test(TestMath_exhaustivo_determinista.test_Control_exhaustivo2)
+Util.java,ClassMath.Util,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,generaEntrada_determinista,40,KILLED,TestMath_exhaustivo_determinista.TestEcus_exhaustivo2.test(TestMath_exhaustivo_determinista.TestEcus_exhaustivo2)
+ControlMath.java,ClassMath.ControlMath,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,<init>,24,KILLED,TestMath.TestVista.test(TestMath.TestVista)

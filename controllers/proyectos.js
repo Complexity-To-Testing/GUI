@@ -5,12 +5,13 @@ var router = express.Router();
 var daoProyectos = require('../integration/daoProyectos');
 
 // GET /proyectos/
-router.get("/", function(req, res) {
+router.get("/", function(req, res, next) {
   // Obtiene los campeonatos
   daoProyectos.getProyectos(function(err, proyectos) {
 
     // Muestra error si hay un error en la BD
     if (err) {
+      console.log(err);
       next(err);
     } else {
 

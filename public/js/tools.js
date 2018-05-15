@@ -1,6 +1,6 @@
 function getListaDecision(numFuncion) {
-  var lista = "0,";
-  for (var i = 0; i < numFuncion; i++) {
+  var lista = "";
+  for (var i = 1; i < numFuncion; i++) {
     lista += "0,"
   }
   return lista;

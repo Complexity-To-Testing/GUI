@@ -319,34 +319,34 @@ router.get("/ejecutar/:nombreProyecto/:listaMutantes",function(req, res, next) {
                                               var arrayMutantesClase = result_cclass.trim().split("\n");
                                               var contMutante = arrayMutantesClase.length;
 
-                                              arrayMutantesClase.forEach(function(mutante){
-                                                var arrayMutante = mutante.split(",");
-                                                var datos = {}
-                                                datos.idProyecto = resultInsertProyecto.insertId;
-                                                datos.idTest = resultInsertTest.insertId;
-                                                datos.clase = arrayMutante[0];
-                                                datos.mutante =  arrayMutante[1];
-                                                datos.killed =  arrayMutante[2];
+                                              // Para cada fichero de configuracion lo copiamos el fichero de configuracion en el proyecto java y lo ejecutamos
+                                              forEachAll(arrayMutantesClase,
+                                                function(mutante, allresultMutant, next1) {
+                                                    asyncSqrt(mutante, function(mutante, result) {
+                                                      var arrayMutante = mutante.split(",");
+                                                      var datos = {}
+                                                      datos.idProyecto = resultInsertProyecto.insertId;
+                                                      datos.idTest = resultInsertTest.insertId;
+                                                      datos.clase = arrayMutante[0];
+                                                      datos.mutante =  arrayMutante[1];
+                                                      datos.killed =  arrayMutante[2];
 
-                                                daoProyectos.insertClasseTestProyecto(datos, function (err, result) {
-                                                  if (err) {
-                                                    next(err);
-                                                  } else {
-                                                    contMutante --;
-
-                                                    if (contMutante == 0) {
-                                                      cont--;
-                                                      allresult.push({value: testFilePom, result: result});
-                                                      next();
-                                                    }
-
-                                                    // Si ha terminado de ejecutar
-                                                    if (cont == 0 && contMutante == 0) {
-                                                      res.json({exito: true, msg:result,idProyecto: resultInsertProyecto.insertId});
-                                                    }
-                                                  }
-                                                });
-                                              });
+                                                      daoProyectos.insertClasseTestProyecto(datos, function (err, result) {
+                                                        if (err) {
+                                                          next(err);
+                                                        } else {
+                                                          next1();
+                                                        }
+                                                      });
+                                                    });
+                                                },
+                                                function(allresult) {
+                                                    next();
+                                                    console.log('COMPLETED');
+                                                    //res.json({exito: true, msg:result,idProyecto: resultInsertProyecto.insertId});
+                                                },
+                                                true
+                                              );
                                             }
                                           });
                                         }
@@ -361,12 +361,11 @@ router.get("/ejecutar/:nombreProyecto/:listaMutantes",function(req, res, next) {
 
                       },
                       function(allresult) {
-                          console.log('COMPLETED');
-                          console.log(allresult);
+                          console.log(' <<- COMPLETED');
+                          res.json({exito: true, idProyecto: resultInsertProyecto.insertId});
                       },
                       true
-                  );
-
+                    );
                   }
                 });
               }
@@ -535,7 +534,7 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
 
   console.log(req.body);
   // var inputs = "1,2,3,4,5,6,7,8,9,10,11,12,13,"
-  var inputs = req.body.listaInputsComprobacion;
+  // var inputs = req.body.listaInputsComprobacion;
   //  var pathPrograma = "./"
   //  var nombrePrograma = "Programa"
   //  var nombreTest = "Test"
@@ -547,11 +546,15 @@ router.post("/generarPrograma/:nombreProyecto",function(req, res, next) {
                         +  req.body.numeroCondicionesLogicas + " "
                         +  req.body.numeroExpresionesLogicas + " "
                         +  req.body.numeroExpresionesAritmeticas + " "
-                        +  inputs + " "
+                        +  req.body.listaInputsComprobacion + " "
                         +  req.body.numeroExpresionesSeguidas + " "
                         +  req.body.numeroFuncion + " "
                         +  req.body.decicionInputs + " "
-                        +  req.body.size_tests + " ";
+                        +  req.body.size_tests + " "
+                        +  req.body.ifsAniCuerpoBucle + " "
+                        +  req.body.aleatorio + " "
+                        +  req.body.ini + " "
+                        +  req.body.fin + " ";
                           //      +  pathPrograma + " "
                           //      +  nombreTest + " "
                           //      +  nombrePrograma + " "
@@ -752,4 +755,5 @@ function saveResultOnDataBase(idProyecto, callback){
   });
 
 };
+
 module.exports = router;
