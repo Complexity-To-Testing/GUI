@@ -72,9 +72,4 @@
 <param>Test1</param>
 <param>Test2</param>
 <param>Test3</param>
-<param>Test4</param>
-<param>Test5</param>
-<param>Test6</param>
-<param>Test7</param>
-<param>Test8</param>
-<param>Test9</param></targetTests></configuration></plugin></plugins></build></project>
+<param>Test4</param></targetTests></configuration></plugin></plugins></build></project>

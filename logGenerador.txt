@@ -10,11 +10,33 @@
 3.0
 4.0
 5.0
+6.0
+34.0
+43.0
+43.0
+34.0
+5.0
+423.0
+54.0
+65.0
+756.0
+867.0
+654.0
+243.0
+132.0
+345.0
+756.0
+876.0
+0
 1
 2
 3
 4
 5
+6
+7
+8
+9
 <===============
 num_ifs
 1
@@ -25,7 +47,7 @@ size_while
 num_for
 1
 size_for
-1
+20
 size_cond
 1
 size_expLogics
@@ -38,6 +60,23 @@ test_inputs
 3.0
 4.0
 5.0
+6.0
+34.0
+43.0
+43.0
+34.0
+5.0
+423.0
+54.0
+65.0
+756.0
+867.0
+654.0
+243.0
+132.0
+345.0
+756.0
+876.0
 ruta
 ./ficherosCreados
 nom_test
@@ -47,15 +86,20 @@ Programa
 num_exp_seguida
 1
 num_funcion
-3
+1
 decision_inputs
+0
 1
 2
 3
 4
 5
+6
+7
+8
+9
 size_tests
-2
+10
 ifsAniCuerpoBucle
 1
 aleatorio
@@ -63,20 +107,14 @@ aleatorio
 ini
 1
 fin
-2
-size_expArit: 1 ,size_expLogics: 1,num_exp_seguida: 1 ,size_cond: 1 ,num_while: 1 ,num_for: 1 ,num_ifs: 1,ifsAniCuerpoBucle): 1 
-
-i: 0
-size_expArit: 1 ,size_expLogics: 1,num_exp_seguida: 1 ,size_cond: 1 ,num_while: 1 ,num_for: 1 ,num_ifs: 1,ifsAniCuerpoBucle): 1 
-
-i: 0
+5
 size_expArit: 1 ,size_expLogics: 1,num_exp_seguida: 1 ,size_cond: 1 ,num_while: 1 ,num_for: 1 ,num_ifs: 1,ifsAniCuerpoBucle): 1 
 
 i: 0
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 0.837 s
-[INFO] Finished at: 2018-05-17T00:26:19+02:00
+[INFO] Total time: 0.839 s
+[INFO] Finished at: 2018-05-17T01:13:30+02:00
 [INFO] Final Memory: 9M/32M
 [INFO] ------------------------------------------------------------------------
