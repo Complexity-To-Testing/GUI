@@ -1,7 +1,0 @@
-Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,exe0,50,NO_COVERAGE,none
-Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,exe1,91,NO_COVERAGE,none
-Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,exe2,120,TIMED_OUT,none
-Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,get_result_bool,127,KILLED,Test1.test(Test1)
-Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,get_result_bool,145,KILLED,Test1.test(Test1)
-Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,get_result_num,151,KILLED,Test1.test(Test1)
-Programa.java,Programa,org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator,get_result_num,169,KILLED,Test1.test(Test1)

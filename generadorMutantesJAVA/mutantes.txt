@@ -1,7 +1,7 @@
 Programa.java,IncrementsMutator,NO_COVERAGE
 Programa.java,IncrementsMutator,NO_COVERAGE
-Programa.java,IncrementsMutator,TIMED_OUT
+Programa.java,IncrementsMutator,NO_COVERAGE
 Programa.java,IncrementsMutator,KILLED
-Programa.java,IncrementsMutator,KILLED
+Programa.java,IncrementsMutator,SURVIVED
 Programa.java,IncrementsMutator,KILLED
 Programa.java,IncrementsMutator,KILLED

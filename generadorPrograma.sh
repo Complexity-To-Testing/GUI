@@ -17,6 +17,12 @@ fi
 mkdir $DIR_PROYECTOS_NODE;
 
 cd $DIR_PROYECTO_GENERADOR_JAVA
+
+if [ -e $NAME_DIR_FICHEROS_CREADOS ] ; then
+rm -r $NAME_DIR_FICHEROS_CREADOS;
+fi
+mkdir $NAME_DIR_FICHEROS_CREADOS;
+
 mvn compile
 echo "PARAMETROS"
 echo " $1 $2 $3 $4 $5 $6 $7 $8 $9  ${10}  ${11} ${12} ${13} ${14} ${15} ${16} ${17}" > parametros
