@@ -3,3 +3,39 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] Building mutationTesting 1.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mutationTesting ---
+[INFO] Deleting /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ mutationTesting ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.2:compile (default-compile) @ mutationTesting ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file to /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/src/main/java/Programa.java:[175,112] incompatible types: char[] cannot be converted to java.util.ArrayList<java.lang.Boolean>
+[ERROR] /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/src/main/java/Programa.java:[195,119] incompatible types: char[] cannot be converted to java.util.ArrayList<java.lang.Double>
+[INFO] 2 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.744 s
+[INFO] Finished at: 2018-05-17T00:43:30+02:00
+[INFO] Final Memory: 12M/42M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.2:compile (default-compile) on project mutationTesting: Compilation failure: Compilation failure: 
+[ERROR] /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/src/main/java/Programa.java:[175,112] incompatible types: char[] cannot be converted to java.util.ArrayList<java.lang.Boolean>
+[ERROR] /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/src/main/java/Programa.java:[195,119] incompatible types: char[] cannot be converted to java.util.ArrayList<java.lang.Double>
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

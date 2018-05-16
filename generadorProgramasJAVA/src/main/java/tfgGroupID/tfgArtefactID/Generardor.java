@@ -1,8 +1,10 @@
 package tfgGroupID.tfgArtefactID;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Generardor {
 	private int contVar=0;//para evitar problema de declaracion de varible con los bucles
@@ -35,215 +37,225 @@ public class Generardor {
 			int size_expLogics,int size_expArit,int num_exp_seguida,int num_funcion,
 			int size_tests,int ifsAniCuerpoBucle,int ini, int fin, int aleatorio) {
 
-		this.nom_program=nom_program;
-		this.nom_test=nom_test;
-		this.aleatorio=aleatorio;
-		this.ini=ini;
-		this.fin=fin;
-		this.num_funcion=num_funcion;
-		this.decision_inputs=decision_inputs;
-		this.size_tests=size_tests;
-		this.tests=new String[size_tests];
-		this.nom_tests=new String[size_tests];
+		if(ini>=fin) {
+			System.out.println("error de fin y ini, no genera mutante");
+		}else {
 
-		for(int j=0;j<size_tests;j++) {
+
+
+			this.nom_program=nom_program;
+			this.nom_test=nom_test;
+			this.aleatorio=aleatorio;
+			this.ini=ini;
+			this.fin=fin;
+			this.num_funcion=num_funcion;
+			this.decision_inputs=decision_inputs;
+			this.size_tests=size_tests;
+			this.tests=new String[size_tests];
+			this.nom_tests=new String[size_tests];
+
+
+
+			for(int j=0;j<size_tests;j++) {
+				/*
+				 * generar programa testeador
+				 */
+				this.nom_tests[j]=nom_test+(j);
+				programa_test+="import static org.junit.Assert.*;\r\n" +
+						"\r\n" +
+						"import java.util.ArrayList;\r\n" +
+						"\r\n" +
+						"public class "+this.nom_tests[j]+"{\r\n" +
+						"\r\n" +
+						"	@org.junit.Test\r\n" +
+						"	public void test() {\r\n" +
+						"		\n";
+
+				//declaracion de variables necesarios
+				//////////codigo que mantener el numero de  inputs segun el numero de test////////////////
+				programa_test+="double[] inputs={"+test_inputs[0];
+				for(int i=1;i<test_inputs.length;i++) {
+					programa_test+=","+test_inputs[i];
+				}
+
+
+				programa_test+="};\n";
+
+				programa_test+="int[] decision_inputs={"+this.decision_inputs[0];
+				//System.out.println("ini genera decision inputs: \n");
+				for(int i=1;i<j+1;i++) {
+					//System.out.println(this.decision_inputs[(i%this.decision_inputs.length)]+";");
+					int l=this.decision_inputs.length-1;
+					int pos=i%l;
+					int tmp=this.decision_inputs[pos];
+					programa_test+=","+tmp;
+				}
+				programa_test+="};\n";
+				//System.out.println("fin genera decision inputs: \n");
+
+				this.inc_nivel+=(int)this.fin/size_tests;
+				//System.out.println(inc_nivel+"\n");
+				//funcion assert
+				programa_test+="assertArrayEquals(new "+nom_program+"(inputs,decision_inputs).get_result_bool("+this.ini+","+this.fin+"),\r\n" +
+						"				new "+nom_program+"(inputs,decision_inputs).get_result_bool("+this.ini+","+this.fin+"));\r\n" +
+						"		assertArrayEquals(new "+nom_program+"(inputs,decision_inputs).get_result_num("+this.ini+","+this.fin+"),\r\n" +
+						"				new "+nom_program+"(inputs,decision_inputs).get_result_num("+this.ini+","+this.fin+"));";
+
+				//fin de funcion test
+				programa_test+="\n}";
+
+
+				//fin de clase programa_test
+				programa_test+="\n}";
+
+				this.tests[j]=programa_test;
+				programa_test="";
+				//////////////////////////////////////////
+			}
+
+
+
+
 			/*
-			 * generar programa testeador
+			 * generar programa testeado
 			 */
-			this.nom_tests[j]=nom_test+(j);
-			programa_test+="import static org.junit.Assert.*;\r\n" +
+			//declarar
+			s="import java.util.ArrayList;\r\n" +
 					"\r\n" +
-					"import java.util.ArrayList;\r\n" +
-					"\r\n" +
-					"public class "+this.nom_tests[j]+"{\r\n" +
-					"\r\n" +
-					"	@org.junit.Test\r\n" +
-					"	public void test() {\r\n" +
-					"		\n";
+					"public class "+nom_program+"{\r\n" +
+					"	private int p_num=1;\r\n" +
+					"	private ArrayList<Double> result_tmp_num=new ArrayList<Double>();\r\n" +
+					"	private double[] result_final_num;\r\n" +
+					"	private ArrayList<Boolean> result_tmp_bool=new ArrayList<Boolean>();\r\n" +
+					"	private boolean[] result_final_bool;\r\n" +
+					"	private double[] inputs_num;\r\n" +
+					"	private int[]decisiones;///////nuevo atributo\r\n" +
+					"	public "+nom_program+"(double[] inputs_num,int[] decisiones) {\r\n" +
+					"		this.inputs_num=inputs_num;\r\n" +
+					"		this.decisiones=decisiones;\r\n" +
+					"	}\n";
 
-			//declaracion de variables necesarios
-			//////////codigo que mantener el numero de  inputs segun el numero de test////////////////
-			programa_test+="double[] inputs={"+test_inputs[0];
-			for(int i=1;i<test_inputs.length;i++) {
-				programa_test+=","+test_inputs[i];
+
+			for(int i=0; i<this.num_funcion;i++) {
+				if(this.aleatorio==1) {//si es 1, entonces el codigo es aleatorio
+					//System.out.println("ini aleatorio!!\n");
+					this.size_for=(int) getRandomArbitrary(1,size_for);
+					this.size_while=(int) getRandomArbitrary(1,size_while);
+					this.size_expArit=(int) getRandomArbitrary(1,size_expArit+1);
+					this.size_expLogics=(int) getRandomArbitrary(1,size_expLogics+1);
+					this.num_exp_seguida=(int) getRandomArbitrary(1,num_exp_seguida+1);
+					this.size_cond=(int) getRandomArbitrary(1,size_cond+1);
+					this.num_while=(int) getRandomArbitrary(1,num_while+1);
+					this.num_for=(int) getRandomArbitrary(1,num_for+1);
+					this.num_ifs=(int) getRandomArbitrary(1,num_ifs)+1;
+					this.ifsAniCuerpoBucle=(int)getRandomArbitrary(1,ifsAniCuerpoBucle+1);
+					//System.out.println("fin aleatorio!!\n");
+				}else {
+					this.size_for=size_for;
+					this.size_while=size_while;
+					this.size_expArit=size_expArit;
+					this.size_expLogics=size_expLogics;
+					this.num_exp_seguida=num_exp_seguida;
+					this.size_cond=size_cond;
+					this.num_while=num_while;
+					this.num_for=num_for;
+					this.num_ifs=num_ifs;
+					this.ifsAniCuerpoBucle=ifsAniCuerpoBucle;
+				}
+
+				System.out.printf("size_expArit: %d ,size_expLogics: %d," +
+						"num_exp_seguida: %d ,size_cond: %d "
+						+ ",num_while: %d ,num_for: %d ,num_ifs: %d,"
+						+ "ifsAniCuerpoBucle): %d \n\n",
+						this.size_expArit,this.size_expLogics,
+						this.num_exp_seguida,this.size_cond,this.num_while,
+						this.num_for,this.num_ifs,this.ifsAniCuerpoBucle);
+
+
+				s+="private void exe"+i+"() {\n";
+				//generar codigos no bucles aleatoriamente
+
+				s+="\n//////Espresiones//////\n";
+				s+=getExpresiones(this.num_exp_seguida);
+
+				s+="\n//////ifs//////\n";
+				//generar codigo ifs
+				s+=getIfs(this.num_ifs)+"\n";
+
+				s+="\n//////whiles//////\n";
+				//generar codigo whiles
+				s+=getWhiles(this.num_while, this.size_while)+"\n";
+
+				s+="\n//////fors//////\n";
+				//generar codigo fors
+				s+=getFors(this.num_for, this.size_for)+"\n";
+
+				s+="\n//////Espresiones//////\n";
+				//generar codigos no bucles aleatoriamente
+				s+=getExpresiones(this.num_exp_seguida);
+
+				//fin de funcion exe
+				s+="}\n";
+
 			}
 
 
-			programa_test+="};\n";
+			//otras funciones necesarios para el testing
+			//get_result_bool
+			s+="public ArrayList<Boolean> get_result_bool(int ini, int fin ) {\r\n" +
+					"		for(int i=0;i<decisiones.length;i++) {\r\n" +
+					"			switch (decisiones[i]) {\r\n" +
+					"			case 0:\r\n" +
+					"				exe0();\r\n" +
+					"				break;\n";
 
-			programa_test+="int[] decision_inputs={"+this.decision_inputs[0];
-			//System.out.println("ini genera decision inputs: \n");
-			for(int i=1;i<j+1;i++) {
-				//System.out.println(this.decision_inputs[(i%this.decision_inputs.length)]+";");
-				int l=this.decision_inputs.length-1;
-				int pos=i%l;
-				int tmp=this.decision_inputs[pos];
-				programa_test+=","+tmp;
+			if(num_funcion>1) {
+				for(int i=1;i<num_funcion;i++) {
+					s+="case "+i+":\r\n" +
+							"				exe"+i+"();\r\n" +
+							"				break;\n";
+				}
 			}
-			programa_test+="};\n";
-			//System.out.println("fin genera decision inputs: \n");
 
-			this.inc_nivel+=(int)this.fin/size_tests;
-			//System.out.println(inc_nivel+"\n");
-			//funcion assert
-			programa_test+="assertArrayEquals(new "+nom_program
-					+"(inputs,decision_inputs).get_result_num("+this.ini+","+(this.ini+inc_nivel)+"),"
-					+ "new "+nom_program+"(inputs,decision_inputs).get_result_num("+this.ini+","+(this.ini+inc_nivel)+"),0);\r\n" +
-					"		assertArrayEquals(new "+nom_program
-					+"(inputs,decision_inputs).get_result_bool("+this.ini+","+(this.ini+inc_nivel)+"),"
-					+ "new "+nom_program+"(inputs,decision_inputs).get_result_bool("+this.ini+","+(this.ini+inc_nivel)+"));\r\n" +
-					"";
-			//fin de funcion test
-			programa_test+="\n}";
-			//fin de clase programa_test
-			programa_test+="\n}";
+			s+="default:\r\n" +
+					"				exe0();\r\n" +
+					"				break;\r\n" +
+					"			}\r\n" +
+					"		}\r\n" +
+					"		\r\n" +
+					"	return result_tmp_bool.toString().substring(ini, fin%(result_tmp_bool.toString().length())).toCharArray();\r\n" +
+					"	}\n";
 
-			this.tests[j]=programa_test;
-			programa_test="";
-			//////////////////////////////////////////
+
+			//get_result_num
+			s+="public ArrayList<Double> get_result_num(int ini, int fin) {\r\n" +
+					"		for(int i=0;i<decisiones.length;i++) {\r\n" +
+					"			switch (decisiones[i]) {\r\n" +
+					"			case 0:\r\n" +
+					"				exe0();\r\n" +
+					"				break;\n";
+
+			if(num_funcion>1) {
+				for(int i=1;i<num_funcion;i++) {
+					s+="case "+i+":\r\n" +
+							"				exe"+i+"();\r\n" +
+							"				break;\n";
+				}
+			}
+
+			s+="default:\r\n" +
+					"				exe0();\r\n" +
+					"				break;\r\n" +
+					"			}\r\n" +
+					"		}\r\n" +
+					"		\r\n" +
+					"		return result_tmp_num.toString().substring(ini, fin%(result_tmp_bool.toString().length())).toCharArray();" +
+					"	}\n";
+
+
+
+			s+="\n}";//cierre de la clase
 		}
-
-		/*
-		 * generar programa testeado
-		 */
-		//declarar
-		s="import java.util.ArrayList;\r\n" +
-				"\r\n" +
-				"public class "+nom_program+"{\r\n" +
-				"	private int p_num=1;\r\n" +
-				"	private ArrayList<Double> result_tmp_num=new ArrayList<Double>();\r\n" +
-				"	private double[] result_final_num;\r\n" +
-				"	private ArrayList<Boolean> result_tmp_bool=new ArrayList<Boolean>();\r\n" +
-				"	private boolean[] result_final_bool;\r\n" +
-				"	private double[] inputs_num;\r\n" +
-				"	private int[]decisiones;///////nuevo atributo\r\n" +
-				"	public "+nom_program+"(double[] inputs_num,int[] decisiones) {\r\n" +
-				"		this.inputs_num=inputs_num;\r\n" +
-				"		this.decisiones=decisiones;\r\n" +
-				"	}\n";
-
-
-		for(int i=0; i<this.num_funcion;i++) {
-			if(this.aleatorio==1) {//si es 1, entonces el codigo es aleatorio
-				//System.out.println("ini aleatorio!!\n");
-				this.size_for=(int) getRandomArbitrary(1,size_for);
-				this.size_while=(int) getRandomArbitrary(1,size_while);
-				this.size_expArit=(int) getRandomArbitrary(1,size_expArit+1);
-				this.size_expLogics=(int) getRandomArbitrary(1,size_expLogics+1);
-				this.num_exp_seguida=(int) getRandomArbitrary(1,num_exp_seguida+1);
-				this.size_cond=(int) getRandomArbitrary(1,size_cond+1);
-				this.num_while=(int) getRandomArbitrary(1,num_while+1);
-				this.num_for=(int) getRandomArbitrary(1,num_for+1);
-				this.num_ifs=(int) getRandomArbitrary(1,num_ifs)+1;
-				this.ifsAniCuerpoBucle=(int)getRandomArbitrary(1,ifsAniCuerpoBucle+1);
-				//System.out.println("fin aleatorio!!\n");
-			}else {
-				this.size_for=size_for;
-				this.size_while=size_while;
-				this.size_expArit=size_expArit;
-				this.size_expLogics=size_expLogics;
-				this.num_exp_seguida=num_exp_seguida;
-				this.size_cond=size_cond;
-				this.num_while=num_while;
-				this.num_for=num_for;
-				this.num_ifs=num_ifs;
-				this.ifsAniCuerpoBucle=ifsAniCuerpoBucle;
-			}
-
-			System.out.printf("size_expArit: %d ,size_expLogics: %d," +
-					"num_exp_seguida: %d ,size_cond: %d "
-					+ ",num_while: %d ,num_for: %d ,num_ifs: %d,"
-					+ "ifsAniCuerpoBucle): %d \n\n",
-					this.size_expArit,this.size_expLogics,
-					this.num_exp_seguida,this.size_cond,this.num_while,
-					this.num_for,this.num_ifs,this.ifsAniCuerpoBucle);
-
-
-			s+="private void exe"+i+"() {\n";
-			//generar codigos no bucles aleatoriamente
-
-			s+=getExpresiones(this.num_exp_seguida);
-
-			//generar codigo ifs
-			s+=getIfs(this.num_ifs)+"\n";
-
-			//generar codigo whiles
-			s+=getWhiles(this.num_while, this.size_while)+"\n";
-
-			//generar codigo fors
-			s+=getFors(this.num_for, this.size_for)+"\n";
-
-			//generar codigos no bucles aleatoriamente
-			s+=getExpresiones(this.num_exp_seguida);
-
-			//fin de funcion exe
-			s+="}\n";
-
-		}
-
-
-		//otras funciones necesarios para el testing
-		//get_result_bool
-		s+="public boolean[] get_result_bool(int ini, int hasta_x) {\r\n" +
-				"		for(int i=0;i<decisiones.length;i++) {\r\n" +
-				"			switch (decisiones[i]) {\r\n" +
-				"			case 0:\r\n" +
-				"				exe0();\r\n" +
-				"				break;\n";
-
-		if(num_funcion>1) {
-			for(int i=1;i<num_funcion;i++) {
-				s+="case "+i+":\r\n" +
-						"				exe"+i+"();\r\n" +
-						"				break;\n";
-			}
-		}
-
-		s+="default:\r\n" +
-				"				exe0();\r\n" +
-				"				break;\r\n" +
-				"			}\r\n" +
-				"		}\r\n" +
-				"		\r\n" +
-				"		result_final_bool=new boolean[result_tmp_bool.size()];\r\n" +
-				"		for(int i=ini;i<(hasta_x<=result_tmp_bool.size()?hasta_x : result_tmp_bool.size());i++) {\r\n" +
-				"			result_final_bool[i]=result_tmp_bool.get(i);\r\n" +
-				"		}\r\n" +
-				"		return result_final_bool;\r\n" +
-				"	}\n";
-
-
-		//get_result_num
-		s+="public double[] get_result_num(int ini,int hasta_x) {\r\n" +
-				"		for(int i=0;i<decisiones.length;i++) {\r\n" +
-				"			switch (decisiones[i]) {\r\n" +
-				"			case 0:\r\n" +
-				"				exe0();\r\n" +
-				"				break;\n";
-
-		if(num_funcion>1) {
-			for(int i=1;i<num_funcion;i++) {
-				s+="case "+i+":\r\n" +
-						"				exe"+i+"();\r\n" +
-						"				break;\n";
-			}
-		}
-
-		s+="default:\r\n" +
-				"				exe0();\r\n" +
-				"				break;\r\n" +
-				"			}\r\n" +
-				"		}\r\n" +
-				"		\r\n" +
-				"		result_final_num=new double[result_tmp_num.size()];\r\n" +
-				"		for(int i=ini;i<(hasta_x<=result_tmp_num.size()?hasta_x : result_tmp_num.size());i++) {\r\n" +
-				"			result_final_num[i]=result_tmp_num.get(i);\r\n" +
-				"		}\r\n" +
-				"		return result_final_num;\r\n" +
-				"	}\n";
-
-
-		s+="\n}";//cierre de la clase
 	}
 
 	public Generardor() {
@@ -501,9 +513,9 @@ public class Generardor {
 			LinkedList<String> vars=new LinkedList<String>();
 			for(int i=0;i<num_anidacion;i++) {
 				var="i"+contVar;
-				 vars.add(var);
+				vars.add(var);
 				contVar++;
-				 declare_var="int "+var;
+				declare_var="int "+var;
 
 
 				String op=(Math.random()>0.5 ? "<" :">");
