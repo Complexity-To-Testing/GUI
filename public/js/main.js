@@ -6,8 +6,11 @@ var listaCompeticiones = [];
 var idCampeonatoSeleccionado = -1;
 
 var SERVER = '/'; // MIKE
-
 $(document).ready(function() {
+(function (d, io, $){
+	'use strict'
+  var io = io()
+
   $('nav-home').click();
 
   $('nav li').on('click', function() {
@@ -17,13 +20,11 @@ $(document).ready(function() {
     switch($(this).attr('id')) {
       // BOTÓN: ESTADÍSTICAS
       case 'nav-listado-proyectos':
+            console.log("emitiendo");
             // Desaparece suavamente
             $('.container > div').fadeOut(400);
 
-            // Y se rellena la nueva lista
-            $.when(getProyectos()).done(function(proyectos) {
-              rellenarProyectos(proyectos);
-            });
+            io.emit('listado proyectos');
 
             // Aparece suavemente
             setTimeout(function () {
@@ -79,8 +80,11 @@ $(document).ready(function() {
   $('#btn-nuevo-programa').on('click', function() {
     // generadorDeProgramasAutomatico2();
     var nombreProyecto = $('#inputNombreProyectoGenerado').val();
-
+    var listaMutantes = getChecksMutantes1();
+    console.log(listaMutantes);
     var datosPrograma = {
+      nombreProyecto:listaMutantes,
+      nombreProyecto:$('#inputNombreProyectoGenerado').val(),
       numeroAnidacionesIf: $('#inputNumeroAnidacionesIf').val(),
       numeroAnidacionesWhile: $('#inputNumeroAnidacionesWhile').val(),
       numeroIteracionesWhile: $('#inputNumeroIteracionesWhile').val(),
@@ -105,10 +109,11 @@ $(document).ready(function() {
       // Activamos el loader
       $('#preloader').removeClass('hidden');
 
-      $.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
+      io.emit('generarPrograma', datosPrograma);
+      //$.when(generarPrograma(datosPrograma, nombreProyecto)).done(function() {
         // Desactivamos el loader
-        $('#preloader').addClass('hidden');
-      });
+
+      //});
     } else {
       alert("Debes completar los campos en rojo.")
     }
@@ -117,33 +122,14 @@ $(document).ready(function() {
   // GESION DE PROYECTOS
   $('#btn-ejecutar-proyecto').on('click', function() {
       var nombreProyecto = $('#inputNombreProyecto').val();
-      var listaMutantes = $('#inputListaMutantesReal').val();
-
+      var listaMutantes = getChecksMutantes();
+      console.log(listaMutantes);
       $('.container > div').addClass('hidden');
 
       if (nombreProyecto !== "" && listaMutantes !=="") {
         // Activamos el loader
         $('#preloader').removeClass('hidden');
-
-        var resultado = $.ajax({
-          url: SERVER + "ejecutar/"+nombreProyecto+"/"+listaMutantes,
-          type: "GET",
-          dataType: 'json',
-          data: {},
-          success: function(data) {
-            if (data.exito) {
-              verEstadisticas(data.idProyecto, nombreProyecto);
-            } else {
-              alert("ERROR"+ data.msg);
-            }
-          },
-          error: function (xhr, status) { alert('Oooops, hubo un error...'); },
-          complete: function(xhr, status) {
-            $('#preloader').addClass('hidden');
-              $("#resultClasses").text("");
-              $("#resultTests").text("");
-          }
-        });
+        io.emit('ejecutarProyecto', {nombreProyecto:nombreProyecto,listaMutantes:listaMutantes});
       } else {
         alert("Los campos con * son obligatorios.")
       }
@@ -161,13 +147,13 @@ $(document).ready(function() {
         // Get form
         var form = $('#fileUploadFormClasses')[0];
 
-		    // Create an FormData object
+        // Create an FormData object
         var data = new FormData(form);
 
-	      // If you want to add an extra field for the FormData
+        // If you want to add an extra field for the FormData
         data.append("CustomField", "This is some extra data, testing");
 
-		    // disabled the submit button
+        // disabled the submit button
         $("#btnSubmitClasses").prop("disabled", true);
 
         $.ajax({
@@ -207,13 +193,13 @@ $(document).ready(function() {
           // Get form
           var form = $('#fileUploadFormTests')[0];
 
-  		// Create an FormData object
+      // Create an FormData object
           var data = new FormData(form);
 
-  		// If you want to add an extra field for the FormData
+      // If you want to add an extra field for the FormData
           data.append("CustomField", "This is some extra data, testing");
 
-  		// disabled the submit button
+      // disabled the submit button
           $("#btnSubmitTests").prop("disabled", true);
 
           $.ajax({
@@ -243,7 +229,68 @@ $(document).ready(function() {
           });
 
       });
-});
+
+
+	$('#chat-form').on('submit', function (e){
+		e.preventDefault()
+		io.emit( 'new message', $('#message-text').val() )
+		$('#message-text').val(null)
+		return false
+	})
+
+	io.on('new user', function (newUser){
+		alert(newUser.message)
+	})
+
+	io.on('mostrar proyectos', function (proyectos){
+		rellenarProyectos(proyectos);
+	})
+  io.on('mostrar estadisticas', function (estadisticas){
+    mostrarEstadisticas(estadisticas);
+    $('#preloader').addClass('hidden');
+  })
+  io.on('test guardado', function (idProyecto){
+    io.emit('obtenerEstadisticasPorIdProyecto', idProyecto);
+  })
+	io.on('mostrar error', function (msg){
+    $.notify({
+    	title: "<strong>Error</strong>",
+    	message: msg
+    },{
+    	// settings
+    	type: 'danger'
+    });
+	})
+	io.on('mostrar exito', function (msg){
+    $('#preloader').addClass('hidden');
+    $.notify({
+    	title: "<strong>Exito </strong>:",
+    	message: msg
+    },{
+    	// settings
+    	type: 'success'
+    });
+	})
+	io.on('mostrar finalizado', function (msg){
+    $('#preloader').addClass('hidden');
+    $.notify({
+    	title: "<strong>Finalizado </strong>:",
+    	message: msg
+    },{
+    	// settings
+    	type: 'success'
+    });
+	})
+	io.on('mostrar proceso', function (msg){
+    $.notify({
+    	title: "<strong>Info</strong>:",
+    	message: msg
+    },{
+    	// settings
+    	type: 'info'
+    });
+	})
+})(document, io, jQuery)
 
 function PathLoader(el) {
 	this.el = el;
@@ -356,12 +403,6 @@ function validarFormularioGeneradorPrograma(){
   }else{
     $('#numeroExpresionesSeguidas').removeClass('has-error');
   }
-  if ($('#inputListaMutantes').val() == "") {
-    $('#listaMutantes').addClass('has-error');
-    valido = false;
-  }else{
-    $('#listaMutantes').removeClass('has-error');
-  }
   if ($('#inputNumeroFuncion').val() == "") {
     $('#numeroFuncion').addClass('has-error');
     valido = false;
@@ -401,3 +442,4 @@ function validarFormularioGeneradorPrograma(){
   }
   return valido;
 }
+});

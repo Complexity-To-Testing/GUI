@@ -32,3 +32,90 @@ function getAtrAleatorio(){
       return 0;
     }
 }
+
+function getChecksMutantes(){
+    var listaMutantes = "";
+    if (document.getElementById("INCREMENTS").checked == true){
+      listaMutantes += "0 "
+    }
+    if (document.getElementById("MATH").checked == true){
+      listaMutantes += "1 "
+    }
+    if (document.getElementById("CONDITIONALS_BOUNDARY").checked == true){
+      listaMutantes += "2 "
+    }
+    if (document.getElementById("NEGATE_CONDITIONALS").checked == true){
+      listaMutantes += "3 "
+    }
+    if (document.getElementById("INVERT_NEGS").checked == true){
+      listaMutantes += "4 "
+    }
+    if (document.getElementById("RETURN_VALS").checked == true){
+      listaMutantes += "5 "
+    }
+    if (document.getElementById("VOID_METHOD_CALLS").checked == true){
+      listaMutantes += "6 "
+    }
+    if (document.getElementById("CONSTRUCTOR_CALLS").checked == true){
+      listaMutantes += "7 "
+    }
+    if (document.getElementById("INLINE_CONSTS").checked == true){
+      listaMutantes += "8 "
+    }
+    if (document.getElementById("NON_VOID_METHOD_CALLS").checked == true){
+      listaMutantes += "9 "
+    }
+    if (document.getElementById("REMOVE_CONDITIONALS").checked == true){
+      listaMutantes += "10 "
+    }
+    if (document.getElementById("EXPERIMENTAL_MEMBER_VARIABLE").checked == true){
+      listaMutantes += "11 "
+    }
+    if (document.getElementById("EXPERIMENTAL_SWITCH").checked == true){
+      listaMutantes += "12 "
+    }
+    return listaMutantes;
+}
+function getChecksMutantes1(){
+    var listaMutantes = "";
+    if (document.getElementById("INCREMENTS1").checked == true){
+      listaMutantes += "0 "
+    }
+    if (document.getElementById("MATH1").checked == true){
+      listaMutantes += "1 "
+    }
+    if (document.getElementById("CONDITIONALS_BOUNDARY1").checked == true){
+      listaMutantes += "2 "
+    }
+    if (document.getElementById("NEGATE_CONDITIONALS1").checked == true){
+      listaMutantes += "3 "
+    }
+    if (document.getElementById("INVERT_NEGS1").checked == true){
+      listaMutantes += "4 "
+    }
+    if (document.getElementById("RETURN_VALS1").checked == true){
+      listaMutantes += "5 "
+    }
+    if (document.getElementById("VOID_METHOD_CALLS1").checked == true){
+      listaMutantes += "6 "
+    }
+    if (document.getElementById("CONSTRUCTOR_CALLS1").checked == true){
+      listaMutantes += "7 "
+    }
+    if (document.getElementById("INLINE_CONSTS1").checked == true){
+      listaMutantes += "8 "
+    }
+    if (document.getElementById("NON_VOID_METHOD_CALLS1").checked == true){
+      listaMutantes += "9 "
+    }
+    if (document.getElementById("REMOVE_CONDITIONALS1").checked == true){
+      listaMutantes += "10 "
+    }
+    if (document.getElementById("EXPERIMENTAL_MEMBER_VARIABLE1").checked == true){
+      listaMutantes += "11 "
+    }
+    if (document.getElementById("EXPERIMENTAL_SWITCH1").checked == true){
+      listaMutantes += "12 "
+    }
+    return listaMutantes;
+}

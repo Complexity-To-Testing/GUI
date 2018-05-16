@@ -1,25 +1,16 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complexity of texting</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/master.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="./js/tools.js" charset="utf-8"></script>
-    <script src="./js/proyectos.js" charset="utf-8"></script>
-    <script src="./js/pruebas.js" charset="utf-8"></script>
-    <script src="./js/pruebasV6.js" charset="utf-8"></script>
-    <script src="./js/pruebasV8.js" charset="utf-8"></script>
-    <script src="./js/pruebasV10.js" charset="utf-8"></script>
-    <script src="./js/main.js" charset="utf-8"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  </head>
-  <body>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/master.css">
+</head>
+<body>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -28,6 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
+
           </button>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -41,7 +33,6 @@
         </div>
       </div>
     </nav>
-
     <div class="container">
       <div id="chartDR2" class="chart"></div>
       <div id="chart" class="chart"></div>
@@ -115,28 +106,108 @@
               <label for="inputNombreCompeticion">Nombre del proyecto <font color="red">*</font></label>
               <input type="text" id="inputNombreProyecto"/><br/><br/>
             </div>
-            <div>
-                <p><h6>  0 = INCREMENTS                     </h6></p>
-                <p><h6>  1 = MATH                          </h6></p>
-                <p><h6>  2 = CONDITIONALS_BOUNDARY         </h6></p>
-                <p><h6>  3 = NEGATE_CONDITIONALS           </h6></p>
-                <p><h6>  4 = INVERT_NEGS                   </h6></p>
-                <p><h6>  5 = RETURN_VALS                   </h6></p>
-                <p><h6>  6 = VOID_METHOD_CALLS             </h6></p>
-                <p><h6>  7 = CONSTRUCTOR_CALLS             </h6></p>
-                <p><h6>  8 = INLINE_CONSTS                 </h6></p>
-                <p><h6>  9 = NON_VOID_METHOD_CALLS         </h6></p>
-                <p><h6> 10 = REMOVE_CONDITIONALS            </h6></p>
-                <p><h6> 11 = EXPERIMENTAL_MEMBER_VARIABLE   </h6></p>
-                <p><h6> 12 = EXPERIMENTAL_SWITCH           </h6></p>
-            </div>
-            <div class=" form-group" id="listaMutantesReal">
-              <div class="col-25">
-                <label for="fname">Lista de mutantes (Ejemplo: 0 1 2) <font color="red">*</font></label>
-              </div>
-              <div class="col-75">
-                <input type="text" id="inputListaMutantesReal" name="listaMutantesReal">
-              </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Seleccione los tipos de mutaciones: </div>
+
+                    <!-- List group -->
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            INCREMENTS
+                            <div class="material-switch pull-right">
+                                <input id="INCREMENTS" name="someSwitchOption001" type="checkbox"/>
+                                <label for="INCREMENTS" class="label-default"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            MATH
+                            <div class="material-switch pull-right">
+                                <input id="MATH" name="someSwitchOption001" type="checkbox"/>
+                                <label for="MATH" class="label-primary"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            CONDITIONALS_BOUNDARY
+                            <div class="material-switch pull-right">
+                                <input id="CONDITIONALS_BOUNDARY" name="someSwitchOption001" type="checkbox"/>
+                                <label for="CONDITIONALS_BOUNDARY" class="label-success"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            NEGATE_CONDITIONALS
+                            <div class="material-switch pull-right">
+                                <input id="NEGATE_CONDITIONALS" name="someSwitchOption001" type="checkbox"/>
+                                <label for="NEGATE_CONDITIONALS" class="label-info"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            INVERT_NEGS
+                            <div class="material-switch pull-right">
+                                <input id="INVERT_NEGS" name="someSwitchOption001" type="checkbox"/>
+                                <label for="INVERT_NEGS" class="label-warning"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            RETURN_VALS
+                            <div class="material-switch pull-right">
+                                <input id="RETURN_VALS" name="someSwitchOption001" type="checkbox"/>
+                                <label for="RETURN_VALS" class="label-danger"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            VOID_METHOD_CALLS
+                            <div class="material-switch pull-right">
+                                <input id="VOID_METHOD_CALLS" name="someSwitchOption001" type="checkbox"/>
+                                <label for="VOID_METHOD_CALLS" class="label-danger"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            CONSTRUCTOR_CALLS
+                            <div class="material-switch pull-right">
+                                <input id="CONSTRUCTOR_CALLS" name="someSwitchOption001" type="checkbox"/>
+                                <label for="CONSTRUCTOR_CALLS" class="label-danger"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            INLINE_CONSTS
+                            <div class="material-switch pull-right">
+                                <input id="INLINE_CONSTS" name="someSwitchOption001" type="checkbox"/>
+                                <label for="INLINE_CONSTS" class="label-danger"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            NON_VOID_METHOD_CALLS
+                            <div class="material-switch pull-right">
+                                <input id="NON_VOID_METHOD_CALLS" name="someSwitchOption001" type="checkbox"/>
+                                <label for="NON_VOID_METHOD_CALLS" class="label-danger"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            REMOVE_CONDITIONALS
+                            <div class="material-switch pull-right">
+                                <input id="REMOVE_CONDITIONALS" name="someSwitchOption001" type="checkbox"/>
+                                <label for="REMOVE_CONDITIONALS" class="label-danger"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            EXPERIMENTAL_MEMBER_VARIABLE
+                            <div class="material-switch pull-right">
+                                <input id="EXPERIMENTAL_MEMBER_VARIABLE" name="someSwitchOption001" type="checkbox"/>
+                                <label for="EXPERIMENTAL_MEMBER_VARIABLE" class="label-danger"></label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            EXPERIMENTAL_SWITCH
+                            <div class="material-switch pull-right">
+                                <input id="EXPERIMENTAL_SWITCH" name="someSwitchOption001" type="checkbox"/>
+                                <label for="EXPERIMENTAL_SWITCH" class="label-danger"></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -191,14 +262,109 @@
         <p>Para ser capaces de generar un programa necesitamos establecer algunos parámetros de los cuales dependerá la estructura del programa generado.</p>
         <br/>
         <form>
-          <div class="row form-group" id="listaMutantes">
-            <div class="col-25">
-              <label for="fname">Lista de mutantes (Ejemplo: 0 1 2) <font color="red">*</font></label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Seleccione los tipos de mutaciones: </div>
+
+                        <!-- List group -->
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                INCREMENTS
+                                <div class="material-switch pull-right">
+                                    <input id="INCREMENTS1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="INCREMENTS1" class="label-default"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                MATH
+                                <div class="material-switch pull-right">
+                                    <input id="MATH1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="MATH1" class="label-primary"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                CONDITIONALS_BOUNDARY
+                                <div class="material-switch pull-right">
+                                    <input id="CONDITIONALS_BOUNDARY1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="CONDITIONALS_BOUNDARY1" class="label-success"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                NEGATE_CONDITIONALS
+                                <div class="material-switch pull-right">
+                                    <input id="NEGATE_CONDITIONALS1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="NEGATE_CONDITIONALS1" class="label-info"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                INVERT_NEGS
+                                <div class="material-switch pull-right">
+                                    <input id="INVERT_NEGS1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="INVERT_NEGS1" class="label-warning"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                RETURN_VALS
+                                <div class="material-switch pull-right">
+                                    <input id="RETURN_VALS1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="RETURN_VALS1" class="label-danger"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                VOID_METHOD_CALLS
+                                <div class="material-switch pull-right">
+                                    <input id="VOID_METHOD_CALLS1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="VOID_METHOD_CALLS1" class="label-danger"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                CONSTRUCTOR_CALLS
+                                <div class="material-switch pull-right">
+                                    <input id="CONSTRUCTOR_CALLS1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="CONSTRUCTOR_CALLS1" class="label-danger"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                INLINE_CONSTS
+                                <div class="material-switch pull-right">
+                                    <input id="INLINE_CONSTS1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="INLINE_CONSTS1" class="label-danger"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                NON_VOID_METHOD_CALLS
+                                <div class="material-switch pull-right">
+                                    <input id="NON_VOID_METHOD_CALLS1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="NON_VOID_METHOD_CALLS1" class="label-danger"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                REMOVE_CONDITIONALS
+                                <div class="material-switch pull-right">
+                                    <input id="REMOVE_CONDITIONALS1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="REMOVE_CONDITIONALS1" class="label-danger"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                EXPERIMENTAL_MEMBER_VARIABLE
+                                <div class="material-switch pull-right">
+                                    <input id="EXPERIMENTAL_MEMBER_VARIABLE1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="EXPERIMENTAL_MEMBER_VARIABLE1" class="label-danger"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                EXPERIMENTAL_SWITCH
+                                <div class="material-switch pull-right">
+                                    <input id="EXPERIMENTAL_SWITCH1" name="someSwitchOption001" type="checkbox"/>
+                                    <label for="EXPERIMENTAL_SWITCH1" class="label-danger"></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="col-75">
-              <input type="text" id="inputListaMutantes" name="listaMutantes" value="0 1 2">
-            </div>
-          </div>
           <div class="row form-group" id="numeroAnidacionesIf">
             <div class="col-25">
               <label for="fname">Número de anidaciones <i>if</i> <font color="red">*</font></label>
@@ -371,5 +537,15 @@
         </div>
       </div>
     </div>
+
+    <script src="./js/tools.js" charset="utf-8"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/proyectos.js" charset="utf-8"></script>
+    <script src="./js/pruebas.js" charset="utf-8"></script>
+    <script src="./js/pruebasV6.js" charset="utf-8"></script>
+    <script src="./js/pruebasV8.js" charset="utf-8"></script>
+    <script src="./js/pruebasV10.js" charset="utf-8"></script>
+    <script src="./js/main.js" charset="utf-8"></script>
+    <script src="./js/bootstrap-notify.min.js" charset="utf-8"></script>
   </body>
 </html>

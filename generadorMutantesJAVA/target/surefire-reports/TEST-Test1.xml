@@ -5,7 +5,7 @@
     <property name="java.vm.version" value="9.0.1+11"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib"/>
     <property name="gopherProxySet" value="false"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/cristhian/Downloads/curso-nodejs-master/10SocketIO/01Chat/generadorMutantesJAVA"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA"/>
+    <property name="user.dir" value="/Users/cristhian/Downloads/curso-nodejs-master/10SocketIO/01Chat/generadorMutantesJAVA"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="9.0.1+11"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>

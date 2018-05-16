@@ -1,0 +1,134 @@
+.hidden {
+  display: none;
+}
+
+.tituloModal {
+  font-weight: bold;
+}
+
+.tr-curso:hover {
+  cursor: pointer;
+}
+
+.selected {
+    background-color: green;
+}
+.bar {
+    height: 18px;
+    background: green;
+}
+
+/* Preloader */
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  /* change if the mask should have another color then white */
+  z-index: 99;
+  /* makes sure it stays on top */
+}
+
+#status {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  /* centers the loading animation horizontally one the screen */
+  top: 50%;
+  /* centers the loading animation vertically one the screen */
+  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
+  /* path to your loading animation */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: -100px 0 0 -100px;
+  /* is width and height divided by two */
+}
+
+#home-principal{
+  text-align: center;
+}
+
+/* Redimensiona la imagen de Home */
+.imagen-bienvenida{
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+
+
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group{
+  border-radius: 4px;
+}
+.btn-success:focus, .btn-success:active, .btn-success:active:focus{
+  background-color: #148ab7;
+  border-color: #148ab7;
+}
+
+/* chart*/
+.chart2 {
+  width: 1200px;
+  height: 700px;
+}
+
+/* Formulario para generar programas */
+* {
+    box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    background-color: #2d9ac3;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #148ab7;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
