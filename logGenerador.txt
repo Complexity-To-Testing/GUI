@@ -1,0 +1,82 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Building tfgArtefactID 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ tfgArtefactID ---
+1.0
+2.0
+3.0
+4.0
+5.0
+1
+2
+3
+4
+5
+<===============
+num_ifs
+1
+num_while
+1
+size_while
+1
+num_for
+1
+size_for
+1
+size_cond
+1
+size_expLogics
+1
+size_expArit
+1
+test_inputs
+1.0
+2.0
+3.0
+4.0
+5.0
+ruta
+./ficherosCreados
+nom_test
+Test
+nom_program
+Programa
+num_exp_seguida
+1
+num_funcion
+3
+decision_inputs
+1
+2
+3
+4
+5
+size_tests
+2
+ifsAniCuerpoBucle
+1
+aleatorio
+0
+ini
+1
+fin
+2
+size_expArit: 1 ,size_expLogics: 1,num_exp_seguida: 1 ,size_cond: 1 ,num_while: 1 ,num_for: 1 ,num_ifs: 1,ifsAniCuerpoBucle): 1 
+
+i: 0
+size_expArit: 1 ,size_expLogics: 1,num_exp_seguida: 1 ,size_cond: 1 ,num_while: 1 ,num_for: 1 ,num_ifs: 1,ifsAniCuerpoBucle): 1 
+
+i: 0
+size_expArit: 1 ,size_expLogics: 1,num_exp_seguida: 1 ,size_cond: 1 ,num_while: 1 ,num_for: 1 ,num_ifs: 1,ifsAniCuerpoBucle): 1 
+
+i: 0
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 0.837 s
+[INFO] Finished at: 2018-05-17T00:26:19+02:00
+[INFO] Final Memory: 9M/32M
+[INFO] ------------------------------------------------------------------------

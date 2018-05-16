@@ -213,7 +213,19 @@ io.on('connection', (socket) => {
 																					console.log(arrayResult.length);
 																					if (arrayResult.length < 4) {
 																							io.emit('mostrar error', "Error no se han generado mutantes para el test "+testFilePom+"con el programa PIT ");
-																							nextTest();
+																							//
+																							var comando = "pwd; cat logMutantes.txt | grep java"
+																							ejecutarComandoLinux( comando, function(err, resulComando) {
+																								 if (err) {
+																										 io.emit('mostrar error', "Error al ejecutar " + comando);
+																								 } else {
+																									 io.emit('mostrar contenido error', resulComando);
+
+																								 }
+																							 		nextTest();
+																							});
+
+
 																					} else {
 																						daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
 		                                          if (err) {
@@ -221,11 +233,11 @@ io.on('connection', (socket) => {
 		                                          } else {
 
 		                                            if (!resultInsertTest.exito) {
-		                                            	io.emit('mostrar error', "Error al insertar el Test en la BD");
+		                                            		io.emit('mostrar error', "Error al insertar el Test en la BD");
 		                                            } else {
-		                                                nextTest();
-																										io.emit('test guardado', datosTest.idProyecto);
+		                                              	io.emit('test guardado', datosTest.idProyecto);
 		                                            }
+																								nextTest();
 		                                          }
 		                                        });
 																					}
@@ -259,7 +271,7 @@ io.on('connection', (socket) => {
 
 		var nombreProyecto = datosProyecto.nombreProyecto;
 		var listaMutantes = datosProyecto.listaMutantes;
-
+				console.log(datosProyecto);
 		if (nombreProyecto === "") {
 	     io.emit('mostrar error', "Nombre del proyecto vacio");
 	  }else {
@@ -317,8 +329,19 @@ io.on('connection', (socket) => {
 
 																				console.log(arrayResult.length);
 																				if (arrayResult.length < 4) {
-																						io.emit('mostrar error', "Error no se han generado mutantes para el test "+testFilePom+"con el programa PIT ");
-																						nextTest();
+																						io.emit('mostrar error', "Error no se han generado mutantes para el test "+testFilePom+" con el programa PIT ");
+																						io.emit('mostrar proceso', "Buscando el error PIT...");
+
+																						var comando = "cat logMutantes.txt | grep java"
+																						ejecutarComandoLinux( comando, function(err, resultComando) {
+																							 if (err) {
+																								 io.emit('mostrar error', "Error al ejecutar " + comando);
+																							 } else {
+																								 io.emit('mostrar contenido error', resultComando);
+
+																							 }
+																								nextTest();
+																						});
 																				} else {
 																					daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
 	                                          if (err) {

@@ -228,13 +228,10 @@ function drawChart() {
       title: 'Inversa del DR (1/(1-DR))'
     },
     vAxis: {
-      title: 'Coste (Tiempo)'
+      title: 'Coste (numero de Tests)'
     },
-    colors: ['#AB0D06', '#007329']/*,
-    trendlines: {
-      0: {type: 'exponential', color: '#333', opacity: 1},
-      1: {type: 'linear', color: '#111', opacity: .3}
-    }*/
+    colors: ['#AB0D06', '#007329'],
+    pointSize: 15
   };
 
   var chart = new google.visualization.LineChart(document.getElementById('chart'));

@@ -29,7 +29,7 @@ echo " $1 $2 $3 $4 $5 $6 $7 $8 $9  ${10}  ${11} ${12} ${13} ${14} ${15} ${16} ${
 echo "EMPIEZA EJECUCION"
 # mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13} ${14}"; #V7
 # mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13}"; #V8
- mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17}"; #V10
+ mvn exec:java -Dexec.mainClass="tfgGroupID.tfgArtefactID.Main" -Dexec.args=" $1 $2 $3 $4 $5 $6 $7 $8 $9 ./$NAME_DIR_FICHEROS_CREADOS Test Programa ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17}" > ../logGenerador.txt; #V10
 
 cd -
 
