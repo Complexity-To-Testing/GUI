@@ -83,7 +83,7 @@ $(document).ready(function() {
     var listaMutantes = getChecksMutantes1();
     console.log(listaMutantes);
     var datosPrograma = {
-      nombreProyecto:listaMutantes,
+      listaMutantes:listaMutantes,
       nombreProyecto:$('#inputNombreProyectoGenerado').val(),
       numeroAnidacionesIf: $('#inputNumeroAnidacionesIf').val(),
       numeroAnidacionesWhile: $('#inputNumeroAnidacionesWhile').val(),
@@ -105,7 +105,7 @@ $(document).ready(function() {
     }
 
     // Si se ha rellenado todos los campos.
-    if (validarFormularioGeneradorPrograma()) {
+    if (validarFormularioGeneradorPrograma() && listaMutantes !== "") {
       // Activamos el loader
       $('#preloader').removeClass('hidden');
 
@@ -115,7 +115,13 @@ $(document).ready(function() {
 
       //});
     } else {
-      alert("Debes completar los campos en rojo.")
+      $.notify({
+        title: "<strong>Info</strong>:",
+        message: " Debes completar los campos en rojo."
+      },{
+        // settings
+        type: 'info'
+      });
     }
   });
 
@@ -123,15 +129,19 @@ $(document).ready(function() {
   $('#btn-ejecutar-proyecto').on('click', function() {
       var nombreProyecto = $('#inputNombreProyecto').val();
       var listaMutantes = getChecksMutantes();
-      console.log(listaMutantes);
-      $('.container > div').addClass('hidden');
 
       if (nombreProyecto !== "" && listaMutantes !=="") {
-        // Activamos el loader
+        $('.container > div').addClass('hidden');
         $('#preloader').removeClass('hidden');
         io.emit('ejecutarProyecto', {nombreProyecto:nombreProyecto,listaMutantes:listaMutantes});
       } else {
-        alert("Los campos con * son obligatorios.")
+        $.notify({
+          title: "<strong>Info</strong>:",
+          message: " Debes completar los campos en rojo."
+        },{
+          // settings
+          type: 'info'
+        });
       }
   });
 

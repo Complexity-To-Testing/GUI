@@ -54,7 +54,7 @@
                 <version>1.1.5</version>
                 <configuration>
                   <mutators>
-<mutator>INCREMENTS</mutator>
+<mutator>MATH</mutator>
 </mutators>
    <failWhenNoMutations>false</failWhenNoMutations>
    <outputFormats>
