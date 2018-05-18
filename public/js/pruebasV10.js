@@ -28,9 +28,9 @@
   "EXPERIMENTAL_MEMBER_VARIABLE"  # 11
   "EXPERIMENTAL_SWITCH")          # 12
   */
-  var prefijo = "PFINAL3_"
+  var prefijo = "TFG_0123_"
   var listaMutantes = "0 1 2 3"
-  var tamPrueba = 1;
+  var tamPrueba = 5;
   var contPrueba = 0;
   var parametroCont =   [ 1,// AndIf
                           1,// AnidWhile_
@@ -46,11 +46,11 @@
                           1,// IfsAniCuerpoBucle
                           1,// Aleatorio
                           1,// Ani
-                          4,// Fin
+                          5,// Fin
                         ];
   var parametroIncremento = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,2];
   var parametroTam =        [5,5,5,5,5,5,5,5,5,5,5,1,1,1,2];
-  var listaPruebas = [[0]]; // Aqui meter los casos
+  var listaPruebas = [[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[14]]; // Aqui meter los casos
   var contListaPruebas = 0
   var pruebaAEjecutar = listaPruebas[contListaPruebas];
   var listaNombrePrueba = [ "AndIf",    // 0
@@ -97,6 +97,7 @@
 
 
     var datosPrograma = {
+      listaMutantes: "0 1 2 3",
       numeroAnidacionesIf: parametroCont[0],
       numeroAnidacionesWhile: parametroCont[1],
       numeroIteracionesWhile: parametroCont[2],
@@ -106,9 +107,9 @@
       numeroExpresionesLogicas: parametroCont[6],
       numeroExpresionesAritmeticas: parametroCont[7],
       numeroExpresionesSeguidas: parametroCont[8],
-      listaInputsComprobacion: "1,2,3,4,",// getListaInputs(-500,500, 1001),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
+      listaInputsComprobacion:  getListaInputs(-500,500, 1001),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
       numeroFuncion: parametroCont[9],
-      decicionInputs: "1,2,3,",//getListaDecision(parametroCont[9]), //  Para (3) -> Devuelve 0,0,0,
+      decicionInputs: getListaDecision(parametroCont[9]), //  Para (3) -> Devuelve 0,0,0,
       size_tests: parametroCont[10],
       ifsAniCuerpoBucle: parametroCont[11],
       aleatorio: parametroCont[12],

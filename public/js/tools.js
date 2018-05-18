@@ -119,3 +119,51 @@ function getChecksMutantes1(){
     }
     return listaMutantes;
 }
+function getColorColumnAtr(nombreAtr) {
+    if (nombreAtr.includes("AnidIf"))
+        return  'color: #FF5733';
+
+    if (nombreAtr.includes("AnidWhile_"))
+        return  'color: #FFA233';
+
+    if (nombreAtr.includes("IterWhile_"))
+        return  'color: #FFD433';
+
+    if (nombreAtr.includes("AnidFor_"))
+        return  'color: #87283E';
+    if (nombreAtr.includes("IterFor_"))
+        return  'color: #FA114A';
+
+    if (nombreAtr.includes("CondLog_"))
+        return  'color: #BBFF33';
+
+    if (nombreAtr.includes("ExprLog_"))
+        return  'color: #68FF33';
+
+    if (nombreAtr.includes("ExprArit_"))
+        return  'color: #42CD6A';
+
+    if (nombreAtr.includes("ExprsSeg_"))
+        return  'color: #42CDA9';
+
+    if (nombreAtr.includes("NumFun_"))
+        return  'color: #9E11FA';
+
+    if (nombreAtr.includes("SizeTests"))
+        return  'color: #42AFCD';
+
+    if (nombreAtr.includes("IfsAniCuerpoBucle"))
+        return  'color: #428ACD';
+
+    if (nombreAtr.includes("Aleatorio"))
+        return  'color: #4260CD';
+
+    if (nombreAtr.includes("Fin"))
+        return  'color: #8342CD';
+    if (nombreAtr.includes("Ini"))
+        return  'color: #1299F7';
+
+
+    return 'color: #000000';
+
+  }

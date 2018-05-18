@@ -175,6 +175,7 @@ function drawChartOLD() {
 }
 
 function drawChart() {
+
   // Create our data table out of JSON data loaded from server.
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'mutante');
@@ -199,8 +200,9 @@ function drawChart() {
     var dr2=(1/(1-dr));
     //var nameTest=jsonData.nombreTest;
     //data.addRows([ [name, value, mutante, time]]);
-    // data.addRows([ [name, value,mutante]]);
-    data.addRows([ [name,killed]]);
+    // data.addRows([ [name, value,mutante]])
+
+    data.addRows([ [name,killed, { role: 'annotation' }]]);
     dataMutant.addRows([ [name,mutante]]);
     dataDR.addRows([ [name,dr]]);
     dataDR2.addRows([ [dr2,i+1]]);
@@ -330,35 +332,34 @@ function drawChartPrueba() {
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'mutante');
   data.addColumn('number', 'killed');
+  data.addColumn({type: 'string', role: 'style'});
   var dataMutant = new google.visualization.DataTable();
   dataMutant.addColumn('string', 'mutante');
   dataMutant.addColumn('number', 'mutant');
+  dataMutant.addColumn({type: 'string', role: 'style'});
   var dataDR = new google.visualization.DataTable();
   dataDR.addColumn('string', 'mutante');
   dataDR.addColumn('number', 'DR');
+  dataDR.addColumn({type: 'string', role: 'style'});
   var dataDR2 = new google.visualization.DataTable();
   dataDR2.addColumn('string', 'mutante');
-  dataDR2.addColumn('number', 'Time');
+  dataDR2.addColumn('number', 'alfa');
+  dataDR2.addColumn({type: 'string', role: 'style'});
 
   $.each(jsonEstaditicasPrueba, function(i,jsonData)
   {
-    var time=jsonData.time;
-    var mutante=jsonData.numMutants;
-    var killed=jsonData.killed;
     var name=jsonData.name;
-    var dr=killed/mutante;
-    var dr2=(1/(1-dr));
-    //var nameTest=jsonData.nombreTest;
-    //data.addRows([ [name, value, mutante, time]]);
-    // data.addRows([ [name, value,mutante]]);
-    data.addRows([ [name,killed]]);
-    dataMutant.addRows([ [name,mutante]]);
-    dataDR.addRows([ [name,dr]]);
-    dataDR2.addRows([ [name,time]]);
+
+    console.log(getColorColumnAtr(name));
+    data.addRow([ name,0,getColorColumnAtr(name)]);
+    dataMutant.addRow([name,0,getColorColumnAtr(name)]);
+    dataDR.addRow([ name,0,getColorColumnAtr(name)]);
+    dataDR2.addRow([ name,0,getColorColumnAtr(name)]);
   });
 
+
   //dataDR.sort([{column: 1}]);
-  dataDR2.sort([{column: 0}]);
+  //dataDR2.sort([{column: 0}]);
   var options = {
     title: 'Estadisticas killed ',
     pointSize: 16,
@@ -375,33 +376,41 @@ function drawChartPrueba() {
     is3D: true
   };
   var optionsDR2 = {
-    hAxis: {
-      title: 'Inversa del DR (1/(1-DR))'
-    },
-    vAxis: {
-      title: 'Coste (Tiempo)'
-    },
-    colors: ['#AB0D06', '#007329']/*,
+      title: 'Estadisticas alfa = 1/(1-DR)'/*,
+    colors: ['#AB0D06', '#007329'],
     trendlines: {
       0: {type: 'exponential', color: '#333', opacity: 1},
       1: {type: 'linear', color: '#111', opacity: .3}
     }*/
   };
 
-  var chart = new google.charts.Bar(document.getElementById('chart'));
-  var chartMutant = new google.charts.Bar(document.getElementById('chartMutant'));
-  var chartDR = new google.charts.Bar(document.getElementById('chartDR'));
-  var chartDR2 = new google.charts.Bar(document.getElementById('chartDR2'));
-
-  google.visualization.events.addListener(chart, 'ready', function() {  });
-  google.visualization.events.addListener(chartMutant, 'ready', function() {  });
-  google.visualization.events.addListener(chartDR, 'ready', function() {  });
-  google.visualization.events.addListener(chartDR2, 'ready', function() {  });
-
+  var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+  var chartMutant = new google.visualization.ColumnChart(document.getElementById('chartMutant'));
+  var chartDR = new google.visualization.ColumnChart(document.getElementById('chartDR'));
+  var chartDR2 = new google.visualization.ColumnChart(document.getElementById('chartDR2'));
   chart.draw(data, options);
   chartMutant.draw(dataMutant, optionsMutant);
   chartDR.draw(dataDR, optionsDR);
   chartDR2.draw(dataDR2, optionsDR2);
+  $.each(jsonEstaditicasPrueba, function(i,jsonData)
+  {
+    var time=jsonData.time;
+    var mutante=jsonData.numMutants;
+    var killed=jsonData.killed;
+    var name=jsonData.name;
+    var dr=killed/mutante;
+    var dr2=(1/(1-dr));
+
+    data.setValue(i,1,killed);
+    dataMutant.setValue(i,1,mutante);
+    dataDR.setValue(i,1,dr);
+    dataDR2.setValue(i,1,dr2);
+  });
+  chart.draw(data, options);
+  chartMutant.draw(dataMutant, optionsMutant);
+  chartDR.draw(dataDR, optionsDR);
+  chartDR2.draw(dataDR2, optionsDR2);
+
   /*
   chart=new google.visualization.ColumnChart(document.getElementById('chart'));
   chart=new google.visualization.PieChart(document.getElementById('chart'));
