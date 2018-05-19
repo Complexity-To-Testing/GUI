@@ -1,6 +1,7 @@
 var idProyectoSeleccionado;
 var idTestSeleccionado;
 var jsonEstaditicas;
+var jsonEstaditicas2
 var jsonEstaditicasPrueba;
 var jsonMutantes;
 var currentNombreProyecto;
@@ -64,6 +65,13 @@ function verTestsProyecto(idProyecto, nombreProyecto) {
     rellenarTests(tests);
   });
 }
+function verEstadisticaComparacionProyecto(idProyecto, idProyecto2) {
+  $.when(getTestProyecto(idProyecto)).done(function(tests) {
+    $.when(getTestProyecto(idProyecto2)).done(function(tests2) {
+      mostrarEstadisticasComparacion(tests,tests2);
+    });
+  });
+}
 
 function verMutantesKilledProyecto(idProyecto, nombreProyecto) {
   //listaEstadisticas = [];
@@ -110,8 +118,21 @@ function verEstadisticas(idProyecto, nombreProyecto) {
 }
 function mostrarEstadisticas(estadisticas) {
     jsonEstaditicas = estadisticas;
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['corechart','line']});
     google.charts.setOnLoadCallback(drawChart);
+
+    $('.container > div').addClass('hidden');
+    $('#chart').removeClass('hidden');
+    $('#chartMutant').removeClass('hidden');
+    $('#chartDR').removeClass('hidden');
+    $('#chartDR2').removeClass('hidden');
+//  });
+}
+function mostrarEstadisticasComparacion(estadisticas, estadisticas2) {
+    jsonEstaditicas = estadisticas;
+    jsonEstaditicas2 = estadisticas2;
+    google.charts.load('current', {'packages':['corechart','line']});
+    google.charts.setOnLoadCallback(drawChartComparacion);
 
     $('.container > div').addClass('hidden');
     $('#chart').removeClass('hidden');
@@ -202,7 +223,7 @@ function drawChart() {
     //data.addRows([ [name, value, mutante, time]]);
     // data.addRows([ [name, value,mutante]])
 
-    data.addRows([ [name,killed, { role: 'annotation' }]]);
+    data.addRows([ [name,killed]]);
     dataMutant.addRows([ [name,mutante]]);
     dataDR.addRows([ [name,dr]]);
     dataDR2.addRows([ [dr2,i+1]]);
@@ -211,7 +232,7 @@ function drawChart() {
   //dataDR.sort([{column: 1}]);
   dataDR2.sort([{column: 0}]);
   var options = {
-    title: 'Estadisticas killed ',
+    title: 'Estadisticas killed,killed+3 ',
     pointSize: 16,
     is3D: true
   };
@@ -419,6 +440,99 @@ function drawChartPrueba() {
   */
 }
 
+function drawChartComparacion() {
+
+  // Create our data table out of JSON data loaded from server.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'mutante');
+  data.addColumn('number', 'killed proyecto 1');
+  data.addColumn('number', 'killed Proyecto 2');
+  var dataMutant = new google.visualization.DataTable();
+  dataMutant.addColumn('string', 'mutante');
+  dataMutant.addColumn('number', 'mutants proyecto 1');
+  dataMutant.addColumn('number', 'mutants proyecto 2');
+  var dataDR = new google.visualization.DataTable();
+  dataDR.addColumn('string', 'mutante');
+  dataDR.addColumn('number', 'DR proyecto 1');
+  dataDR.addColumn('number', 'DR proyecto 2');
+  var dataDR2 = new google.visualization.DataTable();
+  dataDR2.addColumn('number', 'Tests proyecto');
+  dataDR2.addColumn('number', 'DR_Invert proyecto 1');
+  dataDR2.addColumn('number', 'DR_Invert proyecto 2');
+
+  $.each(jsonEstaditicas, function(i,jsonData)
+  {
+    var time=jsonData.time;
+    var mutante=jsonData.numMutants;
+    var killed=jsonData.killed;
+    var name="Test_"+(i+1);
+    var dr=killed/mutante;
+    var dr2=(1/(1-dr));
+    var mutante_2=jsonEstaditicas2[i].numMutants
+    var killed_2=jsonEstaditicas2[i].killed
+    var name_2=jsonEstaditicas2[i].nombreTest;
+    var dr_2=killed_2/mutante_2;
+    var dr2_2=(1/(1-dr_2));
+    //var nameTest=jsonData.nombreTest;
+    //data.addRows([ [name, value, mutante, time]]);
+    // data.addRows([ [name, value,mutante]])
+
+    data.addRows([ [name,killed, killed_2 ]]);
+    dataMutant.addRows([ [name,mutante,mutante_2]]);
+    dataDR.addRows([ [name,dr, dr_2]]);
+    dataDR2.addRows([ [i + 1,dr2,dr2_2]]);
+  });
+
+  //dataDR.sort([{column: 1}]);
+  dataDR2.sort([{column: 0}]);
+  var options = {
+    title: 'Estadisticas killed ',
+    pointSize: 16,
+    is3D: true
+  };
+  var optionsMutant = {
+    title: 'Estadisticas Num Mutants ' ,
+    pointSize: 16,
+    is3D: true
+  };
+  var optionsDR = {
+    title: 'Estadisticas Distingising Rate ',
+    pointSize: 16,
+    is3D: true
+  };
+  var optionsDR2 = {
+    hAxis: {
+      title: 'Coste (numero de Tests)'
+    },
+    vAxis: {
+      title: 'Inversa del DR (1/(1-DR))'
+    },
+    colors: ['#AB0D06', '#007329'],
+    pointSize: 15
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('chart'));
+  var chartMutant = new google.visualization.LineChart(document.getElementById('chartMutant'));
+  var chartDR = new google.visualization.LineChart(document.getElementById('chartDR'));
+  var chartDR2 = new google.visualization.LineChart(document.getElementById('chartDR2'));
+
+  google.visualization.events.addListener(chart, 'ready', function() {  });
+  google.visualization.events.addListener(chartMutant, 'ready', function() {  });
+  google.visualization.events.addListener(chartDR, 'ready', function() {  });
+  google.visualization.events.addListener(chartDR2, 'ready', function() {  });
+
+  chart.draw(data, options);
+  chartMutant.draw(dataMutant, optionsMutant);
+  chartDR.draw(dataDR, optionsDR);
+  chartDR2.draw(dataDR2, optionsDR2);
+  /*
+  chart=new google.visualization.ColumnChart(document.getElementById('chart'));
+  chart=new google.visualization.PieChart(document.getElementById('chart'));
+  chart=new google.visualization.BarChart(document.getElementById('chart'));
+  chart=new google.visualization.GeoChart(document.getElementById('chart'));
+  */
+}
+
 /*
   OBTENER DATOS
 */
@@ -495,4 +609,8 @@ function obtenerSumMutantesKilledPorIdTest(idTest) {
     error: function (xhr, status) { alert('Oooops, hubo un error...'); },
     complete: function(xhr, status) {}
   });
+}
+
+function cargarProyectosComparacion(idProyecto1, idProyecto2) {
+
 }

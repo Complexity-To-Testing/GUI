@@ -144,6 +144,26 @@ $(document).ready(function() {
         });
       }
   });
+  $('#btn-comparar-proyectos').on('click', function() {
+        $('#modal-comparacion-proyectos').modal();
+
+  });
+  $('#btn-ejecutar-comparacion').on('click', function() {
+        var idProyecto1 =  $('#inputIdProyecto1').val();
+        var idProyecto2 =  $('#inputIdProyecto2').val();
+
+        if (idProyecto1 !== "" &&  idProyecto2 !== "") {
+          verEstadisticaComparacionProyecto(idProyecto1, idProyecto2);
+        } else {
+          $.notify({
+            title: "<strong>Info</strong>:",
+            message: "Rellene todos los campos"
+          },{
+            // settings
+            type: 'info'
+          });
+        }
+  });
 
   $('#btn-mostrar-grafica-prueba').on('click', function() {
       var nombrePrueba = $('#inputNombrePrueba').val();
