@@ -25,6 +25,32 @@ router.get("/", function(req, res, next) {
   });
 });
 
+// GET /proyectos/:idProyecto
+router.get("/:idProyecto", function(req, res, next) {
+  var idProyecto =  Number(req.params.idProyecto);
+
+  if (!isNaN(idProyecto)) {
+  // Obtiene los campeonatos
+  daoProyectos.getProyectoPorId(idProyecto, function(err, proyecto) {
+
+    // Muestra error si hay un error en la BD
+    if (err) {
+      next(err);
+    } else {
+
+      // Si no hay proyecto
+      if (proyecto == null) {
+        res.json([]);
+      }else {
+        res.json(proyecto);
+      }
+    }
+  });
+} else {
+  res.json( {error: true, msg: "ERROR: hay un parametro incorrecto, asegurese de que sea un numero entero"});
+}
+});
+
 // GET /proyectos/getEstadisticas/:idProyecto
 router.get("/getEstadisticas/:idProyecto", function(req, res, next) {
   var idProyecto =  Number(req.params.idProyecto);

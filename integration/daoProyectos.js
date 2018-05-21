@@ -5,6 +5,7 @@ var pool  = db.getPool();
 function insertProyecto(nombreProyecto, callback) {
   /* u: datos de un usuario que se va a guardar */
 
+  console.log(nombreProyecto);
   pool.getConnection(function(err, connection) {
 
     var sql = "INSERT INTO `proyectos`( `name`) VALUES (?)";
@@ -30,7 +31,7 @@ function insertProyecto(nombreProyecto, callback) {
 function getProyectos( callback) {
   pool.getConnection(function(err, connection) {
 
-    var sql = "SELECT test_proyecto.idProyecto, proyectos.name, COUNT(test_proyecto.idProyecto) as numTest, ROUND(SUM(test_proyecto.time),2) as totalTime, test_proyecto.numMutants, ROUND(AVG(test_proyecto.killed),2) as avg_killed, ROUND(AVG(test_proyecto.percent),2) as avg_percent FROM `test_proyecto` join proyectos on (proyectos.id = test_proyecto.idProyecto) GROUP by idProyecto  ORDER BY test_proyecto.idProyecto DESC LIMIT 20"
+    var sql = "SELECT test_proyecto.idProyecto, proyectos.name, COUNT(test_proyecto.idProyecto) as numTest, ROUND(SUM(test_proyecto.time),2) as totalTime, test_proyecto.numMutants, ROUND(AVG(test_proyecto.killed),2) as avg_killed, ROUND(AVG(test_proyecto.percent),2) as avg_percent FROM `test_proyecto` join proyectos on (proyectos.id = test_proyecto.idProyecto) GROUP by idProyecto  ORDER BY test_proyecto.idProyecto DESC LIMIT 100"
 
     // Ejecutamos la consulta SQL
     connection.query(sql, function(err, result) {
@@ -44,6 +45,29 @@ function getProyectos( callback) {
           callback(null, null);
         } else {
           callback(null, result);
+        }
+      }
+    });
+  });
+}
+
+function getProyectoPorId(idProyecto, callback) {
+  pool.getConnection(function(err, connection) {
+
+    var sql = "SELECT * from proyectos WHERE id=?";
+
+    // Ejecutamos la consulta SQL
+    connection.query(sql,[idProyecto], function(err, result) {
+      connection.release();
+      if (err) {
+        callback(err);
+      } else {
+        // Si la consulta dio como resultado cero filas, devolvemos null.
+        // En caso contrario, devolvemos el primer elemento del resultado.
+        if (result.length === 0) {
+          callback(null, null);
+        } else {
+          callback(null, result[0]);
         }
       }
     });
@@ -147,7 +171,7 @@ function getSumMutantesPorIdProyectoKilled(idProyecto, callback) {
 function getTestsPorIdProyecto(idProyecto, callback) {
   pool.getConnection(function(err, connection) {
 
-    var sql = "SELECT * FROM `test_proyecto` WHERE idProyecto = ? "
+    var sql = "SELECT * FROM `test_proyecto` WHERE idProyecto = ? ORDER BY killed ASC"
 
     // Ejecutamos la consulta SQL
     connection.query(sql,[idProyecto], function(err, result) {
@@ -216,5 +240,6 @@ module.exports = {
   getSumMutantesPorIdProyectoKilled: getSumMutantesPorIdProyectoKilled,
   getTestsPorIdProyecto: getTestsPorIdProyecto,
   getSumMutantesKilledPorIdTest: getSumMutantesKilledPorIdTest,
-  getResultadoProyectosPorPrueba: getResultadoProyectosPorPrueba
+  getResultadoProyectosPorPrueba: getResultadoProyectosPorPrueba,
+  getProyectoPorId: getProyectoPorId
 };

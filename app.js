@@ -94,6 +94,116 @@ function ejecutarComandoLinux(comando, callback) {
 
 io.on('connection', (socket) => {
 
+	function ejecutarPrograma(datosProyecto, conjuntoPruebas) {
+		preprocesar(datosProyecto.listaMutantes, function (err) {
+				if (err) {
+					io.emit('mostrar error', "Error al preprocesar los ficheros.");
+				} else {
+					io.emit('mostrar proceso', "Guardando el proyecto en la  BD...");
+					daoProyectos.insertProyecto(datosProyecto.nombreProyecto, function(err, resultInsertProyecto) {
+						// Muestra error si hay un error en la BD
+						if (err) {
+							io.emit('mostrar error', "Error al insertar el proyecto en la BD.");
+						} else {
+
+							// si no se ha podido insertar
+							if (!resultInsertProyecto.exito) {
+								io.emit('mostrar error', "Error al insertar el proyecto.");
+							}else {
+
+								// Leemos los ficheros de configuracion
+								ejecutarComandoLinux( "ls " + DIR_TESTSPOMS, function(err, result_ls) {
+									if (err) {
+										io.emit('mostrar error', "Error al leer con ls la carpeta testsPoms.");
+									} else {
+										var arrayTestFilePom = result_ls.trim().split("\n");
+										var cont = arrayTestFilePom.length;
+
+										// Para cada fichero de configuracion lo copiamos el fichero de configuracion en el proyecto java y lo ejecutamos
+										forEachAll(arrayTestFilePom,
+											function(testFilePom, allresult, nextTest) {
+													asyncSqrt(testFilePom, function(testFilePom, result) {
+
+															io.emit('mostrar proceso', "Ejecutando el test "+testFilePom+"...");
+															var comando = "sh ejecutarTest.sh " + testFilePom;
+															ejecutarComandoLinux( comando, function(err, result_et) {
+															if (err) {
+																	io.emit('mostrar error', "Error al ejecutar " + comando);
+															} else {
+
+																var comando =  "cat " + FILE_RESULTADO;
+																ejecutarComandoLinux( comando, function(err, result_cr) {
+																	if (err) {
+																		io.emit('mostrar error', "Error al ejecutar " + comando);
+																	} else {
+																		var arrayResult = result_cr.trim().split(" ");
+																		var datosTest = {}
+
+																		datosTest.idProyecto = resultInsertProyecto.insertId;
+																		datosTest.nombreTest = arrayResult[0];
+																		datosTest.numMutants = Number(arrayResult[1]);
+																		datosTest.killed = Number(arrayResult[2]);
+																		datosTest.percent = Number(arrayResult[3]);
+																		datosTest.time = Number(arrayResult[4]);
+
+																		console.log(arrayResult.length);
+																		if (arrayResult.length < 4) {
+																				io.emit('mostrar error', "Error no se han generado mutantes para el test "+testFilePom+"con el programa PIT ");
+																				//
+																				var comando = "pwd; cat logMutantes.txt | grep java"
+																				ejecutarComandoLinux( comando, function(err, resulComando) {
+																					 if (err) {
+																							 io.emit('mostrar error', "Error al ejecutar " + comando);
+																					 } else {
+																						 io.emit('mostrar contenido error', resulComando);
+
+																					 }
+																						nextTest();
+																				});
+
+
+																		} else {
+																			daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
+																				if (err) {
+																					io.emit('mostrar error', "Error al insertar el Test en la BD");
+																				} else {
+
+																					if (!resultInsertTest.exito) {
+																							io.emit('mostrar error', "Error al insertar el Test en la BD");
+																					} else {
+																							io.emit('test guardado', datosTest.idProyecto);
+																					}
+																					nextTest();
+																				}
+																			});
+																		}
+																	}
+																});
+															}
+														});
+													});
+											},
+											function(allresult) {
+												if (conjuntoPruebas === null) {
+													io.emit('mostrar finalizado', "proyecto " + datosProyecto.nombreProyecto);
+													console.log('COMPLETED');
+													console.log(allresult);
+												} else {
+													io.emit('ejecutar-siguiente-prueba', conjuntoPruebas);
+												}
+											},
+											true
+									);
+
+									}
+								});
+							}
+						}
+					});
+				}
+			});
+	}
+
 	socket.on('listado proyectos', function () {
 		daoProyectos.getProyectos(function(err, proyectos) {
 			// Muestra error si hay un error en la BD
@@ -159,109 +269,7 @@ io.on('connection', (socket) => {
         if (err) {
 					io.emit('mostrar error', "Error al ejecutar script generadorPrograma.sh");
         } else {
-					preprocesar(listaMutantes, function (err) {
-	            if (err) {
-								io.emit('mostrar error', "Error al preprocesar los ficheros.");
-	            } else {
-								io.emit('mostrar proceso', "Guardando el proyecto en la  BD...");
-	              daoProyectos.insertProyecto(nombreProyecto, function(err, resultInsertProyecto) {
-	                // Muestra error si hay un error en la BD
-	                if (err) {
-										io.emit('mostrar error', "Error al insertar el proyecto en la BD.");
-	                } else {
-
-	                  // si no se ha podido insertar
-	                  if (!resultInsertProyecto.exito) {
-											io.emit('mostrar error', "Error al insertar el proyecto.");
-	                  }else {
-
-	                    // Leemos los ficheros de configuracion
-	                    ejecutarComandoLinux( "ls " + DIR_TESTSPOMS, function(err, result_ls) {
-	                      if (err) {
-													io.emit('mostrar error', "Error al leer con ls la carpeta testsPoms.");
-	                      } else {
-	                        var arrayTestFilePom = result_ls.trim().split("\n");
-	                        var cont = arrayTestFilePom.length;
-
-	                        // Para cada fichero de configuracion lo copiamos el fichero de configuracion en el proyecto java y lo ejecutamos
-	                        forEachAll(arrayTestFilePom,
-	                          function(testFilePom, allresult, nextTest) {
-	                              asyncSqrt(testFilePom, function(testFilePom, result) {
-
-																		io.emit('mostrar proceso', "Ejecutando el test "+testFilePom+"...");
-	                                  var comando = "sh ejecutarTest.sh " + testFilePom;
-	                                  ejecutarComandoLinux( comando, function(err, result_et) {
-	                                  if (err) {
-	                                    	io.emit('mostrar error', "Error al ejecutar " + comando);
-	                                  } else {
-
-	                                    var comando =  "cat " + FILE_RESULTADO;
-	                                    ejecutarComandoLinux( comando, function(err, result_cr) {
-	                                      if (err) {
-																					io.emit('mostrar error', "Error al ejecutar " + comando);
-	                                      } else {
-	                                        var arrayResult = result_cr.trim().split(" ");
-	                                        var datosTest = {}
-
-	                                        datosTest.idProyecto = resultInsertProyecto.insertId;
-	                                        datosTest.nombreTest = arrayResult[0];
-	                                        datosTest.numMutants = Number(arrayResult[1]);
-	                                        datosTest.killed = Number(arrayResult[2]);
-	                                        datosTest.percent = Number(arrayResult[3]);
-	                                        datosTest.time = Number(arrayResult[4]);
-
-																					console.log(arrayResult.length);
-																					if (arrayResult.length < 4) {
-																							io.emit('mostrar error', "Error no se han generado mutantes para el test "+testFilePom+"con el programa PIT ");
-																							//
-																							var comando = "pwd; cat logMutantes.txt | grep java"
-																							ejecutarComandoLinux( comando, function(err, resulComando) {
-																								 if (err) {
-																										 io.emit('mostrar error', "Error al ejecutar " + comando);
-																								 } else {
-																									 io.emit('mostrar contenido error', resulComando);
-
-																								 }
-																							 		nextTest();
-																							});
-
-
-																					} else {
-																						daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
-		                                          if (err) {
-		                                          	io.emit('mostrar error', "Error al insertar el Test en la BD");
-		                                          } else {
-
-		                                            if (!resultInsertTest.exito) {
-		                                            		io.emit('mostrar error', "Error al insertar el Test en la BD");
-		                                            } else {
-		                                              	io.emit('test guardado', datosTest.idProyecto);
-		                                            }
-																								nextTest();
-		                                          }
-		                                        });
-																					}
-	                                      }
-	                                    });
-	                                  }
-	                                });
-	                              });
-	                          },
-	                          function(allresult) {
-																io.emit('mostrar finalizado', "proyecto " + nombreProyecto);
-	                               console.log('COMPLETED');
-	                               console.log(allresult);
-	                          },
-	                          true
-	                      );
-
-	                      }
-	                    });
-	                  }
-	                }
-	              });
-	            }
-	          });
+					ejecutarPrograma(datosPrograma, null) ;
         }
       });
 		}
@@ -271,115 +279,49 @@ io.on('connection', (socket) => {
 
 		var nombreProyecto = datosProyecto.nombreProyecto;
 		var listaMutantes = datosProyecto.listaMutantes;
-				console.log(datosProyecto);
+		console.log(datosProyecto);
 		if (nombreProyecto === "") {
 	     io.emit('mostrar error', "Nombre del proyecto vacio");
 	  }else {
 				io.emit('mostrar proceso', "Iniciando preprocesado...");
-        preprocesar(listaMutantes, function (err) {
-            if (err) {
-							io.emit('mostrar error', "Error al preprocesar los ficheros.");
-            } else {
-							io.emit('mostrar proceso', "Guardando el proyecto en la  BD...");
-              daoProyectos.insertProyecto(nombreProyecto, function(err, resultInsertProyecto) {
-                // Muestra error si hay un error en la BD
-                if (err) {
-									io.emit('mostrar error', "Error al insertar el proyecto en la BD.");
-                } else {
-
-                  // si no se ha podido insertar
-                  if (!resultInsertProyecto.exito) {
-										io.emit('mostrar error', "Error al insertar el proyecto.");
-                  }else {
-
-                    // Leemos los ficheros de configuracion
-                    ejecutarComandoLinux( "ls " + DIR_TESTSPOMS, function(err, result_ls) {
-                      if (err) {
-												io.emit('mostrar error', "Error al leer con ls la carpeta testsPoms.");
-                      } else {
-                        var arrayTestFilePom = result_ls.trim().split("\n");
-                        var cont = arrayTestFilePom.length;
-
-                        // Para cada fichero de configuracion lo copiamos el fichero de configuracion en el proyecto java y lo ejecutamos
-                        forEachAll(arrayTestFilePom,
-                          function(testFilePom, allresult, nextTest) {
-                              asyncSqrt(testFilePom, function(testFilePom, result) {
-
-																	io.emit('mostrar proceso', "Ejecutando el test "+testFilePom+"...");
-                                  var comando = "sh ejecutarTest.sh " + testFilePom;
-                                  ejecutarComandoLinux( comando, function(err, result_et) {
-                                  if (err) {
-                                    	io.emit('mostrar error', "Error al ejecutar " + comando);
-                                  } else {
-
-                                    var comando =  "cat " + FILE_RESULTADO;
-                                    ejecutarComandoLinux( comando, function(err, result_cr) {
-                                      if (err) {
-																				io.emit('mostrar error', "Error al ejecutar " + comando);
-                                      } else {
-                                        var arrayResult = result_cr.trim().split(" ");
-                                        var datosTest = {}
-
-                                        datosTest.idProyecto = resultInsertProyecto.insertId;
-                                        datosTest.nombreTest = arrayResult[0];
-                                        datosTest.numMutants = Number(arrayResult[1]);
-                                        datosTest.killed = Number(arrayResult[2]);
-                                        datosTest.percent = Number(arrayResult[3]);
-                                        datosTest.time = Number(arrayResult[4]);
-
-																				console.log(arrayResult.length);
-																				if (arrayResult.length < 4) {
-																						io.emit('mostrar error', "Error no se han generado mutantes para el test "+testFilePom+" con el programa PIT ");
-																						io.emit('mostrar proceso', "Buscando el error PIT...");
-
-																						var comando = "cat logMutantes.txt | grep java"
-																						ejecutarComandoLinux( comando, function(err, resultComando) {
-																							 if (err) {
-																								 io.emit('mostrar error', "Error al ejecutar " + comando);
-																							 } else {
-																								 io.emit('mostrar contenido error', resultComando);
-
-																							 }
-																								nextTest();
-																						});
-																				} else {
-																					daoProyectos.insertTestProyecto(datosTest, function (err, resultInsertTest) {
-	                                          if (err) {
-	                                          	io.emit('mostrar error', "Error al insertar el Test en la BD");
-	                                          } else {
-
-	                                            if (!resultInsertTest.exito) {
-	                                            	io.emit('mostrar error', "Error al insertar el Test en la BD");
-	                                            } else {
-	                                                nextTest();
-																									io.emit('test guardado', datosTest.idProyecto);
-	                                            }
-	                                          }
-	                                        });
-																				}
-                                      }
-                                    });
-                                  }
-                                });
-                              });
-                          },
-                          function(allresult) {
-															io.emit('mostrar finalizado', "proyecto " + nombreProyecto);
-                               console.log('COMPLETED');
-                               console.log(allresult);
-                          },
-                          true
-                      );
-
-                      }
-                    });
-                  }
-                }
-              });
-            }
-          });
+        ejecutarPrograma(datosProyecto, null) ;
 		}
 	})
+	socket.on('ejecutar-conjunto-pruebas', function (conjuntoPruebas) {
+		console.log("<-- Comienzo de la ejecucion");
+		console.log(conjuntoPruebas);
+		var datosPrograma = conjuntoPruebas.datosPrograma;
+		var parametros = "" + datosPrograma.numeroAnidacionesIf + " "
+													+  datosPrograma.numeroAnidacionesWhile + " "
+													+  datosPrograma.numeroIteracionesWhile + " "
+													+  datosPrograma.numeroAnidacionesFor + " "
+													+  datosPrograma.numeroIteracionesFor + " "
+													+  datosPrograma.numeroCondicionesLogicas + " "
+													+  datosPrograma.numeroExpresionesLogicas + " "
+													+  datosPrograma.numeroExpresionesAritmeticas + " "
+													+  datosPrograma.listaInputsComprobacion + " "
+													+  datosPrograma.numeroExpresionesSeguidas + " "
+													+  datosPrograma.numeroFuncion + " "
+													+  datosPrograma.decicionInputs + " "
+													+  datosPrograma.size_tests + " "
+													+  datosPrograma.ifsAniCuerpoBucle + " "
+													+  datosPrograma.aleatorio + " "
+													+  datosPrograma.ini + " "
+													+  datosPrograma.fin + " ";
+
+		console.log(datosPrograma);
+		if (datosPrograma.nombreProyecto === "") {
+			 io.emit('mostrar error', "Nombre del proyecto vacio");
+		}else {
+			ejecutarComandoLinux( "sh generadorPrograma.sh " + parametros, function(err, resultGen) {
+				if (err) {
+					io.emit('mostrar error', "Error al ejecutar script generadorPrograma.sh");
+				} else {
+					ejecutarPrograma(datosPrograma, conjuntoPruebas) ;
+				}
+			});
+		}
+	});
 
 	socket.on('disconnect', () => {
 		console.log('Ha salido un usuario del Chat')

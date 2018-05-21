@@ -6,6 +6,7 @@ var jsonEstaditicasPrueba;
 var jsonMutantes;
 var currentNombreProyecto;
 var currentNombreTest;
+var currentDatosComparacion;
 /*
   ACTUALIZAR VISTA
 */
@@ -65,10 +66,20 @@ function verTestsProyecto(idProyecto, nombreProyecto) {
     rellenarTests(tests);
   });
 }
-function verEstadisticaComparacionProyecto(idProyecto, idProyecto2) {
+
+function cargarDatosProyectosComparacion(idProyecto, idProyecto2) {
   $.when(getTestProyecto(idProyecto)).done(function(tests) {
     $.when(getTestProyecto(idProyecto2)).done(function(tests2) {
-      mostrarEstadisticasComparacion(tests,tests2);
+      $.when(getProyectoPorId(idProyecto)).done(function(proyecto1) {
+        $.when(getProyectoPorId(idProyecto2)).done(function(proyecto2) {
+          currentDatosComparacion = {
+            proyectoNames : [proyecto1.name,proyecto2.name],
+            proyectoTests : [tests, tests2]
+          }
+          console.log(currentDatosComparacion);
+          mostrarEstadisticasComparacion();
+        });
+      });
     });
   });
 }
@@ -114,8 +125,9 @@ function verEstadisticas(idProyecto, nombreProyecto) {
       io.emit('obtenerEstadisticasPorIdProyecto', idProyecto);
 
     })(document, io, jQuery);
-//  });
+  //  });
 }
+
 function mostrarEstadisticas(estadisticas) {
     jsonEstaditicas = estadisticas;
     google.charts.load('current', {'packages':['corechart','line']});
@@ -126,11 +138,11 @@ function mostrarEstadisticas(estadisticas) {
     $('#chartMutant').removeClass('hidden');
     $('#chartDR').removeClass('hidden');
     $('#chartDR2').removeClass('hidden');
-//  });
+    //  });
 }
-function mostrarEstadisticasComparacion(estadisticas, estadisticas2) {
-    jsonEstaditicas = estadisticas;
-    jsonEstaditicas2 = estadisticas2;
+
+function mostrarEstadisticasComparacion() {
+
     google.charts.load('current', {'packages':['corechart','line']});
     google.charts.setOnLoadCallback(drawChartComparacion);
 
@@ -139,7 +151,7 @@ function mostrarEstadisticasComparacion(estadisticas, estadisticas2) {
     $('#chartMutant').removeClass('hidden');
     $('#chartDR').removeClass('hidden');
     $('#chartDR2').removeClass('hidden');
-//  });
+    //  });
 }
 
 function verEstadisticasPorPrueba(nombrePrueba) {
@@ -349,6 +361,7 @@ function drawChartTest() {
 }
 
 function drawChartPrueba() {
+  console.log("<--");
   // Create our data table out of JSON data loaded from server.
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'mutante');
@@ -384,11 +397,13 @@ function drawChartPrueba() {
   var options = {
     title: 'Estadisticas killed ',
     pointSize: 16,
+    hAxis: {  direction:-1, slantedText:true, slantedTextAngle:90 },
     is3D: true
   };
   var optionsMutant = {
     title: 'Estadisticas Num Mutants ' ,
     pointSize: 16,
+    hAxis: {  direction:-1, slantedText:true, slantedTextAngle:90 },
     is3D: true
   };
   var optionsDR = {
@@ -397,7 +412,9 @@ function drawChartPrueba() {
     is3D: true
   };
   var optionsDR2 = {
-      title: 'Estadisticas alfa = 1/(1-DR)'/*,
+      title: 'Estadisticas alfa = 1/(1-DR)',
+      hAxis: {  direction:-1, slantedText:true, slantedTextAngle:90 }
+    /*,
     colors: ['#AB0D06', '#007329'],
     trendlines: {
       0: {type: 'exponential', color: '#333', opacity: 1},
@@ -442,49 +459,65 @@ function drawChartPrueba() {
 
 function drawChartComparacion() {
 
-  // Create our data table out of JSON data loaded from server.
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'mutante');
-  data.addColumn('number', 'killed proyecto 1');
-  data.addColumn('number', 'killed Proyecto 2');
   var dataMutant = new google.visualization.DataTable();
   dataMutant.addColumn('string', 'mutante');
-  dataMutant.addColumn('number', 'mutants proyecto 1');
-  dataMutant.addColumn('number', 'mutants proyecto 2');
   var dataDR = new google.visualization.DataTable();
   dataDR.addColumn('string', 'mutante');
-  dataDR.addColumn('number', 'DR proyecto 1');
-  dataDR.addColumn('number', 'DR proyecto 2');
   var dataDR2 = new google.visualization.DataTable();
   dataDR2.addColumn('number', 'Tests proyecto');
-  dataDR2.addColumn('number', 'DR_Invert proyecto 1');
-  dataDR2.addColumn('number', 'DR_Invert proyecto 2');
 
-  $.each(jsonEstaditicas, function(i,jsonData)
-  {
+  // Create our data table out of JSON data loaded from server.
+  for (var i = 0; i < currentDatosComparacion.proyectoNames.length; i++) {
+    data.addColumn('number', currentDatosComparacion.proyectoNames[i]);
+    dataMutant.addColumn('number', currentDatosComparacion.proyectoNames[i]);
+    dataDR.addColumn('number', currentDatosComparacion.proyectoNames[i]);
+    dataDR2.addColumn('number', currentDatosComparacion.proyectoNames[i]);
+  }
+
+  var ultiDr2 = 100;
+  // Añadimos al principio
+  $.each(currentDatosComparacion.proyectoTests[0], function(indiceTest,jsonData){
+    var proyectosRow = {
+      rowKilled:[],
+      rowMutant:[],
+      rowDR:[],
+      rowDRInvert:[]
+    };
+
     var time=jsonData.time;
-    var mutante=jsonData.numMutants;
-    var killed=jsonData.killed;
-    var name="Test_"+(i+1);
-    var dr=killed/mutante;
-    var dr2=(1/(1-dr));
-    var mutante_2=jsonEstaditicas2[i].numMutants
-    var killed_2=jsonEstaditicas2[i].killed
-    var name_2=jsonEstaditicas2[i].nombreTest;
-    var dr_2=killed_2/mutante_2;
-    var dr2_2=(1/(1-dr_2));
-    //var nameTest=jsonData.nombreTest;
-    //data.addRows([ [name, value, mutante, time]]);
-    // data.addRows([ [name, value,mutante]])
+    var name="Test_"+(indiceTest+1);
 
-    data.addRows([ [name,killed, killed_2 ]]);
-    dataMutant.addRows([ [name,mutante,mutante_2]]);
-    dataDR.addRows([ [name,dr, dr_2]]);
-    dataDR2.addRows([ [i + 1,dr2,dr2_2]]);
+    proyectosRow.rowKilled.push(name);
+    proyectosRow.rowMutant.push(name);
+    proyectosRow.rowDR.push(name);
+    proyectosRow.rowDRInvert.push(indiceTest + 1);
+
+
+    for (var i = 0; i < currentDatosComparacion.proyectoTests.length; i++) {
+      var mutante=currentDatosComparacion.proyectoTests[i][indiceTest].numMutants;
+      var killed=currentDatosComparacion.proyectoTests[i][indiceTest].killed;
+      var dr=killed/mutante;
+      var dr2=(1/(1-dr));
+      ultiDr2=dr2;
+      proyectosRow.rowKilled.push(killed);
+      proyectosRow.rowMutant.push(mutante);
+      proyectosRow.rowDR.push(dr);
+      proyectosRow.rowDRInvert.push(dr2);
+    }
+
+    // Añadimos la fila
+    data.addRows([ proyectosRow.rowKilled]);
+    dataMutant.addRows([ proyectosRow.rowMutant]);
+    dataDR.addRows([ proyectosRow.rowDR]);
+    dataDR2.addRows([ proyectosRow.rowDRInvert]);
   });
 
-  //dataDR.sort([{column: 1}]);
-  dataDR2.sort([{column: 0}]);
+  // Añadimos al final
+  dataDR2.addRows([[ currentDatosComparacion.proyectoTests[0].length+1,ultiDr2*2,ultiDr2*2]]);
+  //  dataDR.sort([{column: 1}]);
+  // dataDR2.sort([{column: 0}]);
   var options = {
     title: 'Estadisticas killed ',
     pointSize: 16,
@@ -502,13 +535,14 @@ function drawChartComparacion() {
   };
   var optionsDR2 = {
     hAxis: {
-      title: 'Coste (numero de Tests)'
-    },
-    vAxis: {
       title: 'Inversa del DR (1/(1-DR))'
     },
+    vAxis: {
+      title: 'Coste (numero de Tests)'
+    },
     colors: ['#AB0D06', '#007329'],
-    pointSize: 15
+    pointSize: 15,
+    orientation: 'vertical'
   };
 
   var chart = new google.visualization.LineChart(document.getElementById('chart'));
@@ -554,6 +588,16 @@ function generarPrograma(datosPrograma, nombreProyecto) {
 function getProyectos() {
   return $.ajax({
     url: SERVER + 'proyectos/',
+    type: "GET",
+    dataType: 'json',
+    error: function (xhr, status) { alert('Oooops, hubo un error...'); },
+    complete: function(xhr, status) {}
+  });
+}
+
+function getProyectoPorId(idProyecto) {
+  return $.ajax({
+    url: SERVER + 'proyectos/' + idProyecto,
     type: "GET",
     dataType: 'json',
     error: function (xhr, status) { alert('Oooops, hubo un error...'); },
@@ -609,8 +653,4 @@ function obtenerSumMutantesKilledPorIdTest(idTest) {
     error: function (xhr, status) { alert('Oooops, hubo un error...'); },
     complete: function(xhr, status) {}
   });
-}
-
-function cargarProyectosComparacion(idProyecto1, idProyecto2) {
-
 }

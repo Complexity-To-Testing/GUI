@@ -6,7 +6,7 @@ function getListaDecision(numFuncion) {
   return lista;
 }
 
-function getListaInputs(min, max, tamLista) {
+function getListaAleatorioInputs(min, max, tamLista) {
   var lista = "";
   for (var i = 0; i < tamLista + 1; i++) {
     lista+=(Math.random() * (max - min) + min)+",";
@@ -159,7 +159,8 @@ function getColorColumnAtr(nombreAtr) {
         return  'color: #4260CD';
 
     if (nombreAtr.includes("Fin"))
-        return  'color: #8342CD';
+          return  'color: #428acd';
+
     if (nombreAtr.includes("Ini"))
         return  'color: #1299F7';
 

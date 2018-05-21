@@ -54,7 +54,7 @@ $(document).ready(function() {
       break;
       // BOTÓN: GENERAR PROGRAMA AUTOMATICO
       case 'nav-generador-automatico':
-          generadorDeProgramasAutomaticoListasPruebasV10();
+          ejecutarConjuntoPruebas(conjuntoPruebasDefecto);
       break;
       // BOTÓN: COMPLEXITY TO TESTING
       case 'nav-home':
@@ -153,7 +153,7 @@ $(document).ready(function() {
         var idProyecto2 =  $('#inputIdProyecto2').val();
 
         if (idProyecto1 !== "" &&  idProyecto2 !== "") {
-          verEstadisticaComparacionProyecto(idProyecto1, idProyecto2);
+          cargarDatosProyectosComparacion(idProyecto1, idProyecto2);
         } else {
           $.notify({
             title: "<strong>Info</strong>:",
@@ -339,6 +339,9 @@ $(document).ready(function() {
     	// settings
     	type: 'info'
     });
+	})
+	io.on('ejecutar-siguiente-prueba', function (conjuntoPruebas){
+    ejecutarConjuntoPruebas(conjuntoPruebas);
 	})
 })(document, io, jQuery)
 
