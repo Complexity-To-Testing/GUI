@@ -120,51 +120,85 @@ function getChecksMutantes1(){
     return listaMutantes;
 }
 function getColorColumnAtr(nombreAtr) {
-    if (nombreAtr.includes("AnidIf"))
-        return  'color: #FF5733';
+    if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("AnidWhile")){
+      return  'color:    #e6b0aa';
+    } else if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("IterWhile")){
+      return  'color:   #d7bde2  ';
+    }else if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("AnidFor")){
+      return  'color:  #a9cce3 ';
+    }else if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("IterFor")){
+      return  'color:   #a3e4d7  ';
+    }else if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("CondLog")){
+      return  'color:  #f9e79f ';
+    }else if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("ExprLog")){
+      return  'color:  #f5cba7 ';
+    }else if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("ExprArit")){
+      return  'color:  #d5dbdb ';
+    }else if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("ExprsSeg")){
+      return  'color:  #abb2b9 ';
 
-    if (nombreAtr.includes("AnidWhile_"))
-        return  'color: #FFA233';
+    } else if (nombreAtr.includes("AnidFor")&&nombreAtr.includes("AnidIf")){
+      return  'color:    #c0392b ';
+    } else if (nombreAtr.includes("AnidFor")&&nombreAtr.includes("AnidWhile")){
+      return  'color:     #9b59b6  ';
+    } else if (nombreAtr.includes("AnidFor")&&nombreAtr.includes("IterWhile")){
+      return  'color:    #9b59b6   ';
+    }else if (nombreAtr.includes("AnidFor")&&nombreAtr.includes("IterFor")){
+      return  'color:    #1abc9c   ';
+    }else if (nombreAtr.includes("AnidFor")&&nombreAtr.includes("CondLog")){
+      return  'color:   #f1c40f  ';
+    }else if (nombreAtr.includes("AnidFor")&&nombreAtr.includes("ExprLog")){
+      return  'color:   #e67e22  ';
+    }else if (nombreAtr.includes("AnidFor")&&nombreAtr.includes("ExprArit")){
+      return  'color:   #7f8c8d  ';
+    }else if (nombreAtr.includes("AnidFor")&&nombreAtr.includes("ExprsSeg")){
+      return  'color:   #34495e   ';
 
-    if (nombreAtr.includes("IterWhile_"))
-        return  'color: #FFD433';
-
-    if (nombreAtr.includes("AnidFor_"))
-        return  'color: #87283E';
-    if (nombreAtr.includes("IterFor_"))
-        return  'color: #FA114A';
-
-    if (nombreAtr.includes("CondLog_"))
-        return  'color: #BBFF33';
-
-    if (nombreAtr.includes("ExprLog_"))
-        return  'color: #68FF33';
-
-    if (nombreAtr.includes("ExprArit_"))
-        return  'color: #42CD6A';
-
-    if (nombreAtr.includes("ExprsSeg_"))
-        return  'color: #42CDA9';
-
-    if (nombreAtr.includes("NumFun_"))
-        return  'color: #9E11FA';
-
-    if (nombreAtr.includes("SizeTests"))
-        return  'color: #42AFCD';
-
-    if (nombreAtr.includes("IfsAniCuerpoBucle"))
-        return  'color: #428ACD';
-
-    if (nombreAtr.includes("Aleatorio"))
-        return  'color: #4260CD';
-
-    if (nombreAtr.includes("Fin"))
-          return  'color: #428acd';
-
-    if (nombreAtr.includes("Ini"))
-        return  'color: #1299F7';
-
-
-    return 'color: #000000';
-
+    } else if (nombreAtr.includes("AnidWhile")&&nombreAtr.includes("AnidIf")){
+      return  'color:     #CCFFFF  ';
+    } else if (nombreAtr.includes("AnidWhile")&&nombreAtr.includes("AnidFor")){
+      return  'color:     #CCCCFF   ';
+    } else if (nombreAtr.includes("AnidWhile")&&nombreAtr.includes("IterWhile")){
+      return  'color:     #CC99FF    ';
+    }else if (nombreAtr.includes("AnidWhile")&&nombreAtr.includes("IterFor")){
+      return  'color:     #CC33FF     ';
+    }else if (nombreAtr.includes("AnidWhile")&&nombreAtr.includes("CondLog")){
+      return  'color:     #6699FF    ';
+    }else if (nombreAtr.includes("AnidWhile")&&nombreAtr.includes("ExprLog")){
+      return  'color:     #66CCFF    ';
+    }else if (nombreAtr.includes("AnidWhile")&&nombreAtr.includes("ExprArit")){
+      return  'color:    #66FFFF   ';
+    }else if (nombreAtr.includes("AnidWhile")&&nombreAtr.includes("ExprsSeg")){
+      return  'color:    #0099FF    ';
+    } else  if (nombreAtr.includes("AnidIf")){
+      return  'color: #FF5733';
+    } else if (nombreAtr.includes("AnidWhile")){
+      return  'color: #FFA233 ';
+    }else if (nombreAtr.includes("IterWhile")){
+      return  'color: #FFD433';
+    }else if (nombreAtr.includes("AnidFor")){
+      return  'color: #87283E';
+    }else if (nombreAtr.includes("CondLog")){
+      return  'color: #BBFF33';
+    }else if (nombreAtr.includes("ExprLog")){
+      return  'color: #68FF33';
+    }else if (nombreAtr.includes("ExprArit")){
+      return  'color: #42CD6A';
+    }else if (nombreAtr.includes("ExprsSeg")){
+      return  'color: #42CDA9';
+    }else if (nombreAtr.includes("NumFun")){
+      return  'color: #9E11FA';
+    }else if (nombreAtr.includes("SizeTests")){
+      return  'color: #42AFCD';
+    }else if (nombreAtr.includes("IfsAniCuerpoBucle")){
+      return  'color: #428ACD';
+    }else if (nombreAtr.includes("Aleatorio")){
+      return  'color: #4260CD';
+    }else if (nombreAtr.includes("Fin")){
+      return  'color: #428acd';
+    }else if (nombreAtr.includes("Ini")){
+      return  'color: #1299F7';
+    } else {
+      return 'color: #000000';
+    }
   }

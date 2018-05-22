@@ -32,7 +32,7 @@
  T E S T S
 -------------------------------------------------------
 Running Test0
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.217 sec
 
 Results :
 
@@ -55,58 +55,113 @@ WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collec
 WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
+stderr  : WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+Wstderr  : ARNING: All illegal access operations will be denied in a future release
 /================================================================================
 - Timings
 ================================================================================
 > scan classpath : < 1 second
 > coverage and dependency analysis : 1 seconds
 > build mutation tests : < 1 second
-> run mutation analysis : 7 seconds
+> run mutation analysis : 2 minutes and 1 seconds
 --------------------------------------------------------------------------------
-> Total  : 8 seconds
+> Total  : 2 minutes and 3 seconds
 --------------------------------------------------------------------------------
 ================================================================================
 - Statistics
 ================================================================================
->> Generated 1260 mutations Killed 46 (4%)
->> Ran 215 tests (0.17 tests per mutation)
+>> Generated 2618 mutations Killed 374 (14%)
+>> Ran 1962 tests (0.75 tests per mutation)
 ================================================================================
 - Mutators
 ================================================================================
 > org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator
->> Generated 151 Killed 4 (3%)
-> KILLED 4 SURVIVED 23 TIMED_OUT 0 NON_VIABLE 0 
+>> Generated 299 Killed 4 (1%)
+> KILLED 4 SURVIVED 211 TIMED_OUT 0 NON_VIABLE 0 
 > MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 124 
+> NO_COVERAGE 84 
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator
->> Generated 16 Killed 4 (25%)
-> KILLED 4 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
+>> Generated 16 Killed 15 (94%)
+> KILLED 4 SURVIVED 0 TIMED_OUT 11 NON_VIABLE 0 
 > MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 12 
+> NO_COVERAGE 1 
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.InvertNegsMutator
->> Generated 11 Killed 0 (0%)
-> KILLED 0 SURVIVED 3 TIMED_OUT 0 NON_VIABLE 0 
+>> Generated 21 Killed 0 (0%)
+> KILLED 0 SURVIVED 16 TIMED_OUT 0 NON_VIABLE 0 
 > MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 8 
+> NO_COVERAGE 5 
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.MathMutator
->> Generated 864 Killed 36 (4%)
-> KILLED 36 SURVIVED 112 TIMED_OUT 0 NON_VIABLE 0 
+>> Generated 1866 Killed 353 (19%)
+> KILLED 353 SURVIVED 1054 TIMED_OUT 0 NON_VIABLE 0 
 > MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 716 
+> NO_COVERAGE 459 
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator
->> Generated 218 Killed 2 (1%)
-> KILLED 2 SURVIVED 31 TIMED_OUT 0 NON_VIABLE 0 
+>> Generated 416 Killed 2 (0%)
+> KILLED 2 SURVIVED 318 TIMED_OUT 0 NON_VIABLE 0 
 > MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 185 
+> NO_COVERAGE 96 
 --------------------------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 12.683 s
-[INFO] Finished at: 2018-05-22T09:34:53+02:00
-[INFO] Final Memory: 18M/60M
+[INFO] Total time: 02:08 min
+[INFO] Finished at: 2018-05-22T13:48:53+02:00
+[INFO] Final Memory: 18M/61M
 [INFO] ------------------------------------------------------------------------

@@ -29,25 +29,32 @@
   "EXPERIMENTAL_SWITCH")          # 12
   */
   var listaPruebas = [
-                        [0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],
-                        [1,0],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8]
+                      [0]
+                      [1]
+                      [2]
+                      [3]
+                      [4]
+                      [5]
+                      [6]
+                      [7]
+                      [8]
                     ];
   var conjuntoPruebasDefecto = {
-    prefijo: "01234_2_Atr_",
-    tamPrueba: 10,
+    prefijo: "01234_2_Atr_5_tests_",
+    tamPrueba: 3,
     contPrueba: 0,
     parametroCont:          [ 1,// AndIf
                             1,// AnidWhile_
                             1,// IterWhile_
-                            1,// AnidFor_
+                            2,// AnidFor_
                             1,// IterFor_
                             1,// CondLog_
                             1,// ExprLog_
                             1,// ExprArit_
-                            1// ExprsSeg_
+                            2// ExprsSeg_
                           ],
-    parametrosPorDefecto:[1,1,1,1,1,1,1,1,1],
-    parametroIncremento: [1,1,10,1,10,1,1,1,1],
+    parametrosPorDefecto:[1,1,1,2,1,1,1,1,1],
+    parametroIncremento: [3,3,30,3,30,3,3,3,3],
     listaPruebas: listaPruebas, // Conjuntos de atributos a probar
     parametroTam: 0,
     contListaPruebas: 0,
@@ -77,7 +84,7 @@
       listaInputsComprobacion:  getListaAleatorioInputs(-200,200, 401),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
       numeroFuncion: 1,
       decicionInputs: "1,", //  Para (3) -> Devuelve 0,0,0,
-      size_tests: 1,
+      size_tests: 5,
       ifsAniCuerpoBucle: 1,
       aleatorio: 0,
       ini: 1,
