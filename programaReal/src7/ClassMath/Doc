@@ -1,0 +1,17 @@
+las ecuaciones de la clase Ecuaciones.java son
+De ecu1 a ecu6 son sacado de example.pdf
+ecu6 es mutipicar todos numeros de entrada
+ecu7 es sumar todos number de entrdada
+
+
+Algunas funciones de testing que testea los resultados de tipo double lo convierto en el tipo String porque hay un problema 
+de precision de double que hacer la funcion de testing desaprobado.
+
+
+El paquete de TestNath gerantiza que se cubra todas las funciones con al menos una llemada a cada una de ellas.
+
+El paquete de  ClassMath.TestMath_exhaustivo y ClassMath.TestMath_exhaustivo_determinista cubre todas las expresiones haciendo que al menos llega 
+a ejecutar una vez cada expresion, aunque puede ser parcialmente.
+
+0,1,2,3, 4, 5, 6
+1,2,2,3,-1,-1,-1
