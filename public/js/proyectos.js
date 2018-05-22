@@ -383,17 +383,12 @@ function drawChartPrueba() {
   $.each(jsonEstaditicasPrueba, function(i,jsonData)
   {
     var name=jsonData.name;
-
-    console.log(getColorColumnAtr(name));
     data.addRow([ name,0,getColorColumnAtr(name)]);
     dataMutant.addRow([name,0,getColorColumnAtr(name)]);
     dataDR.addRow([ name,0,getColorColumnAtr(name)]);
     dataDR2.addRow([ name,0,getColorColumnAtr(name)]);
   });
 
-
-  //dataDR.sort([{column: 1}]);
-  //dataDR2.sort([{column: 0}]);
   var options = {
     title: 'Estadisticas killed ',
     pointSize: 16,

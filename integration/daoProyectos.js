@@ -213,7 +213,7 @@ function getSumMutantesKilledPorIdTest(idTest, callback) {
 function getResultadoProyectosPorPrueba(nombrePrueba, callback) {
   pool.getConnection(function(err, connection) {
 
-    var sql = "SELECT * FROM `test_proyecto` JOIN proyectos ON (proyectos.id = test_proyecto.idProyecto ) WHERE proyectos.name  LIKE  ?  "
+    var sql = "SELECT * FROM `test_proyecto` JOIN proyectos ON (proyectos.id = test_proyecto.idProyecto ) WHERE proyectos.name  LIKE  ?  ORDER BY proyectos.id DESC"
 
     // Ejecutamos la consulta SQL
     connection.query(sql,['%'+nombrePrueba +'%'], function(err, result) {
