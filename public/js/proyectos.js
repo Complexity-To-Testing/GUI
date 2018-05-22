@@ -398,22 +398,32 @@ function drawChartPrueba() {
     title: 'Estadisticas killed ',
     pointSize: 16,
     hAxis: {  direction:-1, slantedText:true, slantedTextAngle:90 },
+    textStyle : {
+           fontSize: 7 // or the number you want
+       },
     is3D: true
   };
   var optionsMutant = {
     title: 'Estadisticas Num Mutants ' ,
     pointSize: 16,
     hAxis: {  direction:-1, slantedText:true, slantedTextAngle:90 },
+    textStyle : {
+           fontSize: 7 // or the number you want
+       },
     is3D: true
   };
   var optionsDR = {
     title: 'Estadisticas Distingising Rate ',
+    hAxis: {  direction:-1, slantedText:true, slantedTextAngle:90 },
     pointSize: 16,
     is3D: true
   };
   var optionsDR2 = {
       title: 'Estadisticas alfa = 1/(1-DR)',
-      hAxis: {  direction:-1, slantedText:true, slantedTextAngle:90 }
+      hAxis: {  direction:-1, slantedText:true, slantedTextAngle:90 },
+      textStyle : {
+           fontSize: 7 // or the number you want
+       }
     /*,
     colors: ['#AB0D06', '#007329'],
     trendlines: {

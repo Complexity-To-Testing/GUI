@@ -171,7 +171,7 @@ io.on('connection', (socket) => {
 																					if (!resultInsertTest.exito) {
 																							io.emit('mostrar error', "Error al insertar el Test en la BD");
 																					} else {
-																							io.emit('test guardado', datosTest.idProyecto);
+																							io.emit('test guardado', datosTest.idProyecto, conjuntoPruebas);
 																					}
 																					nextTest();
 																				}
@@ -240,7 +240,6 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('generarPrograma', function (datosPrograma) {
-
 		var nombreProyecto = datosPrograma.nombreProyecto;
 		var listaMutantes = datosPrograma.listaMutantes;
 		var parametros = "" + datosPrograma.numeroAnidacionesIf + " "
@@ -261,7 +260,6 @@ io.on('connection', (socket) => {
 													+  datosPrograma.ini + " "
 													+  datosPrograma.fin + " ";
 
-		console.log(datosPrograma);
 		if (nombreProyecto === "") {
 	     io.emit('mostrar error', "Nombre del proyecto vacio");
 	  }else {
@@ -276,10 +274,9 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('ejecutarProyecto', function (datosProyecto) {
-
 		var nombreProyecto = datosProyecto.nombreProyecto;
 		var listaMutantes = datosProyecto.listaMutantes;
-		console.log(datosProyecto);
+
 		if (nombreProyecto === "") {
 	     io.emit('mostrar error', "Nombre del proyecto vacio");
 	  }else {
@@ -289,7 +286,6 @@ io.on('connection', (socket) => {
 	})
 	socket.on('ejecutar-conjunto-pruebas', function (conjuntoPruebas) {
 		console.log("<-- Comienzo de la ejecucion");
-		console.log(conjuntoPruebas);
 		var datosPrograma = conjuntoPruebas.datosPrograma;
 		var parametros = "" + datosPrograma.numeroAnidacionesIf + " "
 													+  datosPrograma.numeroAnidacionesWhile + " "
@@ -308,8 +304,6 @@ io.on('connection', (socket) => {
 													+  datosPrograma.aleatorio + " "
 													+  datosPrograma.ini + " "
 													+  datosPrograma.fin + " ";
-
-		console.log(datosPrograma);
 		if (datosPrograma.nombreProyecto === "") {
 			 io.emit('mostrar error', "Nombre del proyecto vacio");
 		}else {

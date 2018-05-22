@@ -28,10 +28,13 @@
   "EXPERIMENTAL_MEMBER_VARIABLE"  # 11
   "EXPERIMENTAL_SWITCH")          # 12
   */
-
+  var listaPruebas = [
+                        [0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],
+                        [1,0],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8]
+                    ];
   var conjuntoPruebasDefecto = {
-    prefijo: "MEM_INC_1Atr_",
-    tamPrueba: 5,
+    prefijo: "01234_2_Atr_",
+    tamPrueba: 10,
     contPrueba: 0,
     parametroCont:          [ 1,// AndIf
                             1,// AnidWhile_
@@ -44,12 +47,12 @@
                             1// ExprsSeg_
                           ],
     parametrosPorDefecto:[1,1,1,1,1,1,1,1,1],
-    parametroIncremento: [1,1,1,1,1,1,1,1,1],
-    listaPruebas: [[0],[1],[2],[3],[4],[5],[6],[7],[8]], // Conjuntos de atributos a probar
+    parametroIncremento: [1,1,10,1,10,1,1,1,1],
+    listaPruebas: listaPruebas, // Conjuntos de atributos a probar
     parametroTam: 0,
     contListaPruebas: 0,
     pruebaAEjecutar: listaPruebas[contListaPruebas],
-    listaNombrePrueba:[ "AndIf",    // 0
+    listaNombrePrueba:[ "AnidIf",    // 0
                         "AnidWhile_", // 1
                         "IterWhile_", // 2
                         "AnidFor_",   // 3
@@ -61,7 +64,7 @@
                       ],
      datosPrograma : {
        nombreProyecto:"",
-      listaMutantes: "0 1 2 3",
+      listaMutantes: "0 1 2 3 4",
       numeroAnidacionesIf: parametroCont[0],
       numeroAnidacionesWhile: parametroCont[1],
       numeroIteracionesWhile: parametroCont[2],
@@ -71,9 +74,9 @@
       numeroExpresionesLogicas: parametroCont[6],
       numeroExpresionesAritmeticas: parametroCont[7],
       numeroExpresionesSeguidas: parametroCont[8],
-      listaInputsComprobacion:  "1,2,3,4,5,",//getListaAleatorioInputs(1,5, 6),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
-      numeroFuncion: 3,
-      decicionInputs: "1,2,3,4,5,", //  Para (3) -> Devuelve 0,0,0,
+      listaInputsComprobacion:  getListaAleatorioInputs(-200,200, 401),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
+      numeroFuncion: 1,
+      decicionInputs: "1,", //  Para (3) -> Devuelve 0,0,0,
       size_tests: 1,
       ifsAniCuerpoBucle: 1,
       aleatorio: 0,
@@ -107,11 +110,11 @@
 
     conjuntoPruebas.datosPrograma.nombreProyecto = conjuntoPruebas.prefijo;
 
-    for (var i = 0; i < pruebaAEjecutar.length; i++) {
+    for (var i = 0; i < conjuntoPruebas.pruebaAEjecutar.length; i++) {
       conjuntoPruebas.parametroCont[conjuntoPruebas.pruebaAEjecutar[i]] += conjuntoPruebas.parametroIncremento[conjuntoPruebas.pruebaAEjecutar[i]];
     }
-    for (var i = 0; i < pruebaAEjecutar.length; i++) {
-      conjuntoPruebas.datosPrograma.nombreProyecto += conjuntoPruebas.listaNombrePrueba[conjuntoPruebas.pruebaAEjecutar[i]]+ "_";
+    for (var i = 0; i < conjuntoPruebas.pruebaAEjecutar.length; i++) {
+      conjuntoPruebas.datosPrograma.nombreProyecto += conjuntoPruebas.listaNombrePrueba[conjuntoPruebas.pruebaAEjecutar[i]]+ "_"+conjuntoPruebas.parametroCont[conjuntoPruebas.pruebaAEjecutar[i]]+"_";
     }
 
 
@@ -124,8 +127,9 @@
      conjuntoPruebas.datosPrograma.numeroExpresionesLogicas=conjuntoPruebas.parametroCont[6];
      conjuntoPruebas.datosPrograma.numeroExpresionesAritmeticas=conjuntoPruebas.parametroCont[7];
      conjuntoPruebas.datosPrograma.numeroExpresionesSeguidas=conjuntoPruebas.parametroCont[8];
-
-    console.log(conjuntoPruebas.datosPrograma);
+       console.log(conjuntoPruebas.pruebaAEjecutar);
+       console.log(conjuntoPruebas.datosPrograma);
+    //console.log(conjuntoPruebas.datosPrograma);
     io.emit('ejecutar-conjunto-pruebas', conjuntoPruebas);
 
     })(document, io, jQuery);

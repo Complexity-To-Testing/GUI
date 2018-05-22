@@ -279,8 +279,13 @@ $(document).ready(function() {
     mostrarEstadisticas(estadisticas);
     $('#preloader').addClass('hidden');
   })
-  io.on('test guardado', function (idProyecto){
-    io.emit('obtenerEstadisticasPorIdProyecto', idProyecto);
+  io.on('test guardado', function (idProyecto,conjuntoPruebas){
+    if (conjuntoPruebas===null) {
+      io.emit('obtenerEstadisticasPorIdProyecto', idProyecto);
+    } else {
+        verEstadisticasPorPrueba(conjuntoPruebas.prefijo);
+    }
+
   })
 	io.on('mostrar error', function (msg){
     $.notify({

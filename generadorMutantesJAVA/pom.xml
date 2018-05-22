@@ -58,6 +58,7 @@
 <mutator>MATH</mutator>
 <mutator>CONDITIONALS_BOUNDARY</mutator>
 <mutator>NEGATE_CONDITIONALS</mutator>
+<mutator>INVERT_NEGS</mutator>
 </mutators>
    <failWhenNoMutations>false</failWhenNoMutations>
    <outputFormats>

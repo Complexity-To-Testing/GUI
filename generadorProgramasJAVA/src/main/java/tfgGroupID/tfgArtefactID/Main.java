@@ -127,14 +127,14 @@ public class Main {
 				System.out.println("fin");
 				System.out.println(fin);
 
-		Generardor g=new Generardor(nom_test,nom_program,test_inputs,decision_inputs, num_ifs, num_while, size_while,  num_for,  size_for, size_cond,
-				size_expLogics, size_expArit,num_exp_seguida,num_funcion,size_tests,ifsAniCuerpoBucle,ini,fin,aleatorio);
+				Generardor g=new Generardor(nom_test,nom_program,test_inputs,decision_inputs, num_ifs, num_while, size_while,  num_for,  size_for, size_cond,
+							size_expLogics, size_expArit,num_exp_seguida,num_funcion,size_tests,ifsAniCuerpoBucle,ini,fin,aleatorio);
 
-		for(int i=0; i<g.nom_tests.length;i++) {
-			GeneraFichero.crear(ruta,g.nom_tests[i]+".java",g.tests[i]);
-		}
+					for(int i=0; i<g.num_test_generado;i++) {
+						GeneraFichero.crear(ruta,g.nom_tests[i]+".java",g.tests[i]);
+					}
 
-		GeneraFichero.crear(ruta,g.nom_program+".java",g.s);
+					GeneraFichero.crear(ruta,g.nom_program+".java",g.s);
 	}
 
 	public static void debug() {

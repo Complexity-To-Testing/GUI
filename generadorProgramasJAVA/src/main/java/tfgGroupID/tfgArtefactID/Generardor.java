@@ -36,6 +36,7 @@ public class Generardor {
 	public int contNum=0;
 	public int contBool=0;
 	public int size_inputs=0;
+	public int num_test_generado=0;
 	public Generardor(String nom_test,String nom_program,double[] test_inputs,int[] decision_inputs,int num_ifs,
 			int num_while,int size_while, int num_for, int size_for,int size_cond,
 			int size_expLogics,int size_expArit,int num_exp_seguida,int num_funcion,
@@ -169,7 +170,7 @@ public class Generardor {
 					"		}\r\n" +
 					"		\r\n" +
 					"	boolean[] a=new boolean[result_tmp_bool.size()];\r\n" +
-					"		for (int i = ini; i < fin; i++) {\r\n" +
+					"		for (int i = ini; i < (fin<=result_tmp_bool.size()?fin : result_tmp_bool.size()); i++) {\r\n" +
 					"			a[i]=result_tmp_bool.get(i);\r\n" +
 					"		}\r\n" +
 					"		return a;" +
@@ -199,7 +200,7 @@ public class Generardor {
 					"		}\r\n" +
 					"		\r\n" +
 					"		double[] a=new double[result_tmp_num.size()];\r\n" +
-					"		for (int i = ini; i < fin; i++) {\r\n" +
+					"		for (int i = ini; i < (fin<=result_tmp_num.size()?fin : result_tmp_num.size()); i++) {\r\n" +
 					"			a[i]=result_tmp_num.get(i);\r\n" +
 					"		}\r\n" +
 					"		return a;" +
@@ -209,6 +210,24 @@ public class Generardor {
 
 			s+="\n}";//cierre de la clase
 		}
+
+
+		System.out.println("size of outputs de bools: "+contBool+"\nsize of outputs de nums: "+contNum+"\nsize input: "+this.size_inputs);
+
+		//rellenar los valores inputs metiendolo valores aleatorios
+		System.out.println("size inputs: "+size_inputs+" "+"test inputs: "+test_inputs.length);
+		if(test_inputs.length<this.size_inputs) {
+			System.out.println("rellenar inputs");
+			int x=test_inputs.length;
+			double[] tmp_inputs=new double[this.size_inputs];
+			while(x<this.size_inputs) {
+				tmp_inputs[x]=(getRandomArbitrary(0, 100)*(Math.random()>0.5 ? 1 : -1));
+				x++;
+			}
+			test_inputs=tmp_inputs;
+		}
+		///////////////////////
+
 
 		this.ini--;
 		boolean bool=true;
@@ -250,10 +269,18 @@ public class Generardor {
 
 
 
-		for(int j=0;j<size_tests;j++) {
+		//forzamos que sea lo máximo, con el fin de hacer la analisis
+		//finNum=contNum;
+		//finBool=contBool;
+		//////////////////
+		boolean ultimoBool=false;
+		boolean ultimoNum=false;
+		boolean seguir=true;
+		for(int j=0;j<size_tests && seguir;j++) {
 			/*
 			 * generar programa testeador
 			 */
+			this.num_test_generado++;
 			this.nom_tests[j]=nom_test+(j);
 			programa_test+="import static org.junit.Assert.*;\r\n" +
 					"\r\n" +
@@ -277,12 +304,16 @@ public class Generardor {
 
 			programa_test+="int[] decision_inputs={"+this.decision_inputs[0];
 			//System.out.println("ini genera decision inputs: \n");
-			for(int i=1;i<j+1;i++) {
+			for(int i=1;i<j+1;i++) { //caso de incrementar decision input
 				int l=this.decision_inputs.length;
 				int pos=i%l;
 				int tmp=this.decision_inputs[pos];
 				programa_test+=","+tmp;
 			}
+			/*for(int i=1;i<this.decision_inputs.length;i++) {
+				int tmp=this.decision_inputs[i];
+				programa_test+=","+tmp;
+			}*/
 			programa_test+="};\n";
 			//System.out.println("fin genera decision inputs: \n");
 
@@ -290,19 +321,56 @@ public class Generardor {
 			//funcion assert
 			if(bool && this.inc_nivel_bool<this.contBool) {
 
+				//////////////////////////////////////////////////
+				//codigo de incremento
 				this.inc_nivel_bool+=((int)finBool/size_tests)+1;
+				//////////////////////////////////////////////////
+
+
 				programa_test+="assertArrayEquals(new "+this.nom_program+"(inputs,decision_inputs).get_result_bool("+this.ini+","+this.inc_nivel_bool+"),\r\n" +
 						"				new "+this.nom_program+"(inputs,decision_inputs).get_result_bool("+this.ini+","+this.inc_nivel_bool+"));\r\n" ;
 
+			}else {
+				ultimoBool=true;
 			}
 
+
 			if(num && this.inc_nivel_num<this.contNum) {
+
+				////////////////////////////////////////////////////
+				//codigo de incremento
 				this.inc_nivel_num+=((int)finNum/size_tests)+1;
+				////////////////////////////////////////////////////
+
+
 				programa_test+=	"	assertArrayEquals(new "+this.nom_program+"(inputs,decision_inputs).get_result_num("+this.ini+","+this.inc_nivel_num+"),\r\n" +
 						"				new "+this.nom_program+"(inputs,decision_inputs).get_result_num("+this.ini+","+this.inc_nivel_num+"),0);";
 
+			}else {
+				ultimoNum=true;
+
 			}
 
+			/////////////////////////////////
+			//codigo para esforzar que el ultimo test cubre todos los casos
+			if(j==size_tests-1  || (ultimoNum && ultimoBool)) {
+				System.out.println("ultimo test");
+					this.inc_nivel_bool=this.contBool;
+					this.inc_nivel_num=this.contNum;
+			////////control sobre los tests que no contiene la funcion assert
+					System.out.println("("+ inc_nivel_bool+","+ contBool+")"
+							+ "(" + inc_nivel_num+","+this.contNum+")");
+
+
+				programa_test+="assertArrayEquals(new "+this.nom_program+"(inputs,decision_inputs).get_result_bool("+this.ini+","+this.inc_nivel_bool+"),\r\n" +
+						"				new "+this.nom_program+"(inputs,decision_inputs).get_result_bool("+this.ini+","+this.inc_nivel_bool+"));\r\n" ;
+				programa_test+=	"	assertArrayEquals(new "+this.nom_program+"(inputs,decision_inputs).get_result_num("+this.ini+","+this.inc_nivel_num+"),\r\n" +
+						"				new "+this.nom_program+"(inputs,decision_inputs).get_result_num("+this.ini+","+this.inc_nivel_num+"),0);";
+
+
+				//paramos el bucle
+				seguir=false;
+			}
 
 			//fin de funcion test
 			programa_test+="\n}";
@@ -314,10 +382,11 @@ public class Generardor {
 			this.tests[j]=programa_test;
 			programa_test="";
 			//////////////////////////////////////////
+
+
+
+
 		}
-
-
-		System.out.println("size of outputs de bools: "+contBool+"\nsize of outputs de nums: "+contNum+"\nsize input: "+this.size_inputs);
 
 	}
 
