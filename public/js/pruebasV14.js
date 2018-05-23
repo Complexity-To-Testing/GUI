@@ -29,19 +29,19 @@
   "EXPERIMENTAL_SWITCH")          # 12
   */
   var listaPruebas = [
-                      [0]
-                      [1]
-                      [2]
-                      [3]
-                      [4]
-                      [5]
-                      [6]
-                      [7]
+                      [0],
+                      [1],
+                      [2],
+                      [3],
+                      [4],
+                      [5],
+                      [6],
+                      [7],
                       [8]
                     ];
   var conjuntoPruebasDefecto = {
-    prefijo: "01234_2_Atr_5_tests_",
-    tamPrueba: 3,
+    prefijo: "01234_1_Atr_8_tests_",
+    tamPrueba: 4,
     contPrueba: 0,
     parametroCont:          [ 1,// AndIf
                             1,// AnidWhile_

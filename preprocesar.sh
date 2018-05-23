@@ -1,10 +1,8 @@
 #!/bin/bash
 DIR_PROYECTOS_NODE='./public/proyectos'                     # Directorio que contiene el fichero de las clases y test que el usuario ha subido
-
 DIR_PROYECTO_JAVA='./generadorMutantesJAVA'                 # Directorio que contiene todo el proyecto java generador de mutantes
 FILE_POM=$DIR_PROYECTO_JAVA/pom.xml                         # Fichero de configuración maven necesario para la creación de mutantes
 FILE_POM_TEMP=$DIR_PROYECTO_JAVA/tempPom/pom.xml            # Fichero base de configuración maven
-
 DIR_PROYECTOJAVA_CLASSES=$DIR_PROYECTO_JAVA/src/main/java   # Directorio donde se descomprimiran las classes originales
 DIR_PROYECTOJAVA_TEST=$DIR_PROYECTO_JAVA/src/test/java      # Directorio donde se descomprimiran los tests
 DIR_TESTS_POMS=$DIR_PROYECTO_JAVA/testsPoms                 # Directorio donde se guardaran todos los ficheros de
@@ -52,11 +50,6 @@ if [ -e $DIR_PROYECTOJAVA_TEST ] ; then
 fi
 mkdir $DIR_PROYECTOJAVA_TEST;
 
-#################################################
-#                                               #
-# 1.1 Añadir los mutantes que se van a generar  #
-#                                               #
-#################################################
 
 
 function procAddFilesTestToFilePomRec() {
@@ -103,14 +96,18 @@ function procAddFilesClasesToFilePomRec() {
   done
 }
 
-
-
-
 # Creamos un fichero de configuración nuevo,
 # a partir del fichero de configuración base que se encuentra
 # en en el directorio 'tempPom'
 
 cp $FILE_POM_TEMP $FILE_POM
+
+#################################################
+#                                               #
+# 3. Preparamos el fichero de configuración      #
+# con los mutantes que se van a generar         #
+#                                               #
+#################################################
 
 for idMutante in $MUTANTES_GENERAR
 do
@@ -130,24 +127,27 @@ done
 echo "<-----------"
 #########################################################################
 #                                                                       #
-# 2. Preparamos el fichero de configuración con las clases del programa #
+# 4. Preparamos el fichero de configuración con las clases del programa #
 #                                                                       #
 #########################################################################
 
-# 2.1. Comprobamos que el fichero zip Classes.zip es un fichero regular
+# 4.1. Comprobamos que el fichero zip Classes.zip es un fichero regular
 if [ -f $FILE_CLASSES_ZIP ]; then
     echo "File $FILE_CLASSES_ZIP exists."
 
-    # 2.2. Descomprimimos el ficheto Classes.zip en el directorio donde estan clases del proyecto java generador de mutantes
+    # 4.2. Descomprimimos el ficheto Classes.zip en el directorio
+    # donde estan clases del proyecto PIT
     unzip -o $FILE_CLASSES_ZIP -d $DIR_PROYECTOJAVA_CLASSES
 
-    # 2.3. Para cada fichero clase, agregamos de manera recursiva la ruta de cada fichero en el fichero de configuración pom.xml
+    # 4.3. Para cada fichero clase, agregamos de manera recursiva
+    # la ruta de cada fichero en el fichero de configuración pom.xml
     cd $DIR_PROYECTOJAVA_CLASSES
     procAddFilesClasesToFilePomRec "."
     cd -
 
-    # 2.4. Agregamos las etiquetas de cierre de la classes
-    # y tambien agregamos las etiquetas de apertura para los tests que se agregaran en el punto 3
+    # 4.4. Agregamos las etiquetas de cierre de la classes
+    # y tambien agregamos las etiquetas de apertura para
+    # los tests que se agregaran en el punto 3
     echo "</targetClasses><targetTests>" >> $FILE_POM
 else
  echo "File $FILE_CLASSES_ZIP does not exist."
@@ -155,22 +155,25 @@ fi
 
 #########################################################################
 #                                                                       #
-# 3. Preparamos el fichero de configuración con los test del programa   #
+# 5. Preparamos el fichero de configuración con los test del programa   #
 #                                                                       #
 #########################################################################
 
-# 3.1. Comprobamos que el fichero Test.zip exite
+# 5.1. Comprobamos que el fichero Test.zip exite
 if [ -f $FILE_TESTS_ZIP ]; then
    echo "File $FILE_TESTS_ZIP exists."
 
-   # 3.2. Descomprimimos el ficheto Tests.zip en el directorio de donde estan los test proyecto java generador de mutantes
+   # 5.2. Descomprimimos el ficheto Tests.zip en el directorio
+   # de donde estan los tests del proyecto PIT
    unzip -o $FILE_TESTS_ZIP -d $DIR_PROYECTOJAVA_TEST
 
-   # 3.3. Para cada fichero test, agregamos de manera recursiva la ruta de cada fichero en el fichero de configuración pom.xml
+   # 5.3. Para cada fichero test, agregamos de manera recursiva
+   # la ruta de cada fichero en el fichero de configuración pom.xml
    cd $DIR_PROYECTOJAVA_TEST
    procAddFilesTestToFilePomRec  "."
    cd -
-   # 3.4. Terminamos de construir el fichero de configuración con las etiquetas de cierre correspondientes
+   # 5.4. Terminamos de construir el fichero de configuración
+   # con las etiquetas de cierre correspondientes
    echo "</targetTests></configuration></plugin></plugins></build></project>" >> $FILE_POM
 else
  echo "File $FILE_TESTS_ZIP does not exist."

@@ -120,6 +120,7 @@ function getChecksMutantes1(){
     return listaMutantes;
 }
 function getColorColumnAtr(nombreAtr) {
+
     if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("AnidWhile")){
       return  'color:    #e6b0aa';
     } else if (nombreAtr.includes("AnidIf")&&nombreAtr.includes("IterWhile")){
