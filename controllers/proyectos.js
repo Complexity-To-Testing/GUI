@@ -11,7 +11,6 @@ router.get("/", function(req, res, next) {
 
     // Muestra error si hay un error en la BD
     if (err) {
-      console.log(err);
       next(err);
     } else {
 

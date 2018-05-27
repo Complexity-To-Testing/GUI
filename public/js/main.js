@@ -81,7 +81,6 @@ $(document).ready(function() {
     // generadorDeProgramasAutomatico2();
     var nombreProyecto = $('#inputNombreProyectoGenerado').val();
     var listaMutantes = getChecksMutantes1();
-    console.log(listaMutantes);
     var datosPrograma = {
       listaMutantes:listaMutantes,
       nombreProyecto:$('#inputNombreProyectoGenerado').val(),

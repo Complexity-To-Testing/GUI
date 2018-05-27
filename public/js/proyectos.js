@@ -76,7 +76,6 @@ function cargarDatosProyectosComparacion(idProyecto, idProyecto2) {
             proyectoNames : [proyecto1.name,proyecto2.name],
             proyectoTests : [tests, tests2]
           }
-          console.log(currentDatosComparacion);
           mostrarEstadisticasComparacion();
         });
       });
@@ -221,7 +220,7 @@ function drawChart() {
   dataDR.addColumn('number', 'DR');
   var dataDR2 = new google.visualization.DataTable();
   dataDR2.addColumn('number', 'DR_Invert');
-  dataDR2.addColumn('number', 'Tests');
+  dataDR2.addColumn('number', 'Time');
 
   $.each(jsonEstaditicas, function(i,jsonData)
   {
@@ -231,6 +230,7 @@ function drawChart() {
     var name=jsonData.nombreTest;
     var dr=killed/mutante;
     var dr2=(1/(1-dr));
+    console.log(name);
     //var nameTest=jsonData.nombreTest;
     //data.addRows([ [name, value, mutante, time]]);
     // data.addRows([ [name, value,mutante]])
@@ -238,11 +238,11 @@ function drawChart() {
     data.addRows([ [name,killed]]);
     dataMutant.addRows([ [name,mutante]]);
     dataDR.addRows([ [name,dr]]);
-    dataDR2.addRows([ [dr2,i+1]]);
+    dataDR2.addRows([ [dr2,time]]);
   });
 
   //dataDR.sort([{column: 1}]);
-  dataDR2.sort([{column: 0}]);
+  //dataDR2.sort([{column: 1}]);
   var options = {
     title: 'Estadisticas killed,killed+3 ',
     pointSize: 16,
@@ -263,7 +263,7 @@ function drawChart() {
       title: 'Inversa del DR (1/(1-DR))'
     },
     vAxis: {
-      title: 'Coste (numero de Tests)'
+      title: 'Coste (Time)'
     },
     colors: ['#AB0D06', '#007329'],
     pointSize: 15

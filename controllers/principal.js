@@ -49,8 +49,10 @@ function asyncSqrt(value, callback) {
     }, 0 | Math.random() * 100);
 }
 
-router.post("/procesar_file_Classes",upload.single("Classes"), function(req, res) {
+router.post("/procesar_file_Classes", upload.single("Classes"), function(req, res) {
     var urlFichero;
+    console.log("<--- ");
+    console.log(req.file);
     if (req.file) {
         urlFichero = path.join("proyectos", NAME_CLASSES_ZIP);
         var fichDestino = path.join("public", urlFichero);

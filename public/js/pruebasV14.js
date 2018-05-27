@@ -30,31 +30,31 @@
   */
   var listaPruebas = [
                       [0],
-                      [1],
-                      [2],
-                      [3],
-                      [4],
-                      [5],
-                      [6],
-                      [7],
-                      [8]
+                        [1],
+                          [2],
+                            [3],
+                              [4],
+                                [5],
+                                  [6],
+                                    [7],
+                                      [8]
                     ];
   var conjuntoPruebasDefecto = {
-    prefijo: "01234_1_Atr_8_tests_",
-    tamPrueba: 4,
+    prefijo: "01234_Ok_1_Atr",
+    tamPrueba: 10,
     contPrueba: 0,
-    parametroCont:          [ 1,// AndIf
+    parametroCont:          [ 0,// AndIf
                             1,// AnidWhile_
                             1,// IterWhile_
-                            2,// AnidFor_
+                            1,// AnidFor_
                             1,// IterFor_
                             1,// CondLog_
                             1,// ExprLog_
                             1,// ExprArit_
-                            2// ExprsSeg_
+                            1// ExprsSeg_
                           ],
-    parametrosPorDefecto:[1,1,1,2,1,1,1,1,1],
-    parametroIncremento: [3,3,30,3,30,3,3,3,3],
+    parametrosPorDefecto:[1,1,1,1,1,1,1,1,1],
+    parametroIncremento: [1,1,10,1,10,1,1,1,1],
     listaPruebas: listaPruebas, // Conjuntos de atributos a probar
     parametroTam: 0,
     contListaPruebas: 0,
@@ -84,7 +84,7 @@
       listaInputsComprobacion:  getListaAleatorioInputs(-200,200, 401),  // para (-5,5) -> devuelve -5,-4,-3,-2,-1,0,1,2,3,4,5,
       numeroFuncion: 1,
       decicionInputs: "1,", //  Para (3) -> Devuelve 0,0,0,
-      size_tests: 5,
+      size_tests: 1,
       ifsAniCuerpoBucle: 1,
       aleatorio: 0,
       ini: 1,
@@ -93,9 +93,10 @@
   }
 
   function ejecutarConjuntoPruebas(conjuntoPruebas) {
-    console.log("<-- ejecutarConjuntoPruebas");
 
     (function (d, io, $){
+      console.log("<-- ejecutarConjuntoPruebas");
+
       'use strict'
       var io = io()
 
@@ -104,8 +105,9 @@
           return;
         } else {
           conjuntoPruebas.contListaPruebas++;
-          conjuntoPruebas.pruebaAEjecutar=conjuntoPruebas.listaPruebas[conjuntoPruebas.contListaPruebas];
+          conjuntoPruebas.pruebaAEjecutar = conjuntoPruebas.listaPruebas[conjuntoPruebas.contListaPruebas];
           conjuntoPruebas.parametroCont = [1,1,1,1,1,1,1,1,1];
+          conjuntoPruebas.parametroCont[conjuntoPruebas.pruebaAEjecutar]=0;
           conjuntoPruebas.contPrueba = 0;
           if (conjuntoPruebas.pruebaAEjecutar === undefined) {
             return;
@@ -115,29 +117,25 @@
         conjuntoPruebas.contPrueba++;
       }
 
-    conjuntoPruebas.datosPrograma.nombreProyecto = conjuntoPruebas.prefijo;
+      conjuntoPruebas.datosPrograma.nombreProyecto = conjuntoPruebas.prefijo;
 
-    for (var i = 0; i < conjuntoPruebas.pruebaAEjecutar.length; i++) {
-      conjuntoPruebas.parametroCont[conjuntoPruebas.pruebaAEjecutar[i]] += conjuntoPruebas.parametroIncremento[conjuntoPruebas.pruebaAEjecutar[i]];
-    }
-    for (var i = 0; i < conjuntoPruebas.pruebaAEjecutar.length; i++) {
-      conjuntoPruebas.datosPrograma.nombreProyecto += conjuntoPruebas.listaNombrePrueba[conjuntoPruebas.pruebaAEjecutar[i]]+ "_"+conjuntoPruebas.parametroCont[conjuntoPruebas.pruebaAEjecutar[i]]+"_";
-    }
+      for (var i = 0; i < conjuntoPruebas.pruebaAEjecutar.length; i++) {
+        conjuntoPruebas.parametroCont[conjuntoPruebas.pruebaAEjecutar[i]] += conjuntoPruebas.parametroIncremento[conjuntoPruebas.pruebaAEjecutar[i]];
+      }
+      for (var i = 0; i < conjuntoPruebas.pruebaAEjecutar.length; i++) {
+        conjuntoPruebas.datosPrograma.nombreProyecto += conjuntoPruebas.listaNombrePrueba[conjuntoPruebas.pruebaAEjecutar[i]]+ "_"+conjuntoPruebas.parametroCont[conjuntoPruebas.pruebaAEjecutar[i]]+"_";
+      }
 
-
-     conjuntoPruebas.datosPrograma.numeroAnidacionesIf=conjuntoPruebas.parametroCont[0];
-     conjuntoPruebas.datosPrograma.numeroAnidacionesWhile=conjuntoPruebas.parametroCont[1];
-     conjuntoPruebas.datosPrograma.numeroIteracionesWhile=conjuntoPruebas.parametroCont[2];
-     conjuntoPruebas.datosPrograma.numeroAnidacionesFor=conjuntoPruebas.parametroCont[3];
-     conjuntoPruebas.datosPrograma.numeroIteracionesFor=conjuntoPruebas.parametroCont[4];
-     conjuntoPruebas.datosPrograma.numeroCondicionesLogicas=conjuntoPruebas.parametroCont[5];
-     conjuntoPruebas.datosPrograma.numeroExpresionesLogicas=conjuntoPruebas.parametroCont[6];
-     conjuntoPruebas.datosPrograma.numeroExpresionesAritmeticas=conjuntoPruebas.parametroCont[7];
-     conjuntoPruebas.datosPrograma.numeroExpresionesSeguidas=conjuntoPruebas.parametroCont[8];
-       console.log(conjuntoPruebas.pruebaAEjecutar);
-       console.log(conjuntoPruebas.datosPrograma);
-    //console.log(conjuntoPruebas.datosPrograma);
-    io.emit('ejecutar-conjunto-pruebas', conjuntoPruebas);
-
+       conjuntoPruebas.datosPrograma.numeroAnidacionesIf=conjuntoPruebas.parametroCont[0];
+       conjuntoPruebas.datosPrograma.numeroAnidacionesWhile=conjuntoPruebas.parametroCont[1];
+       conjuntoPruebas.datosPrograma.numeroIteracionesWhile=conjuntoPruebas.parametroCont[2];
+       conjuntoPruebas.datosPrograma.numeroAnidacionesFor=conjuntoPruebas.parametroCont[3];
+       conjuntoPruebas.datosPrograma.numeroIteracionesFor=conjuntoPruebas.parametroCont[4];
+       conjuntoPruebas.datosPrograma.numeroCondicionesLogicas=conjuntoPruebas.parametroCont[5];
+       conjuntoPruebas.datosPrograma.numeroExpresionesLogicas=conjuntoPruebas.parametroCont[6];
+       conjuntoPruebas.datosPrograma.numeroExpresionesAritmeticas=conjuntoPruebas.parametroCont[7];
+       conjuntoPruebas.datosPrograma.numeroExpresionesSeguidas=conjuntoPruebas.parametroCont[8];
+      //console.log(conjuntoPruebas.datosPrograma);
+       io.emit('ejecutar-conjunto-pruebas', conjuntoPruebas);
     })(document, io, jQuery);
   }

@@ -189,6 +189,7 @@ io.on('connection', (socket) => {
 													console.log('COMPLETED');
 													console.log(allresult);
 												} else {
+													console.log("<< siguiente prueba");
 													io.emit('ejecutar-siguiente-prueba', conjuntoPruebas);
 												}
 											},
@@ -240,6 +241,7 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('generarPrograma', function (datosPrograma) {
+
 		var nombreProyecto = datosPrograma.nombreProyecto;
 		var listaMutantes = datosPrograma.listaMutantes;
 		var parametros = "" + datosPrograma.numeroAnidacionesIf + " "
@@ -274,6 +276,7 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('ejecutarProyecto', function (datosProyecto) {
+
 		var nombreProyecto = datosProyecto.nombreProyecto;
 		var listaMutantes = datosProyecto.listaMutantes;
 
@@ -286,6 +289,7 @@ io.on('connection', (socket) => {
 	})
 	socket.on('ejecutar-conjunto-pruebas', function (conjuntoPruebas) {
 		console.log("<-- Comienzo de la ejecucion");
+		console.log(conjuntoPruebas.datosPrograma.nombreProyecto);
 		var datosPrograma = conjuntoPruebas.datosPrograma;
 		var parametros = "" + datosPrograma.numeroAnidacionesIf + " "
 													+  datosPrograma.numeroAnidacionesWhile + " "

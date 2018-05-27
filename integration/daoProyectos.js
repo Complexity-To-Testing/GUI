@@ -5,7 +5,6 @@ var pool  = db.getPool();
 function insertProyecto(nombreProyecto, callback) {
   /* u: datos de un usuario que se va a guardar */
 
-  console.log(nombreProyecto);
   pool.getConnection(function(err, connection) {
 
     var sql = "INSERT INTO `proyectos`( `name`) VALUES (?)";
