@@ -5,7 +5,7 @@ Servicio web desarollado para el TFG Complexity to testing que permite aplicar p
  + cuya estructura se ha desarollado de forma manual (programa [Math](https://github.com/Complexity-To-Testing/Programas-reales-JAVA/tree/master/ClassMath) o programa [Personaje](https://github.com/Complexity-To-Testing/Programas-reales-JAVA/tree/master/claseNodo)).
 
 ## Estructura de los directorios del servicio web
-![myimage-alt-tag](https://lh3.googleusercontent.com/PjI9hG26PQLzRR3Ft07ELWd6YX9_jM4R8f0yHaI47Isayr_KyR99rbN8ecPQX3FPuP7_t0cyJJhEFg=w2880-h1564)
+![Imagen estructura de los directorios](https://raw.githubusercontent.com/Complexity-To-Testing/GUI/master/imagenesRepositorio/Captura%20de%20pantalla%202018-05-01%20a%20las%2020.26.29.png)
 **Proyecto Node (GUI-Master)**: directorio que contiene todo el proyecto. Dentro se encuentra el resto de los directorios que veremos a continuación. Además, también almacena los scripts .sh que se encargan de controlar las rutas de los ficheros, modificaciones de cadenas de caracteres y limpieza de proyectos anteriormente cargados y/o ejecutados, así como los ficheros .js encargados de poner en marcha el proyecto y almacenar la configuración de la base de datos.
 
 **controllers**: almacena los ficheros .js que se encargan de llevar a cabo la gestión de peticiones (ya sean tipo GET o POST) que realiza el usuario a través de la interfaz web. Si el usuario introduce parámetros, estos ficheros contienen funciones que los recogen y los tratan como sea necesario. Además, también realizan peticiones a la capa de integración, es decir, son los encargados de llamar a los DAO para obtener datos de la base de datos y subirlos de nuevo a las capas superiores para que finalmente sean mostrados al usuario.
