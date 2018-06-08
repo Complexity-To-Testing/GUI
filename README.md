@@ -1,9 +1,14 @@
 # GUI
-## Descripcion
+## Descripción
 Servicio web desarollado para el TFG Complexity to testing que permite aplicar pruebas sobre los mutantes (generados mediante [Pitest](http://pitest.org/) ) de  programas:
  + cuya estructura se ha generado automáticamente (con el [programa generador de programa](https://github.com/Complexity-To-Testing/Programa-generador)).
  + cuya estructura se ha desarollado de forma manual (programa [Math](https://github.com/Complexity-To-Testing/Programas-reales-JAVA/tree/master/programa%20Math) o programa [Personaje](https://github.com/Complexity-To-Testing/Programas-reales-JAVA/tree/master/programa%20Personajes)).
-
+ 
+## Requisitos 
+**Sistema operativo:** Linux
+**Jdk:** 8
+**Node:** 6.11
+**Maven:** 3.5.2
 ## Estructura de los directorios del servicio web
 ![Imagen estructura de los directorios](https://raw.githubusercontent.com/Complexity-To-Testing/GUI/master/imagenesRepositorio/estructuraDirectorios.png)
 **Proyecto Node (GUI-Master)**: directorio que contiene todo el proyecto. Dentro se encuentra el resto de los directorios que veremos a continuación. Además, también almacena los scripts .sh que se encargan de controlar las rutas de los ficheros, modificaciones de cadenas de caracteres y limpieza de proyectos anteriormente cargados y/o ejecutados, así como los ficheros .js encargados de poner en marcha el proyecto y almacenar la configuración de la base de datos.
