@@ -7,8 +7,8 @@ Servicio web desarollado para el TFG Complexity to testing que permite aplicar p
 ## Requisitos 
 
 + **Sistema operativo:** Linux
-+ **Jdk:** 8
-+ **Node:** 6.11
++ **[Jdk](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html):** 8
++ **[Node.js](https://nodejs.org/es/):** 6.11
 + **Maven:** 3.5.2
 
 ## Estructura de los directorios del servicio web
