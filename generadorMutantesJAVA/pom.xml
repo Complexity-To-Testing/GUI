@@ -57,7 +57,6 @@
 <mutator>INCREMENTS</mutator>
 <mutator>MATH</mutator>
 <mutator>CONDITIONALS_BOUNDARY</mutator>
-<mutator>NEGATE_CONDITIONALS</mutator>
 </mutators>
    <failWhenNoMutations>false</failWhenNoMutations>
    <outputFormats>
@@ -69,10 +68,4 @@
 <param>Programa</param>
 </targetClasses><targetTests>
 <param>Test0</param>
-<param>Test1</param>
-<param>Test2</param>
-<param>Test3</param>
-<param>Test4</param>
-<param>Test5</param>
-<param>Test6</param>
-<param>Test7</param></targetTests></configuration></plugin></plugins></build></project>
+<param>Test1</param></targetTests></configuration></plugin></plugins></build></project>

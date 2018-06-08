@@ -50,8 +50,6 @@ if [ -e $DIR_PROYECTOJAVA_TEST ] ; then
 fi
 mkdir $DIR_PROYECTOJAVA_TEST;
 
-
-
 function procAddFilesTestToFilePomRec() {
   for file in "$1"/*
   do
@@ -123,8 +121,8 @@ done
        <param>CSV</param>
    </outputFormats>
    <targetClasses>" >> $FILE_POM
-
 echo "<-----------"
+
 #########################################################################
 #                                                                       #
 # 4. Preparamos el fichero de configuración con las clases del programa #

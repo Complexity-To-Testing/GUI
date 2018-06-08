@@ -57,7 +57,6 @@
 <mutator>INCREMENTS</mutator>
 <mutator>MATH</mutator>
 <mutator>CONDITIONALS_BOUNDARY</mutator>
-<mutator>NEGATE_CONDITIONALS</mutator>
 </mutators>
    <failWhenNoMutations>false</failWhenNoMutations>
    <outputFormats>

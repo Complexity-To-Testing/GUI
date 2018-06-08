@@ -55,7 +55,7 @@ decision_inputs
 4
 5
 size_tests
-8
+2
 ifsAniCuerpoBucle
 1
 aleatorio
@@ -73,18 +73,18 @@ i: 0
 size_expArit: 1 ,size_expLogics: 1,num_exp_seguida: 1 ,size_cond: 1 ,num_while: 1 ,num_for: 1 ,num_ifs: 1,ifsAniCuerpoBucle): 1 
 
 i: 0
-size of outputs de bools: 14
-size of outputs de nums: 6
-size input: 64
-size inputs: 64 test inputs: 5
+size of outputs de bools: 13
+size of outputs de nums: 11
+size input: 79
+size inputs: 79 test inputs: 5
 rellenar inputs
 fin no limite bool, no num test 
 ultimo test
-(14,14)(6,6)
+(13,13)(11,11)
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 0.917 s
-[INFO] Finished at: 2018-05-23T17:01:43+02:00
+[INFO] Total time: 0.950 s
+[INFO] Finished at: 2018-06-08T12:30:44+02:00
 [INFO] Final Memory: 9M/32M
 [INFO] ------------------------------------------------------------------------

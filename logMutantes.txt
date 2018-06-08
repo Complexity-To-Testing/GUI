@@ -23,7 +23,7 @@
 [INFO] --- maven-compiler-plugin:3.2:testCompile (default-testCompile) @ mutationTesting ---
 [INFO] Changes detected - recompiling the module!
 [WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
-[INFO] Compiling 8 source files to /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/target/test-classes
+[INFO] Compiling 2 source files to /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ mutationTesting ---
 [INFO] Surefire report directory: /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/target/surefire-reports
@@ -31,26 +31,14 @@
 -------------------------------------------------------
  T E S T S
 -------------------------------------------------------
-Running Test6
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.125 sec
-Running Test4
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
 Running Test0
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
-Running Test2
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
-Running Test5
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
-Running Test7
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
-Running Test3
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.084 sec
 Running Test1
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
 
 Results :
 
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
 
 [INFO] 
 [INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ mutationTesting ---
@@ -64,7 +52,7 @@ Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
 [INFO] Found shared classpath plugin : Default mutation engine
 [INFO] Adding org.pitest:pitest to SUT classpath
 [INFO] Mutating from /Users/cristhian/Documents/repos/Tfg-GUI/GUI/generadorMutantesJAVA/target/classes
-/-\|/-\|stderr  : WARNING: An illegal reflective access operation has occurred
+/-stderr  : WARNING: An illegal reflective access operation has occurred
 WARNING: Illegal reflective access by org.pitest.reloc.xstream.converters.collections.TreeMapConverter (file:/Users/cristhian/.m2/repository/org/pitest/pitest/1.1.5/pitest-1.1.5.jar) to field javstderr  : a.util.TreeMap.comparator
 WARNING: Please consider reporting this to the maintainers of org.pitest.reloc.xstream.converters.collections.TreeMapConverter
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
@@ -75,23 +63,23 @@ Wstderr  : ARNING: All illegal access operations will be denied in a future rele
 > scan classpath : < 1 second
 > coverage and dependency analysis : < 1 second
 > build mutation tests : < 1 second
-> run mutation analysis : 6 seconds
+> run mutation analysis : 4 seconds
 --------------------------------------------------------------------------------
-> Total  : 7 seconds
+> Total  : 5 seconds
 --------------------------------------------------------------------------------
 ================================================================================
 - Statistics
 ================================================================================
->> Generated 314 mutations Killed 31 (10%)
->> Ran 1076 tests (3.43 tests per mutation)
+>> Generated 311 mutations Killed 28 (9%)
+>> Ran 156 tests (0.5 tests per mutation)
 ================================================================================
 - Mutators
 ================================================================================
 > org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator
->> Generated 41 Killed 2 (5%)
-> KILLED 2 SURVIVED 25 TIMED_OUT 0 NON_VIABLE 0 
+>> Generated 54 Killed 4 (7%)
+> KILLED 4 SURVIVED 21 TIMED_OUT 0 NON_VIABLE 0 
 > MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 14 
+> NO_COVERAGE 29 
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator
 >> Generated 7 Killed 4 (57%)
@@ -100,21 +88,15 @@ Wstderr  : ARNING: All illegal access operations will be denied in a future rele
 > NO_COVERAGE 1 
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.MathMutator
->> Generated 199 Killed 25 (13%)
-> KILLED 25 SURVIVED 86 TIMED_OUT 0 NON_VIABLE 0 
+>> Generated 250 Killed 20 (8%)
+> KILLED 20 SURVIVED 64 TIMED_OUT 0 NON_VIABLE 0 
 > MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 88 
---------------------------------------------------------------------------------
-> org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator
->> Generated 67 Killed 0 (0%)
-> KILLED 0 SURVIVED 39 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 28 
+> NO_COVERAGE 166 
 --------------------------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 12.138 s
-[INFO] Finished at: 2018-05-23T17:03:38+02:00
-[INFO] Final Memory: 20M/66M
+[INFO] Total time: 8.664 s
+[INFO] Finished at: 2018-06-08T12:31:03+02:00
+[INFO] Final Memory: 19M/65M
 [INFO] ------------------------------------------------------------------------

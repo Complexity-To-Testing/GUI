@@ -27,8 +27,8 @@ function rellenarProyectos(json) {
         '<td>' + proyecto.numMutants +'</td>' +
         '<td>' + proyecto.avg_killed +'</td>' +
         '<td>' + proyecto.avg_percent +'</td>' +
-        '<td align="right"> <form name="verTestsProyecto" action="javascript:verTestsProyecto(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verTestsProyecto"  class="btn btn-primary btn-success" type="submit" value="Tests" /> </form> </td>' +
-        '<td align="right"> <form name="verMutantesKilledProyecto" action="javascript:verMutantesKilledProyecto(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verMutantesKilledProyecto"  class="btn btn-primary btn-success" type="submit" value="Killed mutants" /> </form> </td>' +
+       //  '<td align="right"> <form name="verTestsProyecto" action="javascript:verTestsProyecto(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verTestsProyecto"  class="btn btn-primary btn-success" type="submit" value="Tests" /> </form> </td>' +
+       //  '<td align="right"> <form name="verMutantesKilledProyecto" action="javascript:verMutantesKilledProyecto(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verMutantesKilledProyecto"  class="btn btn-primary btn-success" type="submit" value="Killed mutants" /> </form> </td>' +
         '<td align="right"> <form name="verEstadisticas" action="javascript:verEstadisticas(' + proyecto.idProyecto + ', ' + nombreProyecto + ');" > <input id="verEstadisticas"  class="btn btn-primary btn-success" type="submit" value="Estadísticas" /> </form> </td>' +
       '</tr>'
     );
@@ -244,7 +244,7 @@ function drawChart() {
   //dataDR.sort([{column: 1}]);
   dataDR2.sort([{column: 0}]);
   var options = {
-    title: 'Estadisticas killed,killed+3 ',
+    title: 'Estadisticas killed',
     pointSize: 16,
     is3D: true
   };

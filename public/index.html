@@ -38,7 +38,7 @@
             <li id="nav-listado-proyectos" class="user-control"><a href="#">Resultados<span class="sr-only">(current)</span></a></li>
             <li id="nav-experimeto" class="user-control"><a href="#">Crear proyecto con programa real</a></li>
             <li id="nav-generador" class="user-control"><a href="#">Crear proyecto con programa generado</a></li>
-            <li id="nav-generador-automatico" class="user-control"><a href="#">Generador automatico</a></li>
+            <li id="nav-generador-automatico" class="user-control hidden"><a href="#">Generador automatico</a></li>
           </ul>
         </div>
       </div>
@@ -61,23 +61,23 @@
         <h3> Resultados</h3>
         <div class="row">
             <div class="form-group col-sm-6 col-lg-6">
-              <label for="inputNombrePrueba">Nombre de la prueba <font color="red">*</font></label>
+              <label for="inputNombrePrueba">Nombre del proyecto <font color="red">*</font></label>
               <input type="text" id="inputNombrePrueba"/><br/><br/>
             </div>
         </div>
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <div class="input-group">
               <span class="input-group-btn">
                 <button id="btn-mostrar-grafica-prueba" class="btn btn-primary" type="button">
-                  Mostrar gráfica
+                  Comparar gráficas de varios proyectos
                 </button>
               </span>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-6"> 
             <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-info btn-lg" id="btn-comparar-proyectos"> Comparar proyectos   </button>
+            <button type="button" class="btn btn-primary" id="btn-comparar-proyectos"> Comparar dos proyectos   </button>
 
             <!-- Modal -->
             <div class="modal fade" id="modal-comparacion-proyectos" role="dialog">
@@ -87,7 +87,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Escriba los ids de proyecto que desea comparar</h4>
+                    <h4 class="modal-title">Indroduzca los ids de proyecto que desea comparar</h4>
                   </div>
                   <div class="modal-body">
 
@@ -564,7 +564,7 @@
               <br/>
               <br/>
               <br/>
-              <h3><b>Estudio de las clases de complejidad en <i>testing</i></b></h3>
+              <h3><b>Estudio de las clases de complejidad de <i>testing</i></b></h3>
               <br/>
               <br/>
               <h4>Universidad Complutense de Madrid</h4>
