@@ -1,8 +1,8 @@
 # GUI
 ## Descripción
-Servicio web desarollado para el TFG Complexity to testing que permite aplicar pruebas sobre los mutantes (generados mediante [Pitest](http://pitest.org/) ) de  programas:
- + cuya estructura se ha generado automáticamente (con el [programa generador de programa](https://github.com/Complexity-To-Testing/Programa-generador)).
- + cuya estructura se ha desarollado de forma manual (programa [Math](https://github.com/Complexity-To-Testing/Programas-reales-JAVA/tree/master/programa%20Math) o programa [Personaje](https://github.com/Complexity-To-Testing/Programas-reales-JAVA/tree/master/programa%20Personajes)).
+Servicio web desarollado para el TFG Complexity to testing que permite aplicar pruebas sobre los mutantes (generados mediante [Pitest](http://pitest.org/)) de  programas:
+ + Cuya estructura se ha generado automáticamente (con el [programa generador de programa](https://github.com/Complexity-To-Testing/Programa-generador)).
+ + Cuya estructura se ha desarollado de forma manual (programa [Math](https://github.com/Complexity-To-Testing/Programas-reales-JAVA/tree/master/programa%20Math) o programa [Personaje](https://github.com/Complexity-To-Testing/Programas-reales-JAVA/tree/master/programa%20Personajes)).
  
 ## Requisitos 
 
